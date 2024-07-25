@@ -1,0 +1,14 @@
+../Drivers/CMSIS/Include/core_cm4.h:1684:22:__NVIC_EnableIRQ	16	static,ignoring_inline_asm
+../Drivers/STM32F4xx_HAL_Driver/Src/STM32F01VE_gpio_driver.c:12:6:gpio_init	16	static
+../Drivers/STM32F4xx_HAL_Driver/Src/STM32F01VE_gpio_driver.c:20:13:gpio_configure_pin_mode	24	static
+../Drivers/STM32F4xx_HAL_Driver/Src/STM32F01VE_gpio_driver.c:26:13:gpio_configure_pin_type	24	static
+../Drivers/STM32F4xx_HAL_Driver/Src/STM32F01VE_gpio_driver.c:32:13:gpio_configure_pin_speed	24	static
+../Drivers/STM32F4xx_HAL_Driver/Src/STM32F01VE_gpio_driver.c:38:13:gpio_configure_pin_pull	24	static
+../Drivers/STM32F4xx_HAL_Driver/Src/STM32F01VE_gpio_driver.c:44:6:gpio_configure_alt_function	16	static
+../Drivers/STM32F4xx_HAL_Driver/Src/STM32F01VE_gpio_driver.c:60:9:gpio_read_from_pin	16	static
+../Drivers/STM32F4xx_HAL_Driver/Src/STM32F01VE_gpio_driver.c:65:6:gpio_write_to_pin	16	static
+../Drivers/STM32F4xx_HAL_Driver/Src/STM32F01VE_gpio_driver.c:71:10:gpio_read_from_all_pins	24	static
+../Drivers/STM32F4xx_HAL_Driver/Src/STM32F01VE_gpio_driver.c:83:6:gpio_write_to_all_pins	24	static
+../Drivers/STM32F4xx_HAL_Driver/Src/STM32F01VE_gpio_driver.c:98:6:gpio_configure_interrupt	16	static
+../Drivers/STM32F4xx_HAL_Driver/Src/STM32F01VE_gpio_driver.c:123:6:gpio_enable_interrupt	16	static
+../Drivers/STM32F4xx_HAL_Driver/Src/STM32F01VE_gpio_driver.c:130:6:gpio_clear_interrupt	16	static

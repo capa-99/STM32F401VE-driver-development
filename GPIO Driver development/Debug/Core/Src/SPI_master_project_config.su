@@ -1,0 +1,7 @@
+../Drivers/CMSIS/Include/core_cm4.h:1684:22:__NVIC_EnableIRQ	16	static,ignoring_inline_asm
+../Core/Src/SPI_master_project_config.c:13:6:master_configure_gpio	32	static
+../Core/Src/SPI_master_project_config.c:37:6:master_configure_spi2	8	static
+../Core/Src/SPI_master_project_config.c:57:6:EXTI0_IRQHandler	8	static
+../Core/Src/SPI_master_project_config.c:63:6:SPI2_IRQHandler	8	static
+../Core/Src/SPI_master_project_config.c:69:6:master_send_data	24	static
+../Core/Src/SPI_master_project_config.c:100:6:master_recieve_data	24	static

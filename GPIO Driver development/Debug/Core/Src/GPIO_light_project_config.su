@@ -1,0 +1,10 @@
+../Core/Src/GPIO_light_project_config.c:12:6:light_7_seg_init	40	static
+../Core/Src/GPIO_light_project_config.c:28:6:light_buttons_init	32	static
+../Core/Src/GPIO_light_project_config.c:42:6:light_count	24	static
+../Core/Src/GPIO_light_project_config.c:66:6:light_reset	16	static
+../Core/Src/GPIO_light_project_config.c:75:6:light_configure_interrupts_7seg	8	static
+../Core/Src/GPIO_light_project_config.c:84:6:EXTI1_IRQHandler	8	static
+../Core/Src/GPIO_light_project_config.c:99:6:light_display_init	40	static
+../Core/Src/GPIO_light_project_config.c:115:6:light_keyboard_init	40	static
+../Core/Src/GPIO_light_project_config.c:131:6:light_configure_interrupts_calc	4	static
+../Core/Src/GPIO_light_project_config.c:136:6:light_calculate	4	static
