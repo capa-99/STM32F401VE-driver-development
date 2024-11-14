@@ -1,0 +1,11 @@
+../Core/Src/GPIO_clock.c:29:6:disp_initialize	40	static
+../Core/Src/GPIO_clock.c:54:6:disp_configure_interrupts	8	static
+../Core/Src/GPIO_clock.c:66:6:EXTI0_IRQHandler	8	static
+../Core/Src/GPIO_clock.c:72:6:EXTI1_IRQHandler	8	static
+../Core/Src/GPIO_clock.c:78:6:EXTI2_IRQHandler	8	static
+../Core/Src/GPIO_clock.c:84:6:EXTI3_IRQHandler	8	static
+../Core/Src/GPIO_clock.c:90:6:disp_show_number	16	static
+../Core/Src/GPIO_clock.c:95:6:disp_auto_count	16	static
+../Core/Src/GPIO_clock.c:114:6:disp_count_up	8	static
+../Core/Src/GPIO_clock.c:124:6:disp_count_down	8	static
+../Core/Src/GPIO_clock.c:134:6:disp_reset	8	static
