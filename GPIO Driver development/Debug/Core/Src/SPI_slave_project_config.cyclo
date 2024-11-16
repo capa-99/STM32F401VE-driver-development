@@ -1,4 +1,0 @@
-../Drivers/CMSIS/Include/core_cm4.h:1684:22:__NVIC_EnableIRQ	2
-../Core/Src/SPI_slave_project_config.c:13:6:slave_configure_gpio	1
-../Core/Src/SPI_slave_project_config.c:37:6:slave_configure_spi2	1
-../Core/Src/SPI_slave_project_config.c:63:6:slave_send_recv	14
