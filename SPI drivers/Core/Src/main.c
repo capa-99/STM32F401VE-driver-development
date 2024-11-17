@@ -97,7 +97,8 @@ int main(void)
   {
 	  	RCC->AHB1ENR = RCC->AHB1ENR | 0x1;
 	    RCC->AHB1ENR = RCC->AHB1ENR | 0x8;
-	    RCC->APB2ENR = RCC->APB2ENR | 0x1000;
+	    //RCC->APB2ENR = RCC->APB2ENR | 0x1000;
+	    enableSPI(SPI1_TYPE);
 
 	    GPIOA->MODER = 0x00000000;
 	    GPIOA->MODER = GPIOA->MODER | 0xAA00;
@@ -135,7 +136,8 @@ int main(void)
   {
 	  	RCC->AHB1ENR = RCC->AHB1ENR | 0x1;
 	    RCC->AHB1ENR = RCC->AHB1ENR | 0x8;
-	    RCC->APB2ENR = RCC->APB2ENR | 0x1000;
+	    //RCC->APB2ENR = RCC->APB2ENR | 0x1000;
+	    enableSPI(SPI1_TYPE);
 
 	    GPIOA->MODER = 0x00000000;
 	    GPIOA->MODER = GPIOA->MODER | 0xAA00;
