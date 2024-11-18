@@ -97,8 +97,7 @@ int main(void)
   {
 	  	RCC->AHB1ENR = RCC->AHB1ENR | 0x1;
 	    RCC->AHB1ENR = RCC->AHB1ENR | 0x8;
-	    //RCC->APB2ENR = RCC->APB2ENR | 0x1000;
-	    enableSPI(SPI1_TYPE);
+	    //spi_choose_type(SPI1_TYPE);
 
 	    GPIOA->MODER = 0x00000000;
 	    GPIOA->MODER = GPIOA->MODER | 0xAA00;
@@ -107,10 +106,36 @@ int main(void)
 	    GPIOD->MODER = GPIOD->MODER | 0x0055;
 	    GPIOD->ODR = 0x1;
 
-	    SPI1->CR1 = SPI1->CR1 | 0x002F;
-	    SPI1->CR2 = SPI1->CR2 | 0x0004;
+	    //SPI1->CR1 = SPI1->CR1 | 0x002F;
+	    //SPI1->CR2 = SPI1->CR2 | 0x0004;
 
-	    SPI1->CR1 = SPI1->CR1 | 0x40;
+	    //SPI1->CR1 = SPI1->CR1 | 0x40;
+	    spi_type spi1;
+	    spi1.spi = SPI1;
+		spi1.type = SPI1_TYPE;
+		spi1.bidimode = SPI_BIDIMODE_UNI;
+		spi1.bidioe = SPI_BIDIOE_DISABLED;
+		spi1.crcen = SPI_CRCEN_DISABLED;
+		spi1.crcnext = SPI_CRCNEXT_NO_PHASE;
+		spi1.dff = SPI_DFF_8_BIT;
+		spi1.rxonly = SPI_RXONLY_FULL_DUPLEX;
+		spi1.ssm = SPI_SSM_DISABLED;
+		spi1.ssi = SPI_SSI_SELECT;
+		spi1.lsbfirst = SPI_LSBFIRST_MSB;
+		spi1.spe = SPI_SPE_ENABLE;
+		spi1.br = SPI_BR_64;
+		spi1.mstr = SPI_MSTR_MASTER;
+		spi1.cpol = SPI_CPOL_1;
+		spi1.cpha = SPI_CPHA_SECOND;
+		spi1.txeie = SPI_TXEIE_MASKED;
+		spi1.rxneie = SPI_RXNEIE_MASKED;
+		spi1.errie = SPI_ERRIE_MASKED;
+		spi1.frf = SPI_FRF_MOTOROLA;
+		spi1.ssoe = SPI_SSOE_ENABLED;
+		spi1.txdmaen = SPI_TXDMAEN_DISABLED;
+		spi1.rxdmaen = SPI_RXDMAEN_DISABLED;
+		spi_configure(&spi1);
+
 	    SPI1->DR = 0xAA;
 
 	    GPIOD->ODR = 0x2;
@@ -136,8 +161,7 @@ int main(void)
   {
 	  	RCC->AHB1ENR = RCC->AHB1ENR | 0x1;
 	    RCC->AHB1ENR = RCC->AHB1ENR | 0x8;
-	    //RCC->APB2ENR = RCC->APB2ENR | 0x1000;
-	    enableSPI(SPI1_TYPE);
+	    //spi_choose_type(SPI1_TYPE);
 
 	    GPIOA->MODER = 0x00000000;
 	    GPIOA->MODER = GPIOA->MODER | 0xAA00;
@@ -146,10 +170,35 @@ int main(void)
 	    GPIOD->MODER = GPIOD->MODER | 0x0055;
 	    GPIOD->ODR = 0x1;
 
-	    SPI1->CR1 = SPI1->CR1 | 0x002B;
-	    SPI1->CR2 = SPI1->CR2 | 0x0004;
+	    //SPI1->CR1 = SPI1->CR1 | 0x002B;
+	    //SPI1->CR2 = SPI1->CR2 | 0x0004;
 
-	    SPI1->CR1 = SPI1->CR1 | 0x40;
+	    //SPI1->CR1 = SPI1->CR1 | 0x40;
+	    spi_type spi1;
+	    spi1.spi = SPI1;
+	    spi1.type = SPI1_TYPE;
+	    spi1.bidimode = SPI_BIDIMODE_UNI;
+	    spi1.bidioe = SPI_BIDIOE_DISABLED;
+	    spi1.crcen = SPI_CRCEN_DISABLED;
+	    spi1.crcnext = SPI_CRCNEXT_NO_PHASE;
+	    spi1.dff = SPI_DFF_8_BIT;
+	    spi1.rxonly = SPI_RXONLY_FULL_DUPLEX;
+	    spi1.ssm = SPI_SSM_DISABLED;
+	    spi1.ssi = SPI_SSI_SELECT;
+	    spi1.lsbfirst = SPI_LSBFIRST_MSB;
+	    spi1.spe = SPI_SPE_ENABLE;
+	    spi1.br = SPI_BR_64;
+	    spi1.mstr = SPI_MSTR_SLAVE;
+	    spi1.cpol = SPI_CPOL_1;
+	    spi1.cpha = SPI_CPHA_SECOND;
+	    spi1.txeie = SPI_TXEIE_MASKED;
+	    spi1.rxneie = SPI_RXNEIE_MASKED;
+	    spi1.errie = SPI_ERRIE_MASKED;
+	    spi1.frf = SPI_FRF_MOTOROLA;
+	    spi1.ssoe = SPI_SSOE_ENABLED;
+	    spi1.txdmaen = SPI_TXDMAEN_DISABLED;
+	    spi1.rxdmaen = SPI_RXDMAEN_DISABLED;
+	    spi_configure(&spi1);
 
 	    SPI1->DR = 0x55;
 	    GPIOD->ODR = 0x2;
