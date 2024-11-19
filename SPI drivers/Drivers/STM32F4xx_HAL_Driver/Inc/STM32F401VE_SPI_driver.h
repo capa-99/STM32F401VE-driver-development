@@ -102,6 +102,33 @@
 #define SPI_RXDMAEN_ENABLED 	((uint16_t)0x1)
 
 //SR register
+#define SPI_FRE 			((uint16_t)8)
+#define SPI_FRE_NO_ERROR 	((uint16_t)0x0)
+#define SPI_FRE_ERROR 		((uint16_t)0x1)
+#define SPI_BSY 			((uint16_t)7)
+#define SPI_BSY_NOT_BUSY 	((uint16_t)0x0)
+#define SPI_BSY_BUSY	 	((uint16_t)0x1)
+#define SPI_OVR 			((uint16_t)6)
+#define SPI_OVR_NO_OVERRUN 	((uint16_t)0x0)
+#define SPI_OVR_OVERRUN		((uint16_t)0x1)
+#define SPI_MODF 			((uint16_t)5)
+#define SPI_MODF_NO_FAULT 	((uint16_t)0x0)
+#define SPI_MODF_FAULT 		((uint16_t)0x1)
+#define SPI_CRCERR 			((uint16_t)4)
+#define SPI_CRCERR_MATCH 	((uint16_t)0x0)
+#define SPI_CRCERR_NO_MATCH ((uint16_t)0x1)
+#define SPI_UDR 			((uint16_t)3)
+#define SPI_UDR_NO_UNDERRUN ((uint16_t)0x0)
+#define SPI_UDR_UNDERRUN 	((uint16_t)0x1)
+#define SPI_CHSIDE			((uint16_t)2)
+#define SPI_CHSIDE_LEFT 	((uint16_t)0x0)
+#define SPI_CHSIDE_RIGHT 	((uint16_t)0x1)
+#define SPI_TXE 			((uint16_t)1)
+#define SPI_TXE_NO_EMPTY 	((uint16_t)0x0)
+#define SPI_TXE_EMPTY 		((uint16_t)0x1)
+#define SPI_RXNE 			((uint16_t)0)
+#define SPI_RXNE_EMPTY 		((uint16_t)0x0)
+#define SPI_RXNE_NOT_EMPTY 	((uint16_t)0x1)
 
 //*******************************************SPI STRUCT*************************************************************
 typedef struct
@@ -182,3 +209,29 @@ void spi_cr2_configure_ssoe(SPI_TypeDef* type, uint16_t ssoe);
 void spi_cr2_configure_txdmaen(SPI_TypeDef* type, uint16_t txdmaen);
 
 void spi_cr2_configure_rxdmaen(SPI_TypeDef* type, uint16_t rxdmaen);
+
+//***************************************************************SPI STATUS CHECKING*******************************
+
+uint16_t spi_sr_check_fre(SPI_TypeDef* type);
+
+uint16_t spi_sr_check_bsy(SPI_TypeDef* type);
+
+uint16_t spi_sr_check_ovr(SPI_TypeDef* type);
+
+uint16_t spi_sr_check_modf(SPI_TypeDef* type);
+
+uint16_t spi_sr_check_crcerr(SPI_TypeDef* type);
+
+uint16_t spi_sr_check_udr(SPI_TypeDef* type);
+
+uint16_t spi_sr_check_chside(SPI_TypeDef* type);
+
+uint16_t spi_sr_check_txe(SPI_TypeDef* type);
+
+uint16_t spi_sr_check_rxne(SPI_TypeDef* type);
+
+//*****************************************************SPI TRANSFER FUNCTIONS***************************************
+
+void spi_dr_write(SPI_TypeDef* type, uint16_t data);
+
+uint16_t spi_dr_read(SPI_TypeDef* type);

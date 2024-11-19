@@ -23,3 +23,14 @@
 ../Drivers/STM32F4xx_HAL_Driver/Src/STM32F401VE_SPI_driver.c:179:6:spi_cr2_configure_ssoe	16	static
 ../Drivers/STM32F4xx_HAL_Driver/Src/STM32F401VE_SPI_driver.c:185:6:spi_cr2_configure_txdmaen	16	static
 ../Drivers/STM32F4xx_HAL_Driver/Src/STM32F401VE_SPI_driver.c:191:6:spi_cr2_configure_rxdmaen	16	static
+../Drivers/STM32F4xx_HAL_Driver/Src/STM32F401VE_SPI_driver.c:199:10:spi_sr_check_fre	16	static
+../Drivers/STM32F4xx_HAL_Driver/Src/STM32F401VE_SPI_driver.c:204:10:spi_sr_check_bsy	16	static
+../Drivers/STM32F4xx_HAL_Driver/Src/STM32F401VE_SPI_driver.c:209:10:spi_sr_check_ovr	16	static
+../Drivers/STM32F4xx_HAL_Driver/Src/STM32F401VE_SPI_driver.c:214:10:spi_sr_check_modf	16	static
+../Drivers/STM32F4xx_HAL_Driver/Src/STM32F401VE_SPI_driver.c:219:10:spi_sr_check_crcerr	16	static
+../Drivers/STM32F4xx_HAL_Driver/Src/STM32F401VE_SPI_driver.c:224:10:spi_sr_check_udr	16	static
+../Drivers/STM32F4xx_HAL_Driver/Src/STM32F401VE_SPI_driver.c:229:10:spi_sr_check_chside	16	static
+../Drivers/STM32F4xx_HAL_Driver/Src/STM32F401VE_SPI_driver.c:234:10:spi_sr_check_txe	16	static
+../Drivers/STM32F4xx_HAL_Driver/Src/STM32F401VE_SPI_driver.c:239:10:spi_sr_check_rxne	16	static
+../Drivers/STM32F4xx_HAL_Driver/Src/STM32F401VE_SPI_driver.c:247:6:spi_dr_write	16	static
+../Drivers/STM32F4xx_HAL_Driver/Src/STM32F401VE_SPI_driver.c:252:10:spi_dr_read	16	static

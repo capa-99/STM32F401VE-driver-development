@@ -193,3 +193,63 @@ void spi_cr2_configure_rxdmaen(SPI_TypeDef* type, uint16_t rxdmaen)
 	type->CR2 = type->CR2 & ~(0x0001 << SPI_RXDMAEN);
 	type->CR2 = type->CR2 | (rxdmaen << SPI_RXDMAEN);
 }
+
+//************************************SPI STATUS CHECKING**********************************************************
+
+uint16_t spi_sr_check_fre(SPI_TypeDef* type)
+{
+	return ((type->SR & (0x0001 << SPI_FRE)) >> SPI_FRE);
+}
+
+uint16_t spi_sr_check_bsy(SPI_TypeDef* type)
+{
+	return ((type->SR & (0x0001 << SPI_BSY)) >> SPI_BSY);
+}
+
+uint16_t spi_sr_check_ovr(SPI_TypeDef* type)
+{
+	return ((type->SR & (0x0001 << SPI_OVR)) >> SPI_OVR);
+}
+
+uint16_t spi_sr_check_modf(SPI_TypeDef* type)
+{
+	return ((type->SR & (0x0001 << SPI_MODF)) >> SPI_MODF);
+}
+
+uint16_t spi_sr_check_crcerr(SPI_TypeDef* type)
+{
+	return ((type->SR & (0x0001 << SPI_CRCERR)) >> SPI_CRCERR);
+}
+
+uint16_t spi_sr_check_udr(SPI_TypeDef* type)
+{
+	return ((type->SR & (0x0001 << SPI_UDR)) >> SPI_UDR);
+}
+
+uint16_t spi_sr_check_chside(SPI_TypeDef* type)
+{
+	return ((type->SR & (0x0001 << SPI_CHSIDE)) >> SPI_CHSIDE);
+}
+
+uint16_t spi_sr_check_txe(SPI_TypeDef* type)
+{
+	return ((type->SR & (0x0001 << SPI_TXE)) >> SPI_TXE);
+}
+
+uint16_t spi_sr_check_rxne(SPI_TypeDef* type)
+{
+	return ((type->SR & (0x0001 << SPI_RXNE)) >> SPI_RXNE);
+}
+
+
+//**************************************SPI TRANSFER FUNCTIONS*****************************************************
+
+void spi_dr_write(SPI_TypeDef* type, uint16_t data)
+{
+	type->DR = data;
+}
+
+uint16_t spi_dr_read(SPI_TypeDef* type)
+{
+	return type->DR;
+}

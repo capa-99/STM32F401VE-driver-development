@@ -91,13 +91,12 @@ int main(void)
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
 
-  int mstr = 1;
+  int mstr = 0;
 
   if(mstr)
   {
 	  	RCC->AHB1ENR = RCC->AHB1ENR | 0x1;
 	    RCC->AHB1ENR = RCC->AHB1ENR | 0x8;
-	    //spi_choose_type(SPI1_TYPE);
 
 	    GPIOA->MODER = 0x00000000;
 	    GPIOA->MODER = GPIOA->MODER | 0xAA00;
@@ -106,10 +105,6 @@ int main(void)
 	    GPIOD->MODER = GPIOD->MODER | 0x0055;
 	    GPIOD->ODR = 0x1;
 
-	    //SPI1->CR1 = SPI1->CR1 | 0x002F;
-	    //SPI1->CR2 = SPI1->CR2 | 0x0004;
-
-	    //SPI1->CR1 = SPI1->CR1 | 0x40;
 	    spi_type spi1;
 	    spi1.spi = SPI1;
 		spi1.type = SPI1_TYPE;
@@ -136,12 +131,13 @@ int main(void)
 		spi1.rxdmaen = SPI_RXDMAEN_DISABLED;
 		spi_configure(&spi1);
 
-	    SPI1->DR = 0xAA;
+		spi_dr_write(spi1.spi, 0xAA);
 
 	    GPIOD->ODR = 0x2;
-	    while(!(SPI1->SR & 0x0001));
+	    while(spi_sr_check_rxne(spi1.spi) == SPI_RXNE_EMPTY);
 
-	    uint8_t rx_data = (uint8_t)SPI1->DR;
+	    uint16_t data = spi_dr_read(spi1.spi);
+	    uint8_t rx_data = (uint8_t)data;
 
 	    if(rx_data == 0x55)
 	    {
@@ -152,16 +148,15 @@ int main(void)
 	    	 GPIOD->ODR = 0x1;
 	    }
 
-	    while((SPI1->SR & 0x0080));
+	    while(spi_sr_check_bsy(spi1.spi) == SPI_BSY_BUSY);
 
-	    SPI1->CR1 = SPI1->CR1 & ~(0x40);
+	    spi_cr1_configure_spe(spi1.spi, SPI_SPE_DISABLE);
 
   }
   else
   {
 	  	RCC->AHB1ENR = RCC->AHB1ENR | 0x1;
 	    RCC->AHB1ENR = RCC->AHB1ENR | 0x8;
-	    //spi_choose_type(SPI1_TYPE);
 
 	    GPIOA->MODER = 0x00000000;
 	    GPIOA->MODER = GPIOA->MODER | 0xAA00;
@@ -170,10 +165,6 @@ int main(void)
 	    GPIOD->MODER = GPIOD->MODER | 0x0055;
 	    GPIOD->ODR = 0x1;
 
-	    //SPI1->CR1 = SPI1->CR1 | 0x002B;
-	    //SPI1->CR2 = SPI1->CR2 | 0x0004;
-
-	    //SPI1->CR1 = SPI1->CR1 | 0x40;
 	    spi_type spi1;
 	    spi1.spi = SPI1;
 	    spi1.type = SPI1_TYPE;
@@ -200,11 +191,12 @@ int main(void)
 	    spi1.rxdmaen = SPI_RXDMAEN_DISABLED;
 	    spi_configure(&spi1);
 
-	    SPI1->DR = 0x55;
+	    spi_dr_write(spi1.spi, 0x55);
 	    GPIOD->ODR = 0x2;
-	    while(!(SPI1->SR & 0x0001));
+	    while(spi_sr_check_rxne(spi1.spi) == SPI_RXNE_EMPTY);
 
-	    uint8_t rx_data = (uint8_t)SPI1->DR;
+	    uint16_t data = spi_dr_read(spi1.spi);
+	    uint8_t rx_data = (uint8_t)data;
 
 	    if(rx_data == 0xAA)
 	    {
@@ -215,9 +207,9 @@ int main(void)
 	       GPIOD->ODR = 0x1;
 	    }
 
-	    while(SPI1->SR & 0x0080);
+	    while(spi_sr_check_bsy(spi1.spi) == SPI_BSY_BUSY);
 
-	    SPI1->CR1 = SPI1->CR1 & ~(0x40);
+	    spi_cr1_configure_spe(spi1.spi, SPI_SPE_DISABLE);
   }
 
 
