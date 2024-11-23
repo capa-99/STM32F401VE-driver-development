@@ -253,3 +253,59 @@ uint16_t spi_dr_read(SPI_TypeDef* type)
 {
 	return type->DR;
 }
+
+void spi_slave_transmit(SPI_TypeDef* type, uint16_t data)
+{
+	while(spi_sr_check_txe(type) == SPI_TXE_NO_EMPTY);
+	spi_dr_write(type, data);
+}
+
+uint16_t spi_slave_receive(SPI_TypeDef* type)
+{
+	while(spi_sr_check_rxne(type) == SPI_RXNE_EMPTY);
+	return spi_dr_read(type);
+}
+
+void spi_master_transmit(SPI_TypeDef* type, uint16_t data)
+{
+	while(spi_sr_check_txe(type) == SPI_TXE_NO_EMPTY);
+	spi_dr_write(type, data);
+}
+
+uint16_t spi_master_receive(SPI_TypeDef* type)
+{
+	while(spi_sr_check_rxne(type) == SPI_RXNE_EMPTY);
+	return spi_dr_read(type);
+}
+
+void spi_master_continuous_send(SPI_TypeDef* type, uint16_t* data, int count)
+{
+	for(int i = 0; i < count; i++)
+	{
+		while(spi_sr_check_txe(type) == SPI_TXE_NO_EMPTY);
+		spi_dr_write(type, data[i]);
+	}
+}
+
+uint16_t* spi_slave_continuous_receive(SPI_TypeDef* type, int count)
+{
+	uint16_t received[count];
+	for(int i = 0; i < count; i++)
+	{
+		while(spi_sr_check_rxne(type) == SPI_RXNE_EMPTY);
+		received[i] = spi_dr_read(type);
+	}
+	return &received;
+}
+
+//********************************************************SPI INTERRUPT HANDLING************************************
+
+void spi_enable_interrupt(IRQn_Type irq)
+{
+	NVIC_EnableIRQ(irq);
+}
+
+void spi_clear_interrupt()
+{
+
+}

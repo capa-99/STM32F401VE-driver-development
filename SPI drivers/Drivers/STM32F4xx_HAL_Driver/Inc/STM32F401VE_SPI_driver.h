@@ -130,6 +130,10 @@
 #define SPI_RXNE_EMPTY 		((uint16_t)0x0)
 #define SPI_RXNE_NOT_EMPTY 	((uint16_t)0x1)
 
+#define SPI_RISING_EDGE 		((uint32_t)0x0)
+#define SPI_FALLING_EDGE 		((uint32_t)0x1)
+#define SPI_RISING_FALLING_EDGE ((uint32_t)0x2)
+
 //*******************************************SPI STRUCT*************************************************************
 typedef struct
 {
@@ -235,3 +239,21 @@ uint16_t spi_sr_check_rxne(SPI_TypeDef* type);
 void spi_dr_write(SPI_TypeDef* type, uint16_t data);
 
 uint16_t spi_dr_read(SPI_TypeDef* type);
+
+void spi_slave_transmit(SPI_TypeDef* type, uint16_t data);
+
+uint16_t spi_slave_receive(SPI_TypeDef* type);
+
+void spi_master_transmit(SPI_TypeDef* type, uint16_t data);
+
+uint16_t spi_master_receive(SPI_TypeDef* type);
+
+void spi_master_continuous_send(SPI_TypeDef* type, uint16_t* data, int count);
+
+uint16_t* spi_slave_continuous_receive(SPI_TypeDef* type, int count);
+
+//*********************************************SPI INTERRUPT HANDLING***********************************************
+
+void spi_enable_interrupt(IRQn_Type irq);
+
+void spi_clear_interrupt();

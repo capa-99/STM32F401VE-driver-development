@@ -54,6 +54,24 @@ void SystemClock_Config(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 
+void SPI1_IRQHandler(void)
+{
+	 uint16_t rx_data = spi_dr_read(SPI1);
+
+		    if(rx_data == 0x55)
+		    {
+		  	  GPIOD->ODR = 0x4;
+		    }
+		    else
+		    {
+		    	 GPIOD->ODR = 0x1;
+		    }
+}
+
+
+
+
+
 /* USER CODE END 0 */
 
 /**
@@ -91,10 +109,11 @@ int main(void)
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
 
-  int mstr = 0;
+  int mstr = 1;
 
   if(mstr)
   {
+
 	  	RCC->AHB1ENR = RCC->AHB1ENR | 0x1;
 	    RCC->AHB1ENR = RCC->AHB1ENR | 0x8;
 
@@ -105,6 +124,7 @@ int main(void)
 	    GPIOD->MODER = GPIOD->MODER | 0x0055;
 	    GPIOD->ODR = 0x1;
 
+	    spi_enable_interrupt(SPI1_IRQn);
 	    spi_type spi1;
 	    spi1.spi = SPI1;
 		spi1.type = SPI1_TYPE;
@@ -123,7 +143,7 @@ int main(void)
 		spi1.cpol = SPI_CPOL_1;
 		spi1.cpha = SPI_CPHA_SECOND;
 		spi1.txeie = SPI_TXEIE_MASKED;
-		spi1.rxneie = SPI_RXNEIE_MASKED;
+		spi1.rxneie = SPI_RXNEIE_NOT_MASKED;
 		spi1.errie = SPI_ERRIE_MASKED;
 		spi1.frf = SPI_FRF_MOTOROLA;
 		spi1.ssoe = SPI_SSOE_ENABLED;
@@ -131,13 +151,11 @@ int main(void)
 		spi1.rxdmaen = SPI_RXDMAEN_DISABLED;
 		spi_configure(&spi1);
 
-		spi_dr_write(spi1.spi, 0xAA);
+		spi_master_transmit(spi1.spi, 0xAA);
 
 	    GPIOD->ODR = 0x2;
-	    while(spi_sr_check_rxne(spi1.spi) == SPI_RXNE_EMPTY);
 
-	    uint16_t data = spi_dr_read(spi1.spi);
-	    uint8_t rx_data = (uint8_t)data;
+	    /*uint16_t rx_data = spi_master_receive(spi1.spi);
 
 	    if(rx_data == 0x55)
 	    {
@@ -146,7 +164,7 @@ int main(void)
 	    else
 	    {
 	    	 GPIOD->ODR = 0x1;
-	    }
+	    }*/
 
 	    while(spi_sr_check_bsy(spi1.spi) == SPI_BSY_BUSY);
 
@@ -191,12 +209,10 @@ int main(void)
 	    spi1.rxdmaen = SPI_RXDMAEN_DISABLED;
 	    spi_configure(&spi1);
 
-	    spi_dr_write(spi1.spi, 0x55);
+	    spi_slave_transmit(spi1.spi, 0x55);
 	    GPIOD->ODR = 0x2;
-	    while(spi_sr_check_rxne(spi1.spi) == SPI_RXNE_EMPTY);
 
-	    uint16_t data = spi_dr_read(spi1.spi);
-	    uint8_t rx_data = (uint8_t)data;
+	    uint16_t rx_data = spi_slave_receive(spi1.spi);
 
 	    if(rx_data == 0xAA)
 	    {

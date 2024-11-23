@@ -1,3 +1,4 @@
+../Drivers/CMSIS/Include/core_cm4.h:1684:22:__NVIC_EnableIRQ	16	static,ignoring_inline_asm
 ../Drivers/STM32F4xx_HAL_Driver/Src/STM32F401VE_SPI_driver.c:10:6:spi_choose_type	16	static
 ../Drivers/STM32F4xx_HAL_Driver/Src/STM32F401VE_SPI_driver.c:33:6:spi_configure_cr1	24	static
 ../Drivers/STM32F4xx_HAL_Driver/Src/STM32F401VE_SPI_driver.c:50:6:spi_configure_cr2	24	static
@@ -34,3 +35,11 @@
 ../Drivers/STM32F4xx_HAL_Driver/Src/STM32F401VE_SPI_driver.c:239:10:spi_sr_check_rxne	16	static
 ../Drivers/STM32F4xx_HAL_Driver/Src/STM32F401VE_SPI_driver.c:247:6:spi_dr_write	16	static
 ../Drivers/STM32F4xx_HAL_Driver/Src/STM32F401VE_SPI_driver.c:252:10:spi_dr_read	16	static
+../Drivers/STM32F4xx_HAL_Driver/Src/STM32F401VE_SPI_driver.c:257:6:spi_slave_transmit	16	static
+../Drivers/STM32F4xx_HAL_Driver/Src/STM32F401VE_SPI_driver.c:263:10:spi_slave_receive	16	static
+../Drivers/STM32F4xx_HAL_Driver/Src/STM32F401VE_SPI_driver.c:269:6:spi_master_transmit	16	static
+../Drivers/STM32F4xx_HAL_Driver/Src/STM32F401VE_SPI_driver.c:275:10:spi_master_receive	16	static
+../Drivers/STM32F4xx_HAL_Driver/Src/STM32F401VE_SPI_driver.c:281:6:spi_master_continuous_send	32	static
+../Drivers/STM32F4xx_HAL_Driver/Src/STM32F401VE_SPI_driver.c:290:11:spi_slave_continuous_receive	56	dynamic
+../Drivers/STM32F4xx_HAL_Driver/Src/STM32F401VE_SPI_driver.c:303:6:spi_enable_interrupt	16	static
+../Drivers/STM32F4xx_HAL_Driver/Src/STM32F401VE_SPI_driver.c:308:6:spi_clear_interrupt	4	static
