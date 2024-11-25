@@ -39,11 +39,14 @@
 #define STOPLIGHT_EMERGENCY_BUTTON 		((uint16_t)0x2)
 #define STOPLIGHT_OUT_OF_ORDER_BUTTON 	((uint16_t)0x3)
 
+#define STOPLIGHT_ACK 	((uint16_t)0xAA)
+#define STOPLIGHT_NACK 	((uint16_t)0xFF)
+
 //**********************************************************FUNCTIONS************************************************
 
 void stoplight_initialize(uint32_t type);
 
-void stoplight_configure_interrupts();
+void stoplight_configure_interrupts(uint32_t type);
 
 void stoplight_slave_change_light(uint16_t color);
 
@@ -56,3 +59,5 @@ void stoplight_pedestian_crossing();
 void stoplight_emergency_mode();
 
 void stoplight_out_of_order();
+
+void stoplight_handle_rx_data();

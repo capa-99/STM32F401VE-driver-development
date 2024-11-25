@@ -7,6 +7,10 @@
 
 #include <SPI_stoplight.h>
 
+uint16_t rx_data;
+uint32_t ms;
+uint16_t state;
+
 void stoplight_initialize(uint32_t type)
 {
 	if(type == STOPLIGHT_MASTER)
@@ -46,7 +50,7 @@ void stoplight_initialize(uint32_t type)
 		spi1.mstr = SPI_MSTR_MASTER;
 		spi1.cpol = SPI_CPOL_1;
 		spi1.cpha = SPI_CPHA_SECOND;
-		spi1.txeie = SPI_TXEIE_NOT_MASKED;
+		spi1.txeie = SPI_TXEIE_MASKED;
 		spi1.rxneie = SPI_RXNEIE_NOT_MASKED;
 		spi1.errie = SPI_ERRIE_MASKED;
 		spi1.frf = SPI_FRF_MOTOROLA;
@@ -54,6 +58,7 @@ void stoplight_initialize(uint32_t type)
 		spi1.txdmaen = SPI_TXDMAEN_DISABLED;
 		spi1.rxdmaen = SPI_RXDMAEN_DISABLED;
 		spi_configure(&spi1);
+		stoplight_configure_interrupts(type);
 	}
 	if(type == STOPLIGHT_SLAVE)
 	{
@@ -95,7 +100,7 @@ void stoplight_initialize(uint32_t type)
 		spi1.mstr = SPI_MSTR_SLAVE;
 		spi1.cpol = SPI_CPOL_1;
 		spi1.cpha = SPI_CPHA_SECOND;
-		spi1.txeie = SPI_TXEIE_NOT_MASKED;
+		spi1.txeie = SPI_TXEIE_MASKED;
 		spi1.rxneie = SPI_RXNEIE_NOT_MASKED;
 		spi1.errie = SPI_ERRIE_MASKED;
 		spi1.frf = SPI_FRF_MOTOROLA;
@@ -103,19 +108,23 @@ void stoplight_initialize(uint32_t type)
 		spi1.txdmaen = SPI_TXDMAEN_DISABLED;
 		spi1.rxdmaen = SPI_RXDMAEN_DISABLED;
 		spi_configure(&spi1);
+		stoplight_configure_interrupts(type);
 	}
 }
 
-void stoplight_configure_interrupts()
+void stoplight_configure_interrupts(uint32_t type)
 {
-	gpio_configure_interrupt(STOPLIGHT_TRAFFIC_SENSOR, GPIO_FALLING_EDGE);
-	gpio_enable_interrupt(STOPLIGHT_TRAFFIC_SENSOR, EXTI0_IRQn);
-	gpio_configure_interrupt(STOPLIGHT_PEDESTRIAN_BUTTON, GPIO_FALLING_EDGE);
-	gpio_enable_interrupt(STOPLIGHT_PEDESTRIAN_BUTTON, EXTI1_IRQn);
-	gpio_configure_interrupt(STOPLIGHT_EMERGENCY_BUTTON, GPIO_FALLING_EDGE);
-	gpio_enable_interrupt(STOPLIGHT_EMERGENCY_BUTTON, EXTI2_IRQn);
-	gpio_configure_interrupt(STOPLIGHT_OUT_OF_ORDER_BUTTON, GPIO_FALLING_EDGE);
-	gpio_enable_interrupt(STOPLIGHT_OUT_OF_ORDER_BUTTON, EXTI3_IRQn);
+	if(type == STOPLIGHT_MASTER)
+	{
+		gpio_configure_interrupt(STOPLIGHT_TRAFFIC_SENSOR, GPIO_FALLING_EDGE);
+		gpio_enable_interrupt(STOPLIGHT_TRAFFIC_SENSOR, EXTI0_IRQn);
+		gpio_configure_interrupt(STOPLIGHT_PEDESTRIAN_BUTTON, GPIO_FALLING_EDGE);
+		gpio_enable_interrupt(STOPLIGHT_PEDESTRIAN_BUTTON, EXTI1_IRQn);
+		gpio_configure_interrupt(STOPLIGHT_EMERGENCY_BUTTON, GPIO_FALLING_EDGE);
+		gpio_enable_interrupt(STOPLIGHT_EMERGENCY_BUTTON, EXTI2_IRQn);
+		gpio_configure_interrupt(STOPLIGHT_OUT_OF_ORDER_BUTTON, GPIO_FALLING_EDGE);
+		gpio_enable_interrupt(STOPLIGHT_OUT_OF_ORDER_BUTTON, EXTI3_IRQn);
+	}
 	spi_enable_interrupt(SPI1_IRQn);
 }
 
@@ -126,7 +135,8 @@ void stoplight_slave_change_light(uint16_t color)
 
 void SPI1_IRQHandler(void)
 {
-
+	rx_data = spi_dr_read(SPI1);
+	stoplight_handle_rx_data();
 }
 
 void EXTI0_IRQHandler(void)
@@ -147,4 +157,53 @@ void EXTI2_IRQHandler(void)
 void EXTI3_IRQHandler(void)
 {
 	gpio_clear_interrupt(STOPLIGHT_OUT_OF_ORDER_BUTTON);
+}
+
+void stoplight_handle_rx_data()
+{
+	if(ms == STOPLIGHT_SLAVE)
+	{
+		if(rx_data == STOPLIGHT_RED || rx_data == STOPLIGHT_YELLOW || rx_data == STOPLIGHT_GREEN)
+		{
+			stoplight_slave_change_light(rx_data);
+			spi_slave_transmit(SPI1, STOPLIGHT_ACK);
+		}
+		else
+		{
+			spi_slave_transmit(SPI1, STOPLIGHT_NACK);
+		}
+
+	}
+	if(ms == STOPLIGHT_MASTER)
+	{
+		if(rx_data == STOPLIGHT_NACK)
+		{
+
+		}
+	}
+}
+
+void stoplight_normal_working()
+{
+
+}
+
+void stoplight_traffic_jam_mode()
+{
+
+}
+
+void stoplight_pedestian_crossing()
+{
+
+}
+
+void stoplight_emergency_mode()
+{
+
+}
+
+void stoplight_out_of_order()
+{
+
 }

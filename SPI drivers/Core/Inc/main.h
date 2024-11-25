@@ -28,7 +28,8 @@ extern "C" {
 
 /* Includes ------------------------------------------------------------------*/
 
-#include <STM32F401VE_SPI_driver.h>
+//#include <STM32F401VE_SPI_driver.h>
+#include <SPI_stoplight.h>
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */

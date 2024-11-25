@@ -1,0 +1,14 @@
+../Core/Src/SPI_stoplight.c:14:6:stoplight_initialize	184	static
+../Core/Src/SPI_stoplight.c:115:6:stoplight_configure_interrupts	16	static
+../Core/Src/SPI_stoplight.c:131:6:stoplight_slave_change_light	16	static
+../Core/Src/SPI_stoplight.c:136:6:SPI1_IRQHandler	8	static
+../Core/Src/SPI_stoplight.c:142:6:EXTI0_IRQHandler	8	static
+../Core/Src/SPI_stoplight.c:147:6:EXTI1_IRQHandler	8	static
+../Core/Src/SPI_stoplight.c:152:6:EXTI2_IRQHandler	8	static
+../Core/Src/SPI_stoplight.c:157:6:EXTI3_IRQHandler	8	static
+../Core/Src/SPI_stoplight.c:162:6:stoplight_handle_rx_data	8	static
+../Core/Src/SPI_stoplight.c:190:6:stoplight_normal_working	4	static
+../Core/Src/SPI_stoplight.c:195:6:stoplight_traffic_jam_mode	4	static
+../Core/Src/SPI_stoplight.c:200:6:stoplight_pedestian_crossing	4	static
+../Core/Src/SPI_stoplight.c:205:6:stoplight_emergency_mode	4	static
+../Core/Src/SPI_stoplight.c:210:6:stoplight_out_of_order	4	static

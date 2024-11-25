@@ -54,7 +54,7 @@ void SystemClock_Config(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 
-void SPI1_IRQHandler(void)
+/*void SPI1_IRQHandler(void)
 {
 	 uint16_t rx_data = spi_dr_read(SPI1);
 
@@ -66,7 +66,7 @@ void SPI1_IRQHandler(void)
 		    {
 		    	 GPIOD->ODR = 0x1;
 		    }
-}
+}*/
 
 
 
@@ -109,7 +109,7 @@ int main(void)
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
 
-  int mstr = 1;
+  /*int mstr = 1;
 
   if(mstr)
   {
@@ -155,16 +155,6 @@ int main(void)
 
 	    GPIOD->ODR = 0x2;
 
-	    /*uint16_t rx_data = spi_master_receive(spi1.spi);
-
-	    if(rx_data == 0x55)
-	    {
-	  	  GPIOD->ODR = 0x4;
-	    }
-	    else
-	    {
-	    	 GPIOD->ODR = 0x1;
-	    }*/
 
 	    while(spi_sr_check_bsy(spi1.spi) == SPI_BSY_BUSY);
 
@@ -227,8 +217,20 @@ int main(void)
 
 	    spi_cr1_configure_spe(spi1.spi, SPI_SPE_DISABLE);
   }
+*/
 
+  int mstr = 1;
 
+  if(mstr)
+  {
+	  stoplight_initialize(STOPLIGHT_MASTER);
+	  spi_master_transmit(SPI1, STOPLIGHT_YELLOW);
+  }
+  else
+  {
+	  stoplight_initialize(STOPLIGHT_SLAVE);
+
+  }
 
   while (1)
   {
