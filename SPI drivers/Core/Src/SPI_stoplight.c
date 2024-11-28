@@ -9,7 +9,7 @@
 
 uint16_t rx_data;
 uint32_t ms;
-uint16_t state;
+volatile uint16_t state = STOPLIGHT_STATE_STOP;
 
 void stoplight_initialize(uint32_t type)
 {
@@ -59,6 +59,18 @@ void stoplight_initialize(uint32_t type)
 		spi1.rxdmaen = SPI_RXDMAEN_DISABLED;
 		spi_configure(&spi1);
 		stoplight_configure_interrupts(type);
+
+		RCC->APB1ENR = RCC->APB1ENR | 0x1;
+		TIM2->CR1 = 0x0310;
+		TIM2->EGR = TIM2->EGR | 0x0001;
+		TIM2->PSC = 0xFFF;
+		TIM2->ARR = STOPLIGHT_TIMER_STOP;
+		TIM2->DIER = TIM2->DIER | 0x0001;
+		TIM2->CR1 = TIM2->CR1 | 0x0001;
+		NVIC_EnableIRQ(TIM2_IRQn);
+		spi_master_transmit(SPI1, STOPLIGHT_RED);
+		state = STOPLIGHT_STATE_STOP;
+		TIM2->ARR = STOPLIGHT_TIMER_READY;
 	}
 	if(type == STOPLIGHT_SLAVE)
 	{
@@ -147,6 +159,7 @@ void EXTI0_IRQHandler(void)
 void EXTI1_IRQHandler(void)
 {
 	gpio_clear_interrupt(STOPLIGHT_PEDESTRIAN_BUTTON);
+	stoplight_pedestian_crossing();
 }
 
 void EXTI2_IRQHandler(void)
@@ -159,18 +172,27 @@ void EXTI3_IRQHandler(void)
 	gpio_clear_interrupt(STOPLIGHT_OUT_OF_ORDER_BUTTON);
 }
 
+void TIM2_IRQHandler(void)
+{
+	if (TIM2->SR & 0x1)
+	{
+		TIM2->SR &= ~0x1;
+	    stoplight_timer_handler();
+	}
+}
+
 void stoplight_handle_rx_data()
 {
 	if(ms == STOPLIGHT_SLAVE)
 	{
-		if(rx_data == STOPLIGHT_RED || rx_data == STOPLIGHT_YELLOW || rx_data == STOPLIGHT_GREEN)
+		if(rx_data == STOPLIGHT_RED || rx_data == STOPLIGHT_YELLOW || rx_data == STOPLIGHT_GREEN || rx_data == STOPLIGHT_OFF)
 		{
 			stoplight_slave_change_light(rx_data);
-			spi_slave_transmit(SPI1, STOPLIGHT_ACK);
+			//spi_slave_transmit(SPI1, STOPLIGHT_ACK);
 		}
 		else
 		{
-			spi_slave_transmit(SPI1, STOPLIGHT_NACK);
+			//spi_slave_transmit(SPI1, STOPLIGHT_NACK);
 		}
 
 	}
@@ -180,6 +202,51 @@ void stoplight_handle_rx_data()
 		{
 
 		}
+	}
+}
+
+void stoplight_timer_handler()
+{
+	switch(state)
+	{
+	case STOPLIGHT_STATE_STOP:
+	{
+		TIM2->ARR = STOPLIGHT_TIMER_GO;
+		spi_master_transmit(SPI1, STOPLIGHT_YELLOW);
+		state = STOPLIGHT_STATE_READY;
+	}break;
+	case STOPLIGHT_STATE_READY:
+	{
+		TIM2->ARR = STOPLIGHT_TIMER_BLINKING_OFF;
+		spi_master_transmit(SPI1, STOPLIGHT_GREEN);
+		state = STOPLIGHT_STATE_GO;
+	}break;
+	case STOPLIGHT_STATE_GO:
+	{
+		TIM2->ARR = STOPLIGHT_TIMER_BLINKING_GREEN;
+		spi_master_transmit(SPI1, STOPLIGHT_OFF);
+		state = STOPLIGHT_STATE_BLINKING_OFF;
+	}break;
+	case STOPLIGHT_STATE_BLINKING_OFF:
+	{
+		TIM2->ARR = STOPLIGHT_TIMER_BLINKING_END;
+		spi_master_transmit(SPI1, STOPLIGHT_GREEN);
+		state = STOPLIGHT_STATE_BLINKING_GREEN;
+	}break;
+	case STOPLIGHT_STATE_BLINKING_GREEN:
+	{
+		TIM2->ARR = STOPLIGHT_TIMER_STOP;
+		spi_master_transmit(SPI1, STOPLIGHT_YELLOW);
+		state = STOPLIGHT_STATE_BLINKING_END;
+	}break;
+	case STOPLIGHT_STATE_BLINKING_END:
+	{
+		TIM2->ARR = STOPLIGHT_TIMER_READY;
+		spi_master_transmit(SPI1, STOPLIGHT_RED);
+		state = STOPLIGHT_STATE_STOP;
+	}break;
+	default:
+	{};
 	}
 }
 
@@ -195,7 +262,18 @@ void stoplight_traffic_jam_mode()
 
 void stoplight_pedestian_crossing()
 {
-
+	if(state != STOPLIGHT_STATE_STOP)
+	{
+		state = STOPLIGHT_STATE_BLINKING_GREEN;
+		TIM2->ARR = STOPLIGHT_TIMER_BLINKING_OFF;
+		TIM2->EGR = TIM2->EGR | 0x1;
+	}
+	else
+	{
+		state = STOPLIGHT_STATE_BLINKING_END;
+		TIM2->ARR = STOPLIGHT_TIMER_STOP;
+		TIM2->EGR = TIM2->EGR | 0x1;
+	}
 }
 
 void stoplight_emergency_mode()

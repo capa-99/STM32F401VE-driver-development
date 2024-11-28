@@ -224,7 +224,6 @@ int main(void)
   if(mstr)
   {
 	  stoplight_initialize(STOPLIGHT_MASTER);
-	  spi_master_transmit(SPI1, STOPLIGHT_YELLOW);
   }
   else
   {
@@ -234,13 +233,6 @@ int main(void)
 
   while (1)
   {
-
-
-
-
-
-
-
 
 
     /* USER CODE END WHILE */

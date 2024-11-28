@@ -42,6 +42,20 @@
 #define STOPLIGHT_ACK 	((uint16_t)0xAA)
 #define STOPLIGHT_NACK 	((uint16_t)0xFF)
 
+#define STOPLIGHT_STATE_STOP 			((uint16_t)0x0)
+#define STOPLIGHT_STATE_READY 			((uint16_t)0x1)
+#define STOPLIGHT_STATE_GO 				((uint16_t)0x2)
+#define STOPLIGHT_STATE_BLINKING_GREEN  ((uint16_t)0x3)
+#define STOPLIGHT_STATE_BLINKING_OFF 	((uint16_t)0x4)
+#define STOPLIGHT_STATE_BLINKING_END 	((uint16_t)0x5)
+
+#define STOPLIGHT_TIMER_STOP 			((uint16_t)0x5000)
+#define STOPLIGHT_TIMER_READY 			((uint16_t)0x500)
+#define STOPLIGHT_TIMER_GO 				((uint16_t)0x2000)
+#define STOPLIGHT_TIMER_BLINKING_GREEN	((uint16_t)0x200)
+#define STOPLIGHT_TIMER_BLINKING_OFF 	((uint16_t)0x200)
+#define STOPLIGHT_TIMER_BLINKING_END 	((uint16_t)0x500)
+
 //**********************************************************FUNCTIONS************************************************
 
 void stoplight_initialize(uint32_t type);
@@ -61,3 +75,5 @@ void stoplight_emergency_mode();
 void stoplight_out_of_order();
 
 void stoplight_handle_rx_data();
+
+void stoplight_timer_handler();
