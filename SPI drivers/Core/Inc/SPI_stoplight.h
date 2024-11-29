@@ -19,9 +19,9 @@
 //master-slave SPI1 communication on GPIOA pins PA4-7
 //Stoplight connected to slave on GPIOD pins PD0-2
 //Input for smart stoplight connected to master on GPIOA pins PA0-3
-//0 - sensor that indicates traffic jam intensity so that stoplight can elongate green light time
-//1 - pedestrian button that when pressed makes the light red for 15 seconds
-//2 - emergency line button that makes the light red for 10 seconds and turns on emergency alarm
+//0 - light sensor that indicates the time of the day and shortens waiting time
+//1 - pedestrian button that when pressed makes the light red or if it was already red, elongates its time
+//2 - emergency/train passing line button that makes the light red and turns on emergency alarm
 //3 - out of order button that indicates that stoplight no longer works using flashing yellow
 
 //****************************************************MACROS*********************************************************
@@ -33,8 +33,9 @@
 #define STOPLIGHT_RED 		((uint16_t)0x1)
 #define STOPLIGHT_YELLOW 	((uint16_t)0x2)
 #define STOPLIGHT_GREEN 	((uint16_t)0x4)
+#define STOPLIGHT_ALARM 	((uint16_t)0x8)
 
-#define STOPLIGHT_TRAFFIC_SENSOR 		((uint16_t)0x0)
+#define STOPLIGHT_NIGHT_SENSOR 			((uint16_t)0x0)
 #define STOPLIGHT_PEDESTRIAN_BUTTON 	((uint16_t)0x1)
 #define STOPLIGHT_EMERGENCY_BUTTON 		((uint16_t)0x2)
 #define STOPLIGHT_OUT_OF_ORDER_BUTTON 	((uint16_t)0x3)
@@ -48,6 +49,7 @@
 #define STOPLIGHT_STATE_BLINKING_GREEN  ((uint16_t)0x3)
 #define STOPLIGHT_STATE_BLINKING_OFF 	((uint16_t)0x4)
 #define STOPLIGHT_STATE_BLINKING_END 	((uint16_t)0x5)
+#define STOPLIGHT_STATE_OUT_OF_ORDER 	((uint16_t)0x6)
 
 #define STOPLIGHT_TIMER_STOP 			((uint16_t)0x5000)
 #define STOPLIGHT_TIMER_READY 			((uint16_t)0x500)
@@ -55,7 +57,10 @@
 #define STOPLIGHT_TIMER_BLINKING_GREEN	((uint16_t)0x200)
 #define STOPLIGHT_TIMER_BLINKING_OFF 	((uint16_t)0x200)
 #define STOPLIGHT_TIMER_BLINKING_END 	((uint16_t)0x500)
+#define STOPLIGHT_TIMER_NIGHT_STOP 		((uint16_t)0x200)
 
+#define STOPLIGHT_NIGHT_MODE_ON 	((uint8_t)0x0)
+#define STOPLIGHT_NIGHT_MODE_OFF 	((uint8_t)0x1)
 //**********************************************************FUNCTIONS************************************************
 
 void stoplight_initialize(uint32_t type);
@@ -64,9 +69,7 @@ void stoplight_configure_interrupts(uint32_t type);
 
 void stoplight_slave_change_light(uint16_t color);
 
-void stoplight_normal_working();
-
-void stoplight_traffic_jam_mode();
+void stoplight_night_mode();
 
 void stoplight_pedestian_crossing();
 
