@@ -9,8 +9,8 @@
 ../Core/Src/SPI_stoplight.c:180:6:EXTI3_IRQHandler	8	static
 ../Core/Src/SPI_stoplight.c:186:6:TIM2_IRQHandler	8	static
 ../Core/Src/SPI_stoplight.c:195:6:stoplight_handle_rx_data	8	static
-../Core/Src/SPI_stoplight.c:213:6:stoplight_timer_handler	16	static
-../Core/Src/SPI_stoplight.c:292:6:stoplight_night_mode	8	static
-../Core/Src/SPI_stoplight.c:297:6:stoplight_pedestian_crossing	4	static
-../Core/Src/SPI_stoplight.c:313:6:stoplight_emergency_mode	4	static
-../Core/Src/SPI_stoplight.c:330:6:stoplight_out_of_order	8	static
+../Core/Src/SPI_stoplight.c:223:6:stoplight_timer_handler	16	static
+../Core/Src/SPI_stoplight.c:303:6:stoplight_night_mode	4	static
+../Core/Src/SPI_stoplight.c:315:6:stoplight_pedestian_crossing	4	static
+../Core/Src/SPI_stoplight.c:331:6:stoplight_emergency_mode	4	static
+../Core/Src/SPI_stoplight.c:348:6:stoplight_out_of_order	8	static

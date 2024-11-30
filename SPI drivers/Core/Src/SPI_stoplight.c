@@ -196,16 +196,26 @@ void stoplight_handle_rx_data()
 {
 	if(ms == STOPLIGHT_SLAVE)
 	{
+		if(rx_data == 0x0 || rx_data == 0x01 || rx_data == 0x2 || rx_data  == 0x4 || rx_data == 0x9 || rx_data == 0xA)
+		{
 			stoplight_slave_change_light(rx_data);
-			//spi_slave_transmit(SPI1, STOPLIGHT_ACK);
-
-			//spi_slave_transmit(SPI1, STOPLIGHT_NACK);
+			spi_slave_transmit(SPI1, STOPLIGHT_ACK);
+		}
+		else
+		{
+			spi_slave_transmit(SPI1, STOPLIGHT_NACK);
+		}
 	}
 	if(ms == STOPLIGHT_MASTER)
 	{
 		if(rx_data == STOPLIGHT_NACK)
 		{
-
+			TIM2->ARR = STOPLIGHT_TIMER_STOP;
+			spi_master_transmit(SPI1, STOPLIGHT_RED);
+			state = STOPLIGHT_STATE_STOP;
+			TIM2->ARR = STOPLIGHT_TIMER_READY;
+			night_mode = STOPLIGHT_NIGHT_MODE_OFF;
+			out_of_order = 0;
 		}
 	}
 }
@@ -233,6 +243,7 @@ void stoplight_timer_handler()
 		if(emergency)
 		{
 			send = STOPLIGHT_ALARM;
+			emergency = 0;
 		}
 		switch(state)
 			{
@@ -291,7 +302,14 @@ void stoplight_timer_handler()
 
 void stoplight_night_mode()
 {
-	night_mode = gpio_read_from_pin(GPIOA, STOPLIGHT_NIGHT_SENSOR);
+	if(night_mode == STOPLIGHT_NIGHT_MODE_OFF)
+	{
+		night_mode = STOPLIGHT_NIGHT_MODE_ON;
+	}
+	else
+	{
+		night_mode = STOPLIGHT_NIGHT_MODE_OFF;
+	}
 }
 
 void stoplight_pedestian_crossing()
