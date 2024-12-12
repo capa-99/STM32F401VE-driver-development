@@ -74,7 +74,71 @@
 #define USART_SBK_TRANSMIT 		((uint16_t)0x1)
 
 //CR2 register
+#define USART_LINEN 			((uint16_t)14)
+#define USART_LINEN_DISABLED 	((uint16_t)0x0)
+#define USART_LINEN_ENABLED 	((uint16_t)0x1)
+#define USART_STOP 				((uint16_t)12)
+#define USART_STOP_1_BIT 		((uint16_t)0x0)
+#define USART_STOP_0_5_BIT 		((uint16_t)0x1)
+#define USART_STOP_2_BIT 		((uint16_t)0x2)
+#define USART_STOP_1_5_BIT		((uint16_t)0x3)
+#define USART_CLKEN 			((uint16_t)11)
+#define USART_CLKEN_DISABLED 	((uint16_t)0x0)
+#define USART_CLKEN_ENABLED		((uint16_t)0x1)
+#define USART_CPOL				((uint16_t)10)
+#define USART_CPOL_LOW	 		((uint16_t)0x0)
+#define USART_CPOL_HIGH 		((uitn16_t)0x1)
+#define USART_CPHA 				((uitn16_t)9)
+#define USART_CPHA_FIRST_EDGE 	((uint16_t)0x0)
+#define USART_CPHA_SECOND_EDGE 	((uint16_t)0x1)
+#define USART_LBCL 				((uint16_t)8)
+#define USART_LBCL_NOT_OUTPUT 	((uint16_t)0x0)
+#define USART_LBCL_OUTPUT 		((uint16_t)0x1)
+#define USART_LBDIE 			((uint16_t)6)
+#define USART_LBDIE_INHIBITED 	((uint16_t)0x0)
+#define USART_LBDIE_ENABLED 	((uint16_t)0x1)
+#define USART_LBDL	 			((uint16_t)5)
+#define USART_LBDL_10_BIT	 	((uint16_t)0x0)
+#define USART_LBDL_11_BIT	 	((uint16_t)0x1)
+#define USART_ADD 				((uint16_t)0)
 
+//CR3 register
+#define USART_ONEBIT 				((uint16_t)11)
+#define USART_ONEBIT_THREE_SAMPLE 	((uint16_t)0x0)
+#define USART_ONEBIT_ONE_SAMPLE		((uint16_t)0x1)
+#define USART_CTSIE 				((uint16_t)10)
+#define USART_CTSIE_INHIBITED 		((uint16_t)0x0)
+#define USART_CTSIE_ENABLED 		((uitn16_t)0x1)
+#define USART_CTSE	 				((uitn16_t)9)
+#define USART_CTSE_DISABLED 		((uint16_t)0x0)
+#define USART_CTSE_ENABLED 			((uint16_t)0x1)
+#define USART_RTSE 					((uint16_t)8)
+#define USART_RTSE_DISABLED 		((uint16_t)0x0)
+#define USART_RTSE_ENABLED 			((uint16_t)0x1)
+#define USART_DMAT		 			((uint16_t)7)
+#define USART_DMAT_DISABLED		 	((uint16_t)0x0)
+#define USART_DMAT_ENABLED 			((uint16_t)0x1)
+#define USART_DMAR	 				((uint16_t)6)
+#define USART_DMAR_DISABLED 		((uint16_t)0x0)
+#define USART_DMAR_ENABLED 			((uint16_t)0x1)
+#define USART_SCEN		 			((uint16_t)5)
+#define USART_SCEN_DISABLED 		((uint16_t)0x0)
+#define USART_SCEN_ENABLED 			((uint16_t)0x1)
+#define USART_NACK		 			((uint16_t)4)
+#define USART_NACK_DISABLED 		((uint16_t)0x0)
+#define USART_NACK_ENABLED 			((uint16_t)0x1)
+#define USART_HDSEL 				((uint16_t)3)
+#define USART_HDSEL_NOT_SELECTED 	((uint16_t)0x0)
+#define USART_HDSEL_SELECTED 		((uint16_t)0x1)
+#define USART_IRLP	 				((uint16_t)2)
+#define USART_IRLP_NORMAL_MODE 		((uint16_t)0x0)
+#define USART_IRLP_LOW_POWER_MODE 	((uint16_t)0x1)
+#define USART_IREN 					((uint16_t)1)
+#define USART_IREN_DISABLED 		((uint16_t)0x0)
+#define USART_IREN_ENABLED			((uint16_t)0x1)
+#define USART_EIE	 				((uint16_t)0)
+#define USART_EIE_INHIBITED		 	((uint16_t)0x0)
+#define USART_EIE_ENABLED	 		((uint16_t)0x1)
 
 //SR register
 #define USART_CTS 					((uint16_t)9)
@@ -109,113 +173,178 @@
 #define USART_PE_ERROR 				((uint16_t)0x1)
 
 //BRR register
-#define USART_DIV_MANTISSA ((uint16_t)4)
-#define USART_DIV_FRACTION ((uint16_t)0)
+#define USART_DIV_Mantissa ((uint16_t)4)
+#define USART_DIV_Fraction ((uint16_t)0)
+
+//GTPR register
+#define USART_GT 							((uint16_t)8)
+#define USART_PSC 							((uint16_t)0)
 
 //Edges
 #define USART_RISING_EDGE 		((uint32_t)0x0)
 #define USART_FALLING_EDGE 		((uint32_t)0x1)
 #define USART_RISING_FALLING_EDGE ((uint32_t)0x2)
 
-//*******************************************SPI STRUCT*************************************************************
+//*******************************************USART STRUCT*************************************************************
 typedef struct
 {
-	SPI_TypeDef* spi;
+	USART_TypeDef* usart;
 	uint32_t type;
-	uint16_t bidimode;
-	uint16_t bidioe;
-	uint16_t crcen;
-	uint16_t crcnext;
-	uint16_t dff;
-	uint16_t rxonly;
-	uint16_t ssm;
-	uint16_t ssi;
-	uint16_t lsbfirst;
-	uint16_t spe;
-	uint16_t br;
-	uint16_t mstr;
+	uint16_t over8;
+	uint16_t ue;
+	uint16_t m;
+	uint16_t wake;
+	uint16_t pce;
+	uint16_t ps;
+	uint16_t peie;
+	uint16_t txeie;
+	uint16_t tcie;
+	uint16_t rxneie;
+	uint16_t idleie;
+	uint16_t te;
+	uint16_t re;
+	uint16_t rwu;
+	uint16_t sbk;
+	uint16_t linen;
+	uint16_t stop;
+	uint16_t clken;
 	uint16_t cpol;
 	uint16_t cpha;
-	uint16_t txeie;
-	uint16_t rxneie;
-	uint16_t errie;
-	uint16_t frf;
-	uint16_t ssoe;
-	uint16_t txdmaen;
-	uint16_t rxdmaen;
-}spi_type;
+	uint16_t lbcl;
+	uint16_t lbdie;
+	uint16_t lbdl;
+	uint16_t add;
+	uint16_t onebit;
+	uint16_t ctsie;
+	uint16_t ctse;
+	uint16_t rtse;
+	uint16_t dmat;
+	uint16_t dmar;
+	uint16_t scen;
+	uint16_t nack;
+	uint16_t hdsel;
+	uint16_t irlp;
+	uint16_t iren;
+	uint16_t eie;
+	uint16_t div_mantissa;
+	uint16_t div_fraction;
+	uint16_t gt;
+	uint16_t psc;
+}usart_type;
 
 //*********************************SPI CONFIGURATION FUCTIONS********************************************************
 
-void spi_choose_type(uint32_t spi);
+void usart_choose_type(uint32_t usart);
 
-void spi_configure_cr1(SPI_TypeDef* type, uint16_t bidimode, uint16_t bidioe, uint16_t crcen, uint16_t crcnext, uint16_t dff, uint16_t rxonly, uint16_t ssm, uint16_t ssi, uint16_t lsbfirst, uint16_t br, uint16_t mstr, uint16_t cpol, uint16_t cpha);
+void usart_configure_cr1(USART_TypeDef* type, uint16_t over8, uint16_t ue, uint16_t m, uint16_t wake, uint16_t pce, uint16_t ps, uint16_t peie, uint16_t txeie, uint16_t tcie, uint16_t rxneie, uint16_t idleie, uint16_t te, uint16_t re, uint16_t rwu, uint16_t sbk);
 
-void spi_configure_cr2(SPI_TypeDef* type, uint16_t txeie, uint16_t rxneie, uint16_t errie, uint16_t frf, uint16_t ssoe, uint16_t txdmaen, uint16_t rxdmaen);
+void usart_configure_cr2(USART_TypeDef* type, uint16_t linen, uint16_t stop, uint16_t clken, uint16_t cpol, uint16_t cpha, uint16_t lbcl, uint16_t lbdie, uint16_t lbdl, uint16_t add);
 
-void spi_configure(spi_type* spi);
+void usart_configure_cr3(USART_TypeDef* type, uint16_t onebit, uint16_t ctsie, uint16_t ctse, uint16_t rtse, uint16_t dmat, uint16_t dmar, uint16_t scen, uint16_t nack, uint16_t hdsel, uint16_t irlp, uint16_t iren, uint16_t eie);
 
-void spi_cr1_configure_bidimode(SPI_TypeDef* type, uint16_t bidimode);
+void usart_configure(usart_type* usart);
 
-void spi_cr1_configure_bidioe(SPI_TypeDef* type, uint16_t bidioe);
+void usart_cr1_configure_over8(USART_TypeDef* type, uint16_t over8);
 
-void spi_cr1_configure_crcen(SPI_TypeDef* type, uint16_t crcen);
+void usart_cr1_configure_ue(USART_TypeDef* type, uint16_t ue);
 
-void spi_cr1_configure_crcnext(SPI_TypeDef* type, uint16_t crcnext);
+void usart_cr1_configure_m(USART_TypeDef* type, uint16_t m);
 
-void spi_cr1_configure_dff(SPI_TypeDef* type, uint16_t dff);
+void usart_cr1_configure_wake(USART_TypeDef* type, uint16_t wake);
 
-void spi_cr1_configure_rxonly(SPI_TypeDef* type, uint16_t rxonly);
+void usart_cr1_configure_pce(USART_TypeDef* type, uint16_t pce);
 
-void spi_cr1_configure_ssm(SPI_TypeDef* type, uint16_t ssm);
+void usart_cr1_configure_ps(USART_TypeDef* type, uint16_t ps);
 
-void spi_cr1_configure_ssi(SPI_TypeDef* type, uint16_t ssi);
+void usart_cr1_configure_peie(USART_TypeDef* type, uint16_t peie);
 
-void spi_cr1_configure_lsbfirst(SPI_TypeDef* type, uint16_t lsbfirst);
+void usart_cr1_configure_txeie(USART_TypeDef* type, uint16_t txeie);
 
-void spi_cr1_configure_spe(SPI_TypeDef* type, uint16_t spe);
+void usart_cr1_configure_tcie(USART_TypeDef* type, uint16_t tcie);
 
-void spi_cr1_configure_br(SPI_TypeDef* type, uint16_t br);
+void usart_cr1_configure_rxneie(USART_TypeDef* type, uint16_t rxneie);
 
-void spi_cr1_configure_mstr(SPI_TypeDef* type, uint16_t mstr);
+void usart_cr1_configure_idleie(USART_TypeDef* type, uint16_t idleie);
 
-void spi_cr1_configure_cpol(SPI_TypeDef* type, uint16_t cpol);
+void usart_cr1_configure_te(USART_TypeDef* type, uint16_t te);
 
-void spi_cr1_configure_cpha(SPI_TypeDef* type, uint16_t cpha);
+void usart_cr1_configure_re(USART_TypeDef* type, uint16_t re);
 
-void spi_cr2_configure_txeie(SPI_TypeDef* type, uint16_t txeie);
+void usart_cr1_configure_rwu(USART_TypeDef* type, uint16_t rwu);
 
-void spi_cr2_configure_rxneie(SPI_TypeDef* type, uint16_t rxneie);
+void usart_cr1_configure_sbk(USART_TypeDef* type, uint16_t sbk);
 
-void spi_cr2_configure_errie(SPI_TypeDef* type, uint16_t errie);
+void usart_cr2_configure_linen(USART_TypeDef* type, uint16_t linen);
 
-void spi_cr2_configure_frf(SPI_TypeDef* type, uint16_t frf);
+void usart_cr2_configure_stop(USART_TypeDef* type, uint16_t stop);
 
-void spi_cr2_configure_ssoe(SPI_TypeDef* type, uint16_t ssoe);
+void usart_cr2_configure_clken(USART_TypeDef* type, uint16_t clken);
 
-void spi_cr2_configure_txdmaen(SPI_TypeDef* type, uint16_t txdmaen);
+void usart_cr2_configure_cpol(USART_TypeDef* type, uint16_t cpol);
 
-void spi_cr2_configure_rxdmaen(SPI_TypeDef* type, uint16_t rxdmaen);
+void usart_cr2_configure_cpha(USART_TypeDef* type, uint16_t cpha);
 
-//***************************************************************SPI STATUS CHECKING*******************************
+void usart_cr2_configure_lbcl(USART_TypeDef* type, uint16_t lbcl);
 
-uint16_t spi_sr_check_fre(SPI_TypeDef* type);
+void usart_cr2_configure_lbdie(USART_TypeDef* type, uint16_t lbdie);
 
-uint16_t spi_sr_check_bsy(SPI_TypeDef* type);
+void usart_cr2_configure_lbdl(USART_TypeDef* type, uint16_t lbdl);
 
-uint16_t spi_sr_check_ovr(SPI_TypeDef* type);
+void usart_cr2_configure_add(USART_TypeDef* type, uint16_t add);
 
-uint16_t spi_sr_check_modf(SPI_TypeDef* type);
+void usart_cr3_configure_onebit(USART_TypeDef* type, uint16_t onebit);
 
-uint16_t spi_sr_check_crcerr(SPI_TypeDef* type);
+void usart_cr3_configure_ctsie(USART_TypeDef* type, uint16_t ctsie);
 
-uint16_t spi_sr_check_udr(SPI_TypeDef* type);
+void usart_cr3_configure_ctse(USART_TypeDef* type, uint16_t ctse);
 
-uint16_t spi_sr_check_chside(SPI_TypeDef* type);
+void usart_cr3_configure_rtse(USART_TypeDef* type, uint16_t rtse);
 
-uint16_t spi_sr_check_txe(SPI_TypeDef* type);
+void usart_cr3_configure_dmat(USART_TypeDef* type, uint16_t dmat);
 
-uint16_t spi_sr_check_rxne(SPI_TypeDef* type);
+void usart_cr3_configure_dmar(USART_TypeDef* type, uint16_t dmar);
+
+void usart_cr3_configure_scen(USART_TypeDef* type, uint16_t scen);
+
+void usart_cr3_configure_nack(USART_TypeDef* type, uint16_t nack);
+
+void usart_cr3_configure_hdsel(USART_TypeDef* type, uint16_t hdsel);
+
+void usart_cr3_configure_irlp(USART_TypeDef* type, uint16_t irlp);
+
+void usart_cr3_configure_iren(USART_TypeDef* type, uint16_t iren);
+
+void usart_cr3_configure_eie(USART_TypeDef* type, uint16_t eie);
+
+void usart_brr_configure_div_mantissa(USART_TypeDef* type, uint16_t div_mantissa);
+
+void usart_brr_configure_div_fraction(USART_TypeDef* type, uint16_t div_fraction);
+
+void usart_gtpr_configure_gt(USART_TypeDef* type, uint16_t gt);
+
+void usart_gtpr_configure_psc(USART_TypeDef* type, uint16_t psc);
+
+//**************************************************************USART STATUS CHECKING*******************************
+
+uint16_t usart_sr_check_cts(USART_TypeDef* type);
+
+uint16_t usart_sr_check_lbd(USART_TypeDef* type);
+
+uint16_t usart_sr_check_txe(USART_TypeDef* type);
+
+uint16_t usart_sr_check_tc(USART_TypeDef* type);
+
+uint16_t usart_sr_check_rxne(USART_TypeDef* type);
+
+uint16_t usart_sr_check_idle(USART_TypeDef* type);
+
+uint16_t usart_sr_check_ore(USART_TypeDef* type);
+
+uint16_t usart_sr_check_nf(USART_TypeDef* type);
+
+uint16_t usart_sr_check_fe(USART_TypeDef* type);
+
+uint16_t usart_sr_check_pe(USART_TypeDef* type);
 
 //*****************************************************SPI TRANSFER FUNCTIONS***************************************
 
