@@ -42,7 +42,7 @@
 #define USART_PCE 				((uint16_t)10)
 #define USART_PCE_DISABLED 		((uint16_t)0x0)
 #define USART_PCE_ENABLED 		((uitn16_t)0x1)
-#define USART_PS 				((uitn16_t)9)
+#define USART_PS 				((uint16_t)9)
 #define USART_PS_EVEN 			((uint16_t)0x0)
 #define USART_PS_ODD 			((uint16_t)0x1)
 #define USART_PEIE 				((uint16_t)8)
@@ -87,8 +87,8 @@
 #define USART_CLKEN_ENABLED		((uint16_t)0x1)
 #define USART_CPOL				((uint16_t)10)
 #define USART_CPOL_LOW	 		((uint16_t)0x0)
-#define USART_CPOL_HIGH 		((uitn16_t)0x1)
-#define USART_CPHA 				((uitn16_t)9)
+#define USART_CPOL_HIGH 		((uint16_t)0x1)
+#define USART_CPHA 				((uint16_t)9)
 #define USART_CPHA_FIRST_EDGE 	((uint16_t)0x0)
 #define USART_CPHA_SECOND_EDGE 	((uint16_t)0x1)
 #define USART_LBCL 				((uint16_t)8)
@@ -109,7 +109,7 @@
 #define USART_CTSIE 				((uint16_t)10)
 #define USART_CTSIE_INHIBITED 		((uint16_t)0x0)
 #define USART_CTSIE_ENABLED 		((uitn16_t)0x1)
-#define USART_CTSE	 				((uitn16_t)9)
+#define USART_CTSE	 				((uint16_t)9)
 #define USART_CTSE_DISABLED 		((uint16_t)0x0)
 #define USART_CTSE_ENABLED 			((uint16_t)0x1)
 #define USART_RTSE 					((uint16_t)8)
@@ -241,6 +241,10 @@ void usart_configure_cr1(USART_TypeDef* type, uint16_t over8, uint16_t ue, uint1
 void usart_configure_cr2(USART_TypeDef* type, uint16_t linen, uint16_t stop, uint16_t clken, uint16_t cpol, uint16_t cpha, uint16_t lbcl, uint16_t lbdie, uint16_t lbdl, uint16_t add);
 
 void usart_configure_cr3(USART_TypeDef* type, uint16_t onebit, uint16_t ctsie, uint16_t ctse, uint16_t rtse, uint16_t dmat, uint16_t dmar, uint16_t scen, uint16_t nack, uint16_t hdsel, uint16_t irlp, uint16_t iren, uint16_t eie);
+
+void usart_configure_brr(USART_TypeDef* type, uint16_t div_mantissa, uint16_t div_fraction);
+
+void usart_configure_gtpr(USART_TypeDef* type, uint16_t gt, uint16_t psc);
 
 void usart_configure(usart_type* usart);
 
