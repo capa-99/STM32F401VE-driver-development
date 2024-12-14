@@ -92,10 +92,10 @@ void usart_configure(usart_type* usart)
 {
 	usart_choose_type(usart->type);
 	usart_cr1_configure_ue(usart->usart, 0x0);
+	usart_configure_brr(usart->usart, usart->div_mantissa, usart->div_fraction);
 	usart_configure_cr1(usart->usart, usart->over8, usart->ue, usart->m, usart->wake, usart->pce, usart->ps, usart->peie, usart->txeie, usart->tcie, usart->rxneie, usart->idleie, usart->te, usart->re, usart->rwu, usart->sbk);
 	usart_configure_cr2(usart->usart, usart->linen, usart->stop, usart->clken, usart->cpol, usart->cpha, usart->lbcl, usart->lbdie, usart->lbdl, usart->add);
 	usart_configure_cr3(usart->usart, usart->onebit, usart->ctsie, usart->ctse, usart->rtse, usart->dmat, usart->dmar, usart->scen, usart->nack, usart->hdsel, usart->irlp, usart->iren, usart->eie);
-	usart_configure_brr(usart->usart, usart->div_mantissa, usart->div_fraction);
 	usart_configure_gtpr(usart->usart, usart->gt, usart->psc);
 	usart_cr1_configure_ue(usart->usart, 0x1);
 }
@@ -390,4 +390,40 @@ uint16_t usart_sr_check_fe(USART_TypeDef* type)
 uint16_t usart_sr_check_pe(USART_TypeDef* type)
 {
 	return ((type->SR & (0x0001 << USART_PE)) >> USART_PE);
+}
+
+//*****************************************************USART TRANSFER FUNCTIONS***************************************
+
+void usart_dr_write(USART_TypeDef* type, uint16_t data)
+{
+	type->DR = data;
+}
+
+uint16_t usart_dr_read(USART_TypeDef* type)
+{
+	return type->DR;
+}
+
+void usart_transmit(USART_TypeDef* type, uint16_t data)
+{
+	while(usart_sr_check_txe(type) == USART_TXE_NO_TRANSFER);
+	usart_dr_write(type, data);
+}
+
+uint16_t usart_receive(USART_TypeDef* type)
+{
+	while(usart_sr_check_rxne(type) == USART_RXNE_NO_RECEIVED);
+	return usart_dr_read(type);
+}
+
+//*********************************************USART INTERRUPT HANDLING***********************************************
+
+void usart_enable_interrupt(IRQn_Type irq)
+{
+	NVIC_EnableIRQ(irq);
+}
+
+void usart_clear_interrupt()
+{
+
 }

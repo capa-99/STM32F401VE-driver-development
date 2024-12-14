@@ -350,27 +350,19 @@ uint16_t usart_sr_check_fe(USART_TypeDef* type);
 
 uint16_t usart_sr_check_pe(USART_TypeDef* type);
 
-//*****************************************************SPI TRANSFER FUNCTIONS***************************************
+//*****************************************************USART TRANSFER FUNCTIONS***************************************
 
-void spi_dr_write(SPI_TypeDef* type, uint16_t data);
+void usart_dr_write(USART_TypeDef* type, uint16_t data);
 
-uint16_t spi_dr_read(SPI_TypeDef* type);
+uint16_t usart_dr_read(USART_TypeDef* type);
 
-void spi_slave_transmit(SPI_TypeDef* type, uint16_t data);
+void usart_transmit(USART_TypeDef* type, uint16_t data);
 
-uint16_t spi_slave_receive(SPI_TypeDef* type);
+uint16_t usart_receive(USART_TypeDef* type);
 
-void spi_master_transmit(SPI_TypeDef* type, uint16_t data);
+//*********************************************USART INTERRUPT HANDLING***********************************************
 
-uint16_t spi_master_receive(SPI_TypeDef* type);
+void usart_enable_interrupt(IRQn_Type irq);
 
-void spi_master_continuous_send(SPI_TypeDef* type, uint16_t* data, int count);
-
-uint16_t* spi_slave_continuous_receive(SPI_TypeDef* type, int count);
-
-//*********************************************SPI INTERRUPT HANDLING***********************************************
-
-void spi_enable_interrupt(IRQn_Type irq);
-
-void spi_clear_interrupt();
+void usart_clear_interrupt();
 

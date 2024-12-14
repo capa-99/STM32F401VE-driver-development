@@ -55,7 +55,10 @@ void SystemClock_Config(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 
+void USART1_IRQHandler(void)
+{
 
+}
 
 /* USER CODE END 0 */
 
@@ -94,7 +97,7 @@ int main(void)
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
 
-  int mstr = 1;
+  /*int mstr = 1;
 
   if(mstr)
   {
@@ -110,14 +113,14 @@ int main(void)
 	  USART1->CR3 = USART1->CR3 | 0x0;
 	  USART1->CR1 = USART1->CR1 | 0x2000;
 	  uint16_t i = 0;
-	  /*while(i < 100)
+	  while(i < 100)
 	  {
 		  for(int j = 0; j < 1000; j++);
 
 		  while(!(USART1->SR & 0x80));
 		  USART1->DR = 0x4;
 		  i++;
-	  }*/
+	  }
 	  while(1)
 	  {
 	  		while(!(USART1->SR & 0x20));
@@ -140,17 +143,89 @@ int main(void)
 	  USART1->CR1 = USART1->CR1 | 0x2000;
 	  while(!(USART1->SR & 0x20));
 	  GPIOD->ODR = USART1->DR;
-  }
+  }*/
 
+  RCC->AHB1ENR = RCC->AHB1ENR | 0x1;
+  RCC->AHB1ENR = RCC->AHB1ENR | 0x8;
+  GPIOA->MODER = GPIOA->MODER | 0x2AA0000;
+  GPIOA->AFR[1] = GPIOA->AFR[1] | 0x77777;
+  GPIOD->MODER = GPIOD->MODER | 0x0055;
+  //usart_enable_interrupt(USART1_IRQn);
+  usart_type usart1;
+  usart1.usart = USART1;
+  usart1.type = USART1_TYPE;
+  usart1.over8 = USART_OVER8_16;
+  usart1.ue = USART_UE_DISABLED;
+  usart1.m = USART_M_8_BITS;
+  usart1.wake = USART_WAKE_IDLE_LINE;
+  usart1.pce = USART_PCE_DISABLED;
+  usart1.ps = USART_PS_EVEN;
+  usart1.peie = USART_PEIE_INHIBITED;
+  usart1.txeie = USART_TXEIE_INHIBITED;
+  usart1.tcie = USART_TCIE_INHIBITED;
+  usart1.rxneie = USART_RXNEIE_ENABLED;
+  usart1.idleie = USART_IDLEIE_INHIBITED;
+  usart1.te = USART_TE_ENABLED;
+  usart1.re = USART_RE_ENABLED;
+  usart1.rwu = USART_RWU_ACTIVE_MODE;
+  usart1.sbk = USART_SBK_NO_TRANSMIT;
+  usart1.linen = USART_LINEN_DISABLED;
+  usart1.stop = USART_STOP_1_BIT;
+  usart1.clken = USART_CLKEN_DISABLED;
+  usart1.cpol = USART_CPOL_LOW;
+  usart1.cpha = USART_CPHA_FIRST_EDGE;
+  usart1.lbcl = USART_LBCL_NOT_OUTPUT;
+  usart1.lbdie = USART_LBDIE_INHIBITED;
+  usart1.lbdl = USART_LBDL_10_BIT;
+  usart1.add = 0x0;
+  usart1.onebit = USART_ONEBIT_THREE_SAMPLE;
+  usart1.ctsie = USART_CTSIE_INHIBITED;
+  usart1.ctse = USART_CTSE_DISABLED;
+  usart1.rtse = USART_RTSE_DISABLED;
+  usart1.dmat = USART_DMAT_DISABLED;
+  usart1.dmar = USART_DMAR_DISABLED;
+  usart1.scen = USART_SCEN_DISABLED;
+  usart1.nack = USART_NACK_DISABLED;
+  usart1.hdsel = USART_HDSEL_NOT_SELECTED;
+  usart1.irlp = USART_IRLP_NORMAL_MODE;
+  usart1.iren = USART_IREN_DISABLED;
+  usart1.eie = USART_EIE_INHIBITED;
+  usart1.div_mantissa = 0x258;
+  usart1.div_fraction = 0x0;
+  usart1.gt = 0x00;
+  usart1.psc = 0x00;
+  usart_configure(&usart1);
 
-
-
+  uint16_t data;
   while (1)
   {
 
 
     /* USER CODE END WHILE */
-
+	 data = usart_receive(usart1.usart);
+	 switch(data)
+	 {
+	 case 60:
+	 {
+		 GPIOD->ODR = 0x0;
+	 }break;
+	 case 61:
+	 {
+	 	GPIOD->ODR = 0x1;
+	 }break;
+	 case 62:
+	 {
+	 	GPIOD->ODR = 0x2;
+	 }break;
+	 case 64:
+	 {
+	    GPIOD->ODR = 0x4;
+	 }break;
+	 default:
+	 {
+	 	GPIOD->ODR = 0x7;
+	 }break;
+	 }
     /* USER CODE BEGIN 3 */
   }
 

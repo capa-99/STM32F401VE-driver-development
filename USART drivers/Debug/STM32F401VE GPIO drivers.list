@@ -5,47 +5,47 @@ Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
   0 .isr_vector   00000194  08000000  08000000  00001000  2**0
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  1 .text         00000284  08000194  08000194  00001194  2**2
+  1 .text         00000f10  08000194  08000194  00001194  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .rodata       00000000  08000418  08000420  00001420  2**0
+  2 .rodata       00000000  080010a4  080010ac  000020ac  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  3 .ARM.extab    00000000  08000418  08000418  00001420  2**0
+  3 .ARM.extab    00000000  080010a4  080010a4  000020ac  2**0
                   CONTENTS
-  4 .ARM          00000000  08000418  08000418  00001420  2**0
+  4 .ARM          00000000  080010a4  080010a4  000020ac  2**0
                   CONTENTS
-  5 .preinit_array 00000000  08000418  08000420  00001420  2**0
+  5 .preinit_array 00000000  080010a4  080010ac  000020ac  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  6 .init_array   00000004  08000418  08000418  00001418  2**2
+  6 .init_array   00000004  080010a4  080010a4  000020a4  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  7 .fini_array   00000004  0800041c  0800041c  0000141c  2**2
+  7 .fini_array   00000004  080010a8  080010a8  000020a8  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  8 .data         00000000  20000000  20000000  00001420  2**0
+  8 .data         00000000  20000000  20000000  000020ac  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  9 .bss          0000001c  20000000  08000420  00002000  2**2
+  9 .bss          0000001c  20000000  080010ac  00003000  2**2
                   ALLOC
- 10 ._user_heap_stack 00000604  2000001c  08000420  0000201c  2**0
+ 10 ._user_heap_stack 00000604  2000001c  080010ac  0000301c  2**0
                   ALLOC
- 11 .ARM.attributes 00000030  00000000  00000000  00001420  2**0
+ 11 .ARM.attributes 00000030  00000000  00000000  000020ac  2**0
                   CONTENTS, READONLY
- 12 .debug_info   0000093f  00000000  00000000  00001450  2**0
+ 12 .debug_info   00002130  00000000  00000000  000020dc  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 13 .debug_abbrev 00000278  00000000  00000000  00001d8f  2**0
+ 13 .debug_abbrev 0000053f  00000000  00000000  0000420c  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 14 .debug_aranges 00000080  00000000  00000000  00002008  2**3
+ 14 .debug_aranges 000002a0  00000000  00000000  00004750  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_rnglists 00000053  00000000  00000000  00002088  2**0
+ 15 .debug_rnglists 000001e9  00000000  00000000  000049f0  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_macro  0000dc3c  00000000  00000000  000020db  2**0
+ 16 .debug_macro  0000e0da  00000000  00000000  00004bd9  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_line   00000c83  00000000  00000000  0000fd17  2**0
+ 17 .debug_line   00001afe  00000000  00000000  00012cb3  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_str    0004f8d7  00000000  00000000  0001099a  2**0
+ 18 .debug_str    000515b3  00000000  00000000  000147b1  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .comment      00000043  00000000  00000000  00060271  2**0
+ 19 .comment      00000043  00000000  00000000  00065d64  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  000000ec  00000000  00000000  000602b4  2**2
+ 20 .debug_frame  00000afc  00000000  00000000  00065da8  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 21 .debug_line_str 0000007e  00000000  00000000  000603a0  2**0
+ 21 .debug_line_str 0000007e  00000000  00000000  000668a4  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -64,7 +64,7 @@ Disassembly of section .text:
  80001aa:	bd10      	pop	{r4, pc}
  80001ac:	20000000 	.word	0x20000000
  80001b0:	00000000 	.word	0x00000000
- 80001b4:	08000400 	.word	0x08000400
+ 80001b4:	0800108c 	.word	0x0800108c
 
 080001b8 <frame_dummy>:
  80001b8:	b508      	push	{r3, lr}
@@ -76,419 +76,2348 @@ Disassembly of section .text:
  80001c6:	bd08      	pop	{r3, pc}
  80001c8:	00000000 	.word	0x00000000
  80001cc:	20000004 	.word	0x20000004
- 80001d0:	08000400 	.word	0x08000400
+ 80001d0:	0800108c 	.word	0x0800108c
 
-080001d4 <main>:
+080001d4 <USART1_IRQHandler>:
+
+/* Private user code ---------------------------------------------------------*/
+/* USER CODE BEGIN 0 */
+
+void USART1_IRQHandler(void)
+{
+ 80001d4:	b480      	push	{r7}
+ 80001d6:	af00      	add	r7, sp, #0
+
+}
+ 80001d8:	bf00      	nop
+ 80001da:	46bd      	mov	sp, r7
+ 80001dc:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 80001e0:	4770      	bx	lr
+	...
+
+080001e4 <main>:
 /**
   * @brief  The application entry point.
   * @retval int
   */
 int main(void)
 {
- 80001d4:	b580      	push	{r7, lr}
- 80001d6:	b082      	sub	sp, #8
- 80001d8:	af00      	add	r7, sp, #0
+ 80001e4:	b580      	push	{r7, lr}
+ 80001e6:	b098      	sub	sp, #96	@ 0x60
+ 80001e8:	af00      	add	r7, sp, #0
   /* USER CODE BEGIN Init */
 
   /* USER CODE END Init */
 
   /* Configure the system clock */
   SystemClock_Config();
- 80001da:	f000 f8a9 	bl	8000330 <SystemClock_Config>
-  /* USER CODE END 2 */
-
-  /* Infinite loop */
-  /* USER CODE BEGIN WHILE */
-
-  int mstr = 1;
- 80001de:	2301      	movs	r3, #1
- 80001e0:	607b      	str	r3, [r7, #4]
-
-  if(mstr)
- 80001e2:	687b      	ldr	r3, [r7, #4]
- 80001e4:	2b00      	cmp	r3, #0
- 80001e6:	d04b      	beq.n	8000280 <main+0xac>
-  {
-	  RCC->AHB1ENR = RCC->AHB1ENR | 0x1;
- 80001e8:	4b4c      	ldr	r3, [pc, #304]	@ (800031c <main+0x148>)
- 80001ea:	6b1b      	ldr	r3, [r3, #48]	@ 0x30
- 80001ec:	4a4b      	ldr	r2, [pc, #300]	@ (800031c <main+0x148>)
- 80001ee:	f043 0301 	orr.w	r3, r3, #1
- 80001f2:	6313      	str	r3, [r2, #48]	@ 0x30
-	  RCC->AHB1ENR = RCC->AHB1ENR | 0x8;
- 80001f4:	4b49      	ldr	r3, [pc, #292]	@ (800031c <main+0x148>)
- 80001f6:	6b1b      	ldr	r3, [r3, #48]	@ 0x30
- 80001f8:	4a48      	ldr	r2, [pc, #288]	@ (800031c <main+0x148>)
- 80001fa:	f043 0308 	orr.w	r3, r3, #8
- 80001fe:	6313      	str	r3, [r2, #48]	@ 0x30
-	  GPIOA->MODER = GPIOA->MODER | 0x2AA0000;
- 8000200:	4b47      	ldr	r3, [pc, #284]	@ (8000320 <main+0x14c>)
- 8000202:	681b      	ldr	r3, [r3, #0]
- 8000204:	4a46      	ldr	r2, [pc, #280]	@ (8000320 <main+0x14c>)
- 8000206:	f043 732a 	orr.w	r3, r3, #44564480	@ 0x2a80000
- 800020a:	f443 3300 	orr.w	r3, r3, #131072	@ 0x20000
- 800020e:	6013      	str	r3, [r2, #0]
-	  GPIOA->AFR[1] = GPIOA->AFR[1] | 0x77777;
- 8000210:	4b43      	ldr	r3, [pc, #268]	@ (8000320 <main+0x14c>)
- 8000212:	6a5a      	ldr	r2, [r3, #36]	@ 0x24
- 8000214:	4942      	ldr	r1, [pc, #264]	@ (8000320 <main+0x14c>)
- 8000216:	4b43      	ldr	r3, [pc, #268]	@ (8000324 <main+0x150>)
- 8000218:	4313      	orrs	r3, r2
- 800021a:	624b      	str	r3, [r1, #36]	@ 0x24
-	  GPIOD->MODER = GPIOD->MODER | 0x0055;
- 800021c:	4b42      	ldr	r3, [pc, #264]	@ (8000328 <main+0x154>)
- 800021e:	681b      	ldr	r3, [r3, #0]
- 8000220:	4a41      	ldr	r2, [pc, #260]	@ (8000328 <main+0x154>)
- 8000222:	f043 0355 	orr.w	r3, r3, #85	@ 0x55
- 8000226:	6013      	str	r3, [r2, #0]
-	  RCC->APB2ENR = RCC->APB2ENR | 0x10;
- 8000228:	4b3c      	ldr	r3, [pc, #240]	@ (800031c <main+0x148>)
- 800022a:	6c5b      	ldr	r3, [r3, #68]	@ 0x44
- 800022c:	4a3b      	ldr	r2, [pc, #236]	@ (800031c <main+0x148>)
- 800022e:	f043 0310 	orr.w	r3, r3, #16
- 8000232:	6453      	str	r3, [r2, #68]	@ 0x44
-	  USART1->BRR = 9600;
- 8000234:	4b3d      	ldr	r3, [pc, #244]	@ (800032c <main+0x158>)
- 8000236:	f44f 5216 	mov.w	r2, #9600	@ 0x2580
- 800023a:	609a      	str	r2, [r3, #8]
-	  USART1->CR1 = USART1->CR1 | 0xC;
- 800023c:	4b3b      	ldr	r3, [pc, #236]	@ (800032c <main+0x158>)
- 800023e:	68db      	ldr	r3, [r3, #12]
- 8000240:	4a3a      	ldr	r2, [pc, #232]	@ (800032c <main+0x158>)
- 8000242:	f043 030c 	orr.w	r3, r3, #12
- 8000246:	60d3      	str	r3, [r2, #12]
-	  USART1->CR2 = USART1->CR2 | 0x0;
- 8000248:	4b38      	ldr	r3, [pc, #224]	@ (800032c <main+0x158>)
- 800024a:	4a38      	ldr	r2, [pc, #224]	@ (800032c <main+0x158>)
- 800024c:	691b      	ldr	r3, [r3, #16]
- 800024e:	6113      	str	r3, [r2, #16]
-	  USART1->CR3 = USART1->CR3 | 0x0;
- 8000250:	4b36      	ldr	r3, [pc, #216]	@ (800032c <main+0x158>)
- 8000252:	4a36      	ldr	r2, [pc, #216]	@ (800032c <main+0x158>)
- 8000254:	695b      	ldr	r3, [r3, #20]
- 8000256:	6153      	str	r3, [r2, #20]
+ 80001ea:	f000 f8c1 	bl	8000370 <SystemClock_Config>
 	  USART1->CR1 = USART1->CR1 | 0x2000;
- 8000258:	4b34      	ldr	r3, [pc, #208]	@ (800032c <main+0x158>)
- 800025a:	68db      	ldr	r3, [r3, #12]
- 800025c:	4a33      	ldr	r2, [pc, #204]	@ (800032c <main+0x158>)
- 800025e:	f443 5300 	orr.w	r3, r3, #8192	@ 0x2000
- 8000262:	60d3      	str	r3, [r2, #12]
-	  uint16_t i = 0;
- 8000264:	2300      	movs	r3, #0
- 8000266:	807b      	strh	r3, [r7, #2]
-		  USART1->DR = 0x4;
-		  i++;
-	  }*/
-	  while(1)
-	  {
-	  		while(!(USART1->SR & 0x20));
- 8000268:	bf00      	nop
- 800026a:	4b30      	ldr	r3, [pc, #192]	@ (800032c <main+0x158>)
- 800026c:	681b      	ldr	r3, [r3, #0]
- 800026e:	f003 0320 	and.w	r3, r3, #32
- 8000272:	2b00      	cmp	r3, #0
- 8000274:	d0f9      	beq.n	800026a <main+0x96>
-	  		GPIOD->ODR = USART1->DR;
- 8000276:	4b2d      	ldr	r3, [pc, #180]	@ (800032c <main+0x158>)
- 8000278:	4a2b      	ldr	r2, [pc, #172]	@ (8000328 <main+0x154>)
- 800027a:	685b      	ldr	r3, [r3, #4]
- 800027c:	6153      	str	r3, [r2, #20]
-	  		while(!(USART1->SR & 0x20));
- 800027e:	e7f3      	b.n	8000268 <main+0x94>
-	  }
-  }
-  else
-  {
-	  RCC->AHB1ENR = RCC->AHB1ENR | 0x1;
- 8000280:	4b26      	ldr	r3, [pc, #152]	@ (800031c <main+0x148>)
- 8000282:	6b1b      	ldr	r3, [r3, #48]	@ 0x30
- 8000284:	4a25      	ldr	r2, [pc, #148]	@ (800031c <main+0x148>)
- 8000286:	f043 0301 	orr.w	r3, r3, #1
- 800028a:	6313      	str	r3, [r2, #48]	@ 0x30
-	  RCC->AHB1ENR = RCC->AHB1ENR | 0x8;
- 800028c:	4b23      	ldr	r3, [pc, #140]	@ (800031c <main+0x148>)
- 800028e:	6b1b      	ldr	r3, [r3, #48]	@ 0x30
- 8000290:	4a22      	ldr	r2, [pc, #136]	@ (800031c <main+0x148>)
- 8000292:	f043 0308 	orr.w	r3, r3, #8
- 8000296:	6313      	str	r3, [r2, #48]	@ 0x30
-	  GPIOA->MODER = GPIOA->MODER | 0x2AA0000;
- 8000298:	4b21      	ldr	r3, [pc, #132]	@ (8000320 <main+0x14c>)
- 800029a:	681b      	ldr	r3, [r3, #0]
- 800029c:	4a20      	ldr	r2, [pc, #128]	@ (8000320 <main+0x14c>)
- 800029e:	f043 732a 	orr.w	r3, r3, #44564480	@ 0x2a80000
- 80002a2:	f443 3300 	orr.w	r3, r3, #131072	@ 0x20000
- 80002a6:	6013      	str	r3, [r2, #0]
-	  GPIOA->AFR[1] = GPIOA->AFR[1] | 0x77777;
- 80002a8:	4b1d      	ldr	r3, [pc, #116]	@ (8000320 <main+0x14c>)
- 80002aa:	6a5a      	ldr	r2, [r3, #36]	@ 0x24
- 80002ac:	491c      	ldr	r1, [pc, #112]	@ (8000320 <main+0x14c>)
- 80002ae:	4b1d      	ldr	r3, [pc, #116]	@ (8000324 <main+0x150>)
- 80002b0:	4313      	orrs	r3, r2
- 80002b2:	624b      	str	r3, [r1, #36]	@ 0x24
-	  GPIOD->MODER = GPIOD->MODER | 0x0055;
- 80002b4:	4b1c      	ldr	r3, [pc, #112]	@ (8000328 <main+0x154>)
- 80002b6:	681b      	ldr	r3, [r3, #0]
- 80002b8:	4a1b      	ldr	r2, [pc, #108]	@ (8000328 <main+0x154>)
- 80002ba:	f043 0355 	orr.w	r3, r3, #85	@ 0x55
- 80002be:	6013      	str	r3, [r2, #0]
-	  GPIOD->ODR = 0x1;
- 80002c0:	4b19      	ldr	r3, [pc, #100]	@ (8000328 <main+0x154>)
- 80002c2:	2201      	movs	r2, #1
- 80002c4:	615a      	str	r2, [r3, #20]
-	  RCC->APB2ENR = RCC->APB2ENR | 0x10;
- 80002c6:	4b15      	ldr	r3, [pc, #84]	@ (800031c <main+0x148>)
- 80002c8:	6c5b      	ldr	r3, [r3, #68]	@ 0x44
- 80002ca:	4a14      	ldr	r2, [pc, #80]	@ (800031c <main+0x148>)
- 80002cc:	f043 0310 	orr.w	r3, r3, #16
- 80002d0:	6453      	str	r3, [r2, #68]	@ 0x44
-	  USART1->BRR = 1667;
- 80002d2:	4b16      	ldr	r3, [pc, #88]	@ (800032c <main+0x158>)
- 80002d4:	f240 6283 	movw	r2, #1667	@ 0x683
- 80002d8:	609a      	str	r2, [r3, #8]
-	  USART1->CR1 = USART1->CR1 | 0xC;
- 80002da:	4b14      	ldr	r3, [pc, #80]	@ (800032c <main+0x158>)
- 80002dc:	68db      	ldr	r3, [r3, #12]
- 80002de:	4a13      	ldr	r2, [pc, #76]	@ (800032c <main+0x158>)
- 80002e0:	f043 030c 	orr.w	r3, r3, #12
- 80002e4:	60d3      	str	r3, [r2, #12]
-	  USART1->CR2 = USART1->CR2 | 0x0;
- 80002e6:	4b11      	ldr	r3, [pc, #68]	@ (800032c <main+0x158>)
- 80002e8:	4a10      	ldr	r2, [pc, #64]	@ (800032c <main+0x158>)
- 80002ea:	691b      	ldr	r3, [r3, #16]
- 80002ec:	6113      	str	r3, [r2, #16]
-	  USART1->CR3 = USART1->CR3 | 0x0;
- 80002ee:	4b0f      	ldr	r3, [pc, #60]	@ (800032c <main+0x158>)
- 80002f0:	4a0e      	ldr	r2, [pc, #56]	@ (800032c <main+0x158>)
- 80002f2:	695b      	ldr	r3, [r3, #20]
- 80002f4:	6153      	str	r3, [r2, #20]
-	  USART1->CR1 = USART1->CR1 | 0x2000;
- 80002f6:	4b0d      	ldr	r3, [pc, #52]	@ (800032c <main+0x158>)
- 80002f8:	68db      	ldr	r3, [r3, #12]
- 80002fa:	4a0c      	ldr	r2, [pc, #48]	@ (800032c <main+0x158>)
- 80002fc:	f443 5300 	orr.w	r3, r3, #8192	@ 0x2000
- 8000300:	60d3      	str	r3, [r2, #12]
 	  while(!(USART1->SR & 0x20));
- 8000302:	bf00      	nop
- 8000304:	4b09      	ldr	r3, [pc, #36]	@ (800032c <main+0x158>)
- 8000306:	681b      	ldr	r3, [r3, #0]
- 8000308:	f003 0320 	and.w	r3, r3, #32
- 800030c:	2b00      	cmp	r3, #0
- 800030e:	d0f9      	beq.n	8000304 <main+0x130>
 	  GPIOD->ODR = USART1->DR;
- 8000310:	4b06      	ldr	r3, [pc, #24]	@ (800032c <main+0x158>)
- 8000312:	4a05      	ldr	r2, [pc, #20]	@ (8000328 <main+0x154>)
- 8000314:	685b      	ldr	r3, [r3, #4]
- 8000316:	6153      	str	r3, [r2, #20]
-  }
+  }*/
 
-
-
-
+  RCC->AHB1ENR = RCC->AHB1ENR | 0x1;
+ 80001ee:	4b5b      	ldr	r3, [pc, #364]	@ (800035c <main+0x178>)
+ 80001f0:	6b1b      	ldr	r3, [r3, #48]	@ 0x30
+ 80001f2:	4a5a      	ldr	r2, [pc, #360]	@ (800035c <main+0x178>)
+ 80001f4:	f043 0301 	orr.w	r3, r3, #1
+ 80001f8:	6313      	str	r3, [r2, #48]	@ 0x30
+  RCC->AHB1ENR = RCC->AHB1ENR | 0x8;
+ 80001fa:	4b58      	ldr	r3, [pc, #352]	@ (800035c <main+0x178>)
+ 80001fc:	6b1b      	ldr	r3, [r3, #48]	@ 0x30
+ 80001fe:	4a57      	ldr	r2, [pc, #348]	@ (800035c <main+0x178>)
+ 8000200:	f043 0308 	orr.w	r3, r3, #8
+ 8000204:	6313      	str	r3, [r2, #48]	@ 0x30
+  GPIOA->MODER = GPIOA->MODER | 0x2AA0000;
+ 8000206:	4b56      	ldr	r3, [pc, #344]	@ (8000360 <main+0x17c>)
+ 8000208:	681b      	ldr	r3, [r3, #0]
+ 800020a:	4a55      	ldr	r2, [pc, #340]	@ (8000360 <main+0x17c>)
+ 800020c:	f043 732a 	orr.w	r3, r3, #44564480	@ 0x2a80000
+ 8000210:	f443 3300 	orr.w	r3, r3, #131072	@ 0x20000
+ 8000214:	6013      	str	r3, [r2, #0]
+  GPIOA->AFR[1] = GPIOA->AFR[1] | 0x77777;
+ 8000216:	4b52      	ldr	r3, [pc, #328]	@ (8000360 <main+0x17c>)
+ 8000218:	6a5a      	ldr	r2, [r3, #36]	@ 0x24
+ 800021a:	4951      	ldr	r1, [pc, #324]	@ (8000360 <main+0x17c>)
+ 800021c:	4b51      	ldr	r3, [pc, #324]	@ (8000364 <main+0x180>)
+ 800021e:	4313      	orrs	r3, r2
+ 8000220:	624b      	str	r3, [r1, #36]	@ 0x24
+  GPIOD->MODER = GPIOD->MODER | 0x0055;
+ 8000222:	4b51      	ldr	r3, [pc, #324]	@ (8000368 <main+0x184>)
+ 8000224:	681b      	ldr	r3, [r3, #0]
+ 8000226:	4a50      	ldr	r2, [pc, #320]	@ (8000368 <main+0x184>)
+ 8000228:	f043 0355 	orr.w	r3, r3, #85	@ 0x55
+ 800022c:	6013      	str	r3, [r2, #0]
+  //usart_enable_interrupt(USART1_IRQn);
+  usart_type usart1;
+  usart1.usart = USART1;
+ 800022e:	4b4f      	ldr	r3, [pc, #316]	@ (800036c <main+0x188>)
+ 8000230:	607b      	str	r3, [r7, #4]
+  usart1.type = USART1_TYPE;
+ 8000232:	2300      	movs	r3, #0
+ 8000234:	60bb      	str	r3, [r7, #8]
+  usart1.over8 = USART_OVER8_16;
+ 8000236:	2300      	movs	r3, #0
+ 8000238:	81bb      	strh	r3, [r7, #12]
+  usart1.ue = USART_UE_DISABLED;
+ 800023a:	2300      	movs	r3, #0
+ 800023c:	81fb      	strh	r3, [r7, #14]
+  usart1.m = USART_M_8_BITS;
+ 800023e:	2300      	movs	r3, #0
+ 8000240:	823b      	strh	r3, [r7, #16]
+  usart1.wake = USART_WAKE_IDLE_LINE;
+ 8000242:	2300      	movs	r3, #0
+ 8000244:	827b      	strh	r3, [r7, #18]
+  usart1.pce = USART_PCE_DISABLED;
+ 8000246:	2300      	movs	r3, #0
+ 8000248:	82bb      	strh	r3, [r7, #20]
+  usart1.ps = USART_PS_EVEN;
+ 800024a:	2300      	movs	r3, #0
+ 800024c:	82fb      	strh	r3, [r7, #22]
+  usart1.peie = USART_PEIE_INHIBITED;
+ 800024e:	2300      	movs	r3, #0
+ 8000250:	833b      	strh	r3, [r7, #24]
+  usart1.txeie = USART_TXEIE_INHIBITED;
+ 8000252:	2300      	movs	r3, #0
+ 8000254:	837b      	strh	r3, [r7, #26]
+  usart1.tcie = USART_TCIE_INHIBITED;
+ 8000256:	2300      	movs	r3, #0
+ 8000258:	83bb      	strh	r3, [r7, #28]
+  usart1.rxneie = USART_RXNEIE_ENABLED;
+ 800025a:	2301      	movs	r3, #1
+ 800025c:	83fb      	strh	r3, [r7, #30]
+  usart1.idleie = USART_IDLEIE_INHIBITED;
+ 800025e:	2300      	movs	r3, #0
+ 8000260:	843b      	strh	r3, [r7, #32]
+  usart1.te = USART_TE_ENABLED;
+ 8000262:	2301      	movs	r3, #1
+ 8000264:	847b      	strh	r3, [r7, #34]	@ 0x22
+  usart1.re = USART_RE_ENABLED;
+ 8000266:	2301      	movs	r3, #1
+ 8000268:	84bb      	strh	r3, [r7, #36]	@ 0x24
+  usart1.rwu = USART_RWU_ACTIVE_MODE;
+ 800026a:	2300      	movs	r3, #0
+ 800026c:	84fb      	strh	r3, [r7, #38]	@ 0x26
+  usart1.sbk = USART_SBK_NO_TRANSMIT;
+ 800026e:	2300      	movs	r3, #0
+ 8000270:	853b      	strh	r3, [r7, #40]	@ 0x28
+  usart1.linen = USART_LINEN_DISABLED;
+ 8000272:	2300      	movs	r3, #0
+ 8000274:	857b      	strh	r3, [r7, #42]	@ 0x2a
+  usart1.stop = USART_STOP_1_BIT;
+ 8000276:	2300      	movs	r3, #0
+ 8000278:	85bb      	strh	r3, [r7, #44]	@ 0x2c
+  usart1.clken = USART_CLKEN_DISABLED;
+ 800027a:	2300      	movs	r3, #0
+ 800027c:	85fb      	strh	r3, [r7, #46]	@ 0x2e
+  usart1.cpol = USART_CPOL_LOW;
+ 800027e:	2300      	movs	r3, #0
+ 8000280:	863b      	strh	r3, [r7, #48]	@ 0x30
+  usart1.cpha = USART_CPHA_FIRST_EDGE;
+ 8000282:	2300      	movs	r3, #0
+ 8000284:	867b      	strh	r3, [r7, #50]	@ 0x32
+  usart1.lbcl = USART_LBCL_NOT_OUTPUT;
+ 8000286:	2300      	movs	r3, #0
+ 8000288:	86bb      	strh	r3, [r7, #52]	@ 0x34
+  usart1.lbdie = USART_LBDIE_INHIBITED;
+ 800028a:	2300      	movs	r3, #0
+ 800028c:	86fb      	strh	r3, [r7, #54]	@ 0x36
+  usart1.lbdl = USART_LBDL_10_BIT;
+ 800028e:	2300      	movs	r3, #0
+ 8000290:	873b      	strh	r3, [r7, #56]	@ 0x38
+  usart1.add = 0x0;
+ 8000292:	2300      	movs	r3, #0
+ 8000294:	877b      	strh	r3, [r7, #58]	@ 0x3a
+  usart1.onebit = USART_ONEBIT_THREE_SAMPLE;
+ 8000296:	2300      	movs	r3, #0
+ 8000298:	87bb      	strh	r3, [r7, #60]	@ 0x3c
+  usart1.ctsie = USART_CTSIE_INHIBITED;
+ 800029a:	2300      	movs	r3, #0
+ 800029c:	87fb      	strh	r3, [r7, #62]	@ 0x3e
+  usart1.ctse = USART_CTSE_DISABLED;
+ 800029e:	2300      	movs	r3, #0
+ 80002a0:	f8a7 3040 	strh.w	r3, [r7, #64]	@ 0x40
+  usart1.rtse = USART_RTSE_DISABLED;
+ 80002a4:	2300      	movs	r3, #0
+ 80002a6:	f8a7 3042 	strh.w	r3, [r7, #66]	@ 0x42
+  usart1.dmat = USART_DMAT_DISABLED;
+ 80002aa:	2300      	movs	r3, #0
+ 80002ac:	f8a7 3044 	strh.w	r3, [r7, #68]	@ 0x44
+  usart1.dmar = USART_DMAR_DISABLED;
+ 80002b0:	2300      	movs	r3, #0
+ 80002b2:	f8a7 3046 	strh.w	r3, [r7, #70]	@ 0x46
+  usart1.scen = USART_SCEN_DISABLED;
+ 80002b6:	2300      	movs	r3, #0
+ 80002b8:	f8a7 3048 	strh.w	r3, [r7, #72]	@ 0x48
+  usart1.nack = USART_NACK_DISABLED;
+ 80002bc:	2300      	movs	r3, #0
+ 80002be:	f8a7 304a 	strh.w	r3, [r7, #74]	@ 0x4a
+  usart1.hdsel = USART_HDSEL_NOT_SELECTED;
+ 80002c2:	2300      	movs	r3, #0
+ 80002c4:	f8a7 304c 	strh.w	r3, [r7, #76]	@ 0x4c
+  usart1.irlp = USART_IRLP_NORMAL_MODE;
+ 80002c8:	2300      	movs	r3, #0
+ 80002ca:	f8a7 304e 	strh.w	r3, [r7, #78]	@ 0x4e
+  usart1.iren = USART_IREN_DISABLED;
+ 80002ce:	2300      	movs	r3, #0
+ 80002d0:	f8a7 3050 	strh.w	r3, [r7, #80]	@ 0x50
+  usart1.eie = USART_EIE_INHIBITED;
+ 80002d4:	2300      	movs	r3, #0
+ 80002d6:	f8a7 3052 	strh.w	r3, [r7, #82]	@ 0x52
+  usart1.div_mantissa = 0x258;
+ 80002da:	f44f 7316 	mov.w	r3, #600	@ 0x258
+ 80002de:	f8a7 3054 	strh.w	r3, [r7, #84]	@ 0x54
+  usart1.div_fraction = 0x0;
+ 80002e2:	2300      	movs	r3, #0
+ 80002e4:	f8a7 3056 	strh.w	r3, [r7, #86]	@ 0x56
+  usart1.gt = 0x00;
+ 80002e8:	2300      	movs	r3, #0
+ 80002ea:	f8a7 3058 	strh.w	r3, [r7, #88]	@ 0x58
+  usart1.psc = 0x00;
+ 80002ee:	2300      	movs	r3, #0
+ 80002f0:	f8a7 305a 	strh.w	r3, [r7, #90]	@ 0x5a
+  usart_configure(&usart1);
+ 80002f4:	1d3b      	adds	r3, r7, #4
+ 80002f6:	4618      	mov	r0, r3
+ 80002f8:	f000 f9c1 	bl	800067e <usart_configure>
   while (1)
- 8000318:	bf00      	nop
- 800031a:	e7fd      	b.n	8000318 <main+0x144>
- 800031c:	40023800 	.word	0x40023800
- 8000320:	40020000 	.word	0x40020000
- 8000324:	00077777 	.word	0x00077777
- 8000328:	40020c00 	.word	0x40020c00
- 800032c:	40011000 	.word	0x40011000
+  {
 
-08000330 <SystemClock_Config>:
+
+    /* USER CODE END WHILE */
+	 data = usart_receive(usart1.usart);
+ 80002fc:	687b      	ldr	r3, [r7, #4]
+ 80002fe:	4618      	mov	r0, r3
+ 8000300:	f000 fe8d 	bl	800101e <usart_receive>
+ 8000304:	4603      	mov	r3, r0
+ 8000306:	f8a7 305e 	strh.w	r3, [r7, #94]	@ 0x5e
+	 switch(data)
+ 800030a:	f8b7 305e 	ldrh.w	r3, [r7, #94]	@ 0x5e
+ 800030e:	3b3c      	subs	r3, #60	@ 0x3c
+ 8000310:	2b04      	cmp	r3, #4
+ 8000312:	d81d      	bhi.n	8000350 <main+0x16c>
+ 8000314:	a201      	add	r2, pc, #4	@ (adr r2, 800031c <main+0x138>)
+ 8000316:	f852 f023 	ldr.w	pc, [r2, r3, lsl #2]
+ 800031a:	bf00      	nop
+ 800031c:	08000331 	.word	0x08000331
+ 8000320:	08000339 	.word	0x08000339
+ 8000324:	08000341 	.word	0x08000341
+ 8000328:	08000351 	.word	0x08000351
+ 800032c:	08000349 	.word	0x08000349
+	 {
+	 case 60:
+	 {
+		 GPIOD->ODR = 0x0;
+ 8000330:	4b0d      	ldr	r3, [pc, #52]	@ (8000368 <main+0x184>)
+ 8000332:	2200      	movs	r2, #0
+ 8000334:	615a      	str	r2, [r3, #20]
+	 }break;
+ 8000336:	e00f      	b.n	8000358 <main+0x174>
+	 case 61:
+	 {
+	 	GPIOD->ODR = 0x1;
+ 8000338:	4b0b      	ldr	r3, [pc, #44]	@ (8000368 <main+0x184>)
+ 800033a:	2201      	movs	r2, #1
+ 800033c:	615a      	str	r2, [r3, #20]
+	 }break;
+ 800033e:	e00b      	b.n	8000358 <main+0x174>
+	 case 62:
+	 {
+	 	GPIOD->ODR = 0x2;
+ 8000340:	4b09      	ldr	r3, [pc, #36]	@ (8000368 <main+0x184>)
+ 8000342:	2202      	movs	r2, #2
+ 8000344:	615a      	str	r2, [r3, #20]
+	 }break;
+ 8000346:	e007      	b.n	8000358 <main+0x174>
+	 case 64:
+	 {
+	    GPIOD->ODR = 0x4;
+ 8000348:	4b07      	ldr	r3, [pc, #28]	@ (8000368 <main+0x184>)
+ 800034a:	2204      	movs	r2, #4
+ 800034c:	615a      	str	r2, [r3, #20]
+	 }break;
+ 800034e:	e003      	b.n	8000358 <main+0x174>
+	 default:
+	 {
+	 	GPIOD->ODR = 0x7;
+ 8000350:	4b05      	ldr	r3, [pc, #20]	@ (8000368 <main+0x184>)
+ 8000352:	2207      	movs	r2, #7
+ 8000354:	615a      	str	r2, [r3, #20]
+	 }break;
+ 8000356:	bf00      	nop
+	 data = usart_receive(usart1.usart);
+ 8000358:	e7d0      	b.n	80002fc <main+0x118>
+ 800035a:	bf00      	nop
+ 800035c:	40023800 	.word	0x40023800
+ 8000360:	40020000 	.word	0x40020000
+ 8000364:	00077777 	.word	0x00077777
+ 8000368:	40020c00 	.word	0x40020c00
+ 800036c:	40011000 	.word	0x40011000
+
+08000370 <SystemClock_Config>:
 /**
   * @brief System Clock Configuration
   * @retval None
   */
 void SystemClock_Config(void)
 {
- 8000330:	b480      	push	{r7}
- 8000332:	af00      	add	r7, sp, #0
+ 8000370:	b480      	push	{r7}
+ 8000372:	af00      	add	r7, sp, #0
 
   if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_0) != HAL_OK)
   {
     Error_Handler();
   }*/
 }
- 8000334:	bf00      	nop
- 8000336:	46bd      	mov	sp, r7
- 8000338:	f85d 7b04 	ldr.w	r7, [sp], #4
- 800033c:	4770      	bx	lr
+ 8000374:	bf00      	nop
+ 8000376:	46bd      	mov	sp, r7
+ 8000378:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 800037c:	4770      	bx	lr
 	...
 
-08000340 <SystemInit>:
+08000380 <SystemInit>:
   *         configuration.
   * @param  None
   * @retval None
   */
 void SystemInit(void)
 {
- 8000340:	b480      	push	{r7}
- 8000342:	af00      	add	r7, sp, #0
+ 8000380:	b480      	push	{r7}
+ 8000382:	af00      	add	r7, sp, #0
   /* FPU settings ------------------------------------------------------------*/
   #if (__FPU_PRESENT == 1) && (__FPU_USED == 1)
     SCB->CPACR |= ((3UL << 10*2)|(3UL << 11*2));  /* set CP10 and CP11 Full Access */
- 8000344:	4b06      	ldr	r3, [pc, #24]	@ (8000360 <SystemInit+0x20>)
- 8000346:	f8d3 3088 	ldr.w	r3, [r3, #136]	@ 0x88
- 800034a:	4a05      	ldr	r2, [pc, #20]	@ (8000360 <SystemInit+0x20>)
- 800034c:	f443 0370 	orr.w	r3, r3, #15728640	@ 0xf00000
- 8000350:	f8c2 3088 	str.w	r3, [r2, #136]	@ 0x88
+ 8000384:	4b06      	ldr	r3, [pc, #24]	@ (80003a0 <SystemInit+0x20>)
+ 8000386:	f8d3 3088 	ldr.w	r3, [r3, #136]	@ 0x88
+ 800038a:	4a05      	ldr	r2, [pc, #20]	@ (80003a0 <SystemInit+0x20>)
+ 800038c:	f443 0370 	orr.w	r3, r3, #15728640	@ 0xf00000
+ 8000390:	f8c2 3088 	str.w	r3, [r2, #136]	@ 0x88
 
   /* Configure the Vector Table location -------------------------------------*/
 #if defined(USER_VECT_TAB_ADDRESS)
   SCB->VTOR = VECT_TAB_BASE_ADDRESS | VECT_TAB_OFFSET; /* Vector Table Relocation in Internal SRAM */
 #endif /* USER_VECT_TAB_ADDRESS */
 }
- 8000354:	bf00      	nop
- 8000356:	46bd      	mov	sp, r7
- 8000358:	f85d 7b04 	ldr.w	r7, [sp], #4
- 800035c:	4770      	bx	lr
- 800035e:	bf00      	nop
- 8000360:	e000ed00 	.word	0xe000ed00
+ 8000394:	bf00      	nop
+ 8000396:	46bd      	mov	sp, r7
+ 8000398:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 800039c:	4770      	bx	lr
+ 800039e:	bf00      	nop
+ 80003a0:	e000ed00 	.word	0xe000ed00
 
-08000364 <Reset_Handler>:
+080003a4 <Reset_Handler>:
 
     .section  .text.Reset_Handler
   .weak  Reset_Handler
   .type  Reset_Handler, %function
 Reset_Handler:  
   ldr   sp, =_estack    		 /* set stack pointer */
- 8000364:	f8df d034 	ldr.w	sp, [pc, #52]	@ 800039c <LoopFillZerobss+0xe>
+ 80003a4:	f8df d034 	ldr.w	sp, [pc, #52]	@ 80003dc <LoopFillZerobss+0xe>
 
 /* Call the clock system initialization function.*/
   bl  SystemInit  
- 8000368:	f7ff ffea 	bl	8000340 <SystemInit>
+ 80003a8:	f7ff ffea 	bl	8000380 <SystemInit>
 
 /* Copy the data segment initializers from flash to SRAM */  
   ldr r0, =_sdata
- 800036c:	480c      	ldr	r0, [pc, #48]	@ (80003a0 <LoopFillZerobss+0x12>)
+ 80003ac:	480c      	ldr	r0, [pc, #48]	@ (80003e0 <LoopFillZerobss+0x12>)
   ldr r1, =_edata
- 800036e:	490d      	ldr	r1, [pc, #52]	@ (80003a4 <LoopFillZerobss+0x16>)
+ 80003ae:	490d      	ldr	r1, [pc, #52]	@ (80003e4 <LoopFillZerobss+0x16>)
   ldr r2, =_sidata
- 8000370:	4a0d      	ldr	r2, [pc, #52]	@ (80003a8 <LoopFillZerobss+0x1a>)
+ 80003b0:	4a0d      	ldr	r2, [pc, #52]	@ (80003e8 <LoopFillZerobss+0x1a>)
   movs r3, #0
- 8000372:	2300      	movs	r3, #0
+ 80003b2:	2300      	movs	r3, #0
   b LoopCopyDataInit
- 8000374:	e002      	b.n	800037c <LoopCopyDataInit>
+ 80003b4:	e002      	b.n	80003bc <LoopCopyDataInit>
 
-08000376 <CopyDataInit>:
+080003b6 <CopyDataInit>:
 
 CopyDataInit:
   ldr r4, [r2, r3]
- 8000376:	58d4      	ldr	r4, [r2, r3]
+ 80003b6:	58d4      	ldr	r4, [r2, r3]
   str r4, [r0, r3]
- 8000378:	50c4      	str	r4, [r0, r3]
+ 80003b8:	50c4      	str	r4, [r0, r3]
   adds r3, r3, #4
- 800037a:	3304      	adds	r3, #4
+ 80003ba:	3304      	adds	r3, #4
 
-0800037c <LoopCopyDataInit>:
+080003bc <LoopCopyDataInit>:
 
 LoopCopyDataInit:
   adds r4, r0, r3
- 800037c:	18c4      	adds	r4, r0, r3
+ 80003bc:	18c4      	adds	r4, r0, r3
   cmp r4, r1
- 800037e:	428c      	cmp	r4, r1
+ 80003be:	428c      	cmp	r4, r1
   bcc CopyDataInit
- 8000380:	d3f9      	bcc.n	8000376 <CopyDataInit>
+ 80003c0:	d3f9      	bcc.n	80003b6 <CopyDataInit>
   
 /* Zero fill the bss segment. */
   ldr r2, =_sbss
- 8000382:	4a0a      	ldr	r2, [pc, #40]	@ (80003ac <LoopFillZerobss+0x1e>)
+ 80003c2:	4a0a      	ldr	r2, [pc, #40]	@ (80003ec <LoopFillZerobss+0x1e>)
   ldr r4, =_ebss
- 8000384:	4c0a      	ldr	r4, [pc, #40]	@ (80003b0 <LoopFillZerobss+0x22>)
+ 80003c4:	4c0a      	ldr	r4, [pc, #40]	@ (80003f0 <LoopFillZerobss+0x22>)
   movs r3, #0
- 8000386:	2300      	movs	r3, #0
+ 80003c6:	2300      	movs	r3, #0
   b LoopFillZerobss
- 8000388:	e001      	b.n	800038e <LoopFillZerobss>
+ 80003c8:	e001      	b.n	80003ce <LoopFillZerobss>
 
-0800038a <FillZerobss>:
+080003ca <FillZerobss>:
 
 FillZerobss:
   str  r3, [r2]
- 800038a:	6013      	str	r3, [r2, #0]
+ 80003ca:	6013      	str	r3, [r2, #0]
   adds r2, r2, #4
- 800038c:	3204      	adds	r2, #4
+ 80003cc:	3204      	adds	r2, #4
 
-0800038e <LoopFillZerobss>:
+080003ce <LoopFillZerobss>:
 
 LoopFillZerobss:
   cmp r2, r4
- 800038e:	42a2      	cmp	r2, r4
+ 80003ce:	42a2      	cmp	r2, r4
   bcc FillZerobss
- 8000390:	d3fb      	bcc.n	800038a <FillZerobss>
+ 80003d0:	d3fb      	bcc.n	80003ca <FillZerobss>
  
 /* Call static constructors */
     bl __libc_init_array
- 8000392:	f000 f811 	bl	80003b8 <__libc_init_array>
+ 80003d2:	f000 fe37 	bl	8001044 <__libc_init_array>
 /* Call the application's entry point.*/
   bl  main
- 8000396:	f7ff ff1d 	bl	80001d4 <main>
+ 80003d6:	f7ff ff05 	bl	80001e4 <main>
   bx  lr    
- 800039a:	4770      	bx	lr
+ 80003da:	4770      	bx	lr
   ldr   sp, =_estack    		 /* set stack pointer */
- 800039c:	20018000 	.word	0x20018000
+ 80003dc:	20018000 	.word	0x20018000
   ldr r0, =_sdata
- 80003a0:	20000000 	.word	0x20000000
+ 80003e0:	20000000 	.word	0x20000000
   ldr r1, =_edata
- 80003a4:	20000000 	.word	0x20000000
+ 80003e4:	20000000 	.word	0x20000000
   ldr r2, =_sidata
- 80003a8:	08000420 	.word	0x08000420
+ 80003e8:	080010ac 	.word	0x080010ac
   ldr r2, =_sbss
- 80003ac:	20000000 	.word	0x20000000
+ 80003ec:	20000000 	.word	0x20000000
   ldr r4, =_ebss
- 80003b0:	2000001c 	.word	0x2000001c
+ 80003f0:	2000001c 	.word	0x2000001c
 
-080003b4 <ADC_IRQHandler>:
+080003f4 <ADC_IRQHandler>:
  * @retval None       
 */
     .section  .text.Default_Handler,"ax",%progbits
 Default_Handler:
 Infinite_Loop:
   b  Infinite_Loop
- 80003b4:	e7fe      	b.n	80003b4 <ADC_IRQHandler>
+ 80003f4:	e7fe      	b.n	80003f4 <ADC_IRQHandler>
 	...
 
-080003b8 <__libc_init_array>:
- 80003b8:	b570      	push	{r4, r5, r6, lr}
- 80003ba:	4d0d      	ldr	r5, [pc, #52]	@ (80003f0 <__libc_init_array+0x38>)
- 80003bc:	4c0d      	ldr	r4, [pc, #52]	@ (80003f4 <__libc_init_array+0x3c>)
- 80003be:	1b64      	subs	r4, r4, r5
- 80003c0:	10a4      	asrs	r4, r4, #2
- 80003c2:	2600      	movs	r6, #0
- 80003c4:	42a6      	cmp	r6, r4
- 80003c6:	d109      	bne.n	80003dc <__libc_init_array+0x24>
- 80003c8:	4d0b      	ldr	r5, [pc, #44]	@ (80003f8 <__libc_init_array+0x40>)
- 80003ca:	4c0c      	ldr	r4, [pc, #48]	@ (80003fc <__libc_init_array+0x44>)
- 80003cc:	f000 f818 	bl	8000400 <_init>
- 80003d0:	1b64      	subs	r4, r4, r5
- 80003d2:	10a4      	asrs	r4, r4, #2
- 80003d4:	2600      	movs	r6, #0
- 80003d6:	42a6      	cmp	r6, r4
- 80003d8:	d105      	bne.n	80003e6 <__libc_init_array+0x2e>
- 80003da:	bd70      	pop	{r4, r5, r6, pc}
- 80003dc:	f855 3b04 	ldr.w	r3, [r5], #4
- 80003e0:	4798      	blx	r3
- 80003e2:	3601      	adds	r6, #1
- 80003e4:	e7ee      	b.n	80003c4 <__libc_init_array+0xc>
- 80003e6:	f855 3b04 	ldr.w	r3, [r5], #4
- 80003ea:	4798      	blx	r3
- 80003ec:	3601      	adds	r6, #1
- 80003ee:	e7f2      	b.n	80003d6 <__libc_init_array+0x1e>
- 80003f0:	08000418 	.word	0x08000418
- 80003f4:	08000418 	.word	0x08000418
- 80003f8:	08000418 	.word	0x08000418
- 80003fc:	0800041c 	.word	0x0800041c
+080003f8 <usart_choose_type>:
+#include <STM32F401VE_USART_driver.h>
 
-08000400 <_init>:
- 8000400:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
- 8000402:	bf00      	nop
- 8000404:	bcf8      	pop	{r3, r4, r5, r6, r7}
- 8000406:	bc08      	pop	{r3}
- 8000408:	469e      	mov	lr, r3
- 800040a:	4770      	bx	lr
+//*********************************SPI CONFIGURATION FUCTIONS********************************************************
 
-0800040c <_fini>:
- 800040c:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
- 800040e:	bf00      	nop
- 8000410:	bcf8      	pop	{r3, r4, r5, r6, r7}
- 8000412:	bc08      	pop	{r3}
- 8000414:	469e      	mov	lr, r3
- 8000416:	4770      	bx	lr
+void usart_choose_type(uint32_t usart)
+{
+ 80003f8:	b480      	push	{r7}
+ 80003fa:	b083      	sub	sp, #12
+ 80003fc:	af00      	add	r7, sp, #0
+ 80003fe:	6078      	str	r0, [r7, #4]
+	switch(usart)
+ 8000400:	687b      	ldr	r3, [r7, #4]
+ 8000402:	2b02      	cmp	r3, #2
+ 8000404:	d017      	beq.n	8000436 <usart_choose_type+0x3e>
+ 8000406:	687b      	ldr	r3, [r7, #4]
+ 8000408:	2b02      	cmp	r3, #2
+ 800040a:	d81b      	bhi.n	8000444 <usart_choose_type+0x4c>
+ 800040c:	687b      	ldr	r3, [r7, #4]
+ 800040e:	2b00      	cmp	r3, #0
+ 8000410:	d003      	beq.n	800041a <usart_choose_type+0x22>
+ 8000412:	687b      	ldr	r3, [r7, #4]
+ 8000414:	2b01      	cmp	r3, #1
+ 8000416:	d007      	beq.n	8000428 <usart_choose_type+0x30>
+	case USART6_TYPE:
+	{
+		RCC->APB2ENR = RCC->APB2ENR | USART6EN;
+	}break;
+	}
+}
+ 8000418:	e014      	b.n	8000444 <usart_choose_type+0x4c>
+		RCC->APB2ENR = RCC->APB2ENR | USART1EN;
+ 800041a:	4b0d      	ldr	r3, [pc, #52]	@ (8000450 <usart_choose_type+0x58>)
+ 800041c:	6c5b      	ldr	r3, [r3, #68]	@ 0x44
+ 800041e:	4a0c      	ldr	r2, [pc, #48]	@ (8000450 <usart_choose_type+0x58>)
+ 8000420:	f043 0310 	orr.w	r3, r3, #16
+ 8000424:	6453      	str	r3, [r2, #68]	@ 0x44
+	}break;
+ 8000426:	e00d      	b.n	8000444 <usart_choose_type+0x4c>
+		RCC->APB1ENR = RCC->APB1ENR | USART2EN;
+ 8000428:	4b09      	ldr	r3, [pc, #36]	@ (8000450 <usart_choose_type+0x58>)
+ 800042a:	6c1b      	ldr	r3, [r3, #64]	@ 0x40
+ 800042c:	4a08      	ldr	r2, [pc, #32]	@ (8000450 <usart_choose_type+0x58>)
+ 800042e:	f443 3300 	orr.w	r3, r3, #131072	@ 0x20000
+ 8000432:	6413      	str	r3, [r2, #64]	@ 0x40
+	}break;
+ 8000434:	e006      	b.n	8000444 <usart_choose_type+0x4c>
+		RCC->APB2ENR = RCC->APB2ENR | USART6EN;
+ 8000436:	4b06      	ldr	r3, [pc, #24]	@ (8000450 <usart_choose_type+0x58>)
+ 8000438:	6c5b      	ldr	r3, [r3, #68]	@ 0x44
+ 800043a:	4a05      	ldr	r2, [pc, #20]	@ (8000450 <usart_choose_type+0x58>)
+ 800043c:	f043 0320 	orr.w	r3, r3, #32
+ 8000440:	6453      	str	r3, [r2, #68]	@ 0x44
+	}break;
+ 8000442:	bf00      	nop
+}
+ 8000444:	bf00      	nop
+ 8000446:	370c      	adds	r7, #12
+ 8000448:	46bd      	mov	sp, r7
+ 800044a:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 800044e:	4770      	bx	lr
+ 8000450:	40023800 	.word	0x40023800
+
+08000454 <usart_configure_cr1>:
+
+void usart_configure_cr1(USART_TypeDef* type, uint16_t over8, uint16_t ue, uint16_t m, uint16_t wake, uint16_t pce, uint16_t ps, uint16_t peie, uint16_t txeie, uint16_t tcie, uint16_t rxneie, uint16_t idleie, uint16_t te, uint16_t re, uint16_t rwu, uint16_t sbk)
+{
+ 8000454:	b580      	push	{r7, lr}
+ 8000456:	b084      	sub	sp, #16
+ 8000458:	af00      	add	r7, sp, #0
+ 800045a:	60f8      	str	r0, [r7, #12]
+ 800045c:	4608      	mov	r0, r1
+ 800045e:	4611      	mov	r1, r2
+ 8000460:	461a      	mov	r2, r3
+ 8000462:	4603      	mov	r3, r0
+ 8000464:	817b      	strh	r3, [r7, #10]
+ 8000466:	460b      	mov	r3, r1
+ 8000468:	813b      	strh	r3, [r7, #8]
+ 800046a:	4613      	mov	r3, r2
+ 800046c:	80fb      	strh	r3, [r7, #6]
+	usart_cr1_configure_over8(type, over8);
+ 800046e:	897b      	ldrh	r3, [r7, #10]
+ 8000470:	4619      	mov	r1, r3
+ 8000472:	68f8      	ldr	r0, [r7, #12]
+ 8000474:	f000 f9d0 	bl	8000818 <usart_cr1_configure_over8>
+	usart_cr1_configure_ue(type, ue);
+ 8000478:	893b      	ldrh	r3, [r7, #8]
+ 800047a:	4619      	mov	r1, r3
+ 800047c:	68f8      	ldr	r0, [r7, #12]
+ 800047e:	f000 f9e4 	bl	800084a <usart_cr1_configure_ue>
+	usart_cr1_configure_m(type, m);
+ 8000482:	88fb      	ldrh	r3, [r7, #6]
+ 8000484:	4619      	mov	r1, r3
+ 8000486:	68f8      	ldr	r0, [r7, #12]
+ 8000488:	f000 f9f8 	bl	800087c <usart_cr1_configure_m>
+	usart_cr1_configure_wake(type, wake);
+ 800048c:	8b3b      	ldrh	r3, [r7, #24]
+ 800048e:	4619      	mov	r1, r3
+ 8000490:	68f8      	ldr	r0, [r7, #12]
+ 8000492:	f000 fa0c 	bl	80008ae <usart_cr1_configure_wake>
+	usart_cr1_configure_pce(type, pce);
+ 8000496:	8bbb      	ldrh	r3, [r7, #28]
+ 8000498:	4619      	mov	r1, r3
+ 800049a:	68f8      	ldr	r0, [r7, #12]
+ 800049c:	f000 fa20 	bl	80008e0 <usart_cr1_configure_pce>
+	usart_cr1_configure_ps(type, ps);
+ 80004a0:	8c3b      	ldrh	r3, [r7, #32]
+ 80004a2:	4619      	mov	r1, r3
+ 80004a4:	68f8      	ldr	r0, [r7, #12]
+ 80004a6:	f000 fa34 	bl	8000912 <usart_cr1_configure_ps>
+	usart_cr1_configure_peie(type, peie);
+ 80004aa:	8cbb      	ldrh	r3, [r7, #36]	@ 0x24
+ 80004ac:	4619      	mov	r1, r3
+ 80004ae:	68f8      	ldr	r0, [r7, #12]
+ 80004b0:	f000 fa48 	bl	8000944 <usart_cr1_configure_peie>
+	usart_cr1_configure_txeie(type, txeie);
+ 80004b4:	8d3b      	ldrh	r3, [r7, #40]	@ 0x28
+ 80004b6:	4619      	mov	r1, r3
+ 80004b8:	68f8      	ldr	r0, [r7, #12]
+ 80004ba:	f000 fa5c 	bl	8000976 <usart_cr1_configure_txeie>
+	usart_cr1_configure_tcie(type, tcie);
+ 80004be:	8dbb      	ldrh	r3, [r7, #44]	@ 0x2c
+ 80004c0:	4619      	mov	r1, r3
+ 80004c2:	68f8      	ldr	r0, [r7, #12]
+ 80004c4:	f000 fa70 	bl	80009a8 <usart_cr1_configure_tcie>
+	usart_cr1_configure_rxneie(type, rxneie);
+ 80004c8:	8e3b      	ldrh	r3, [r7, #48]	@ 0x30
+ 80004ca:	4619      	mov	r1, r3
+ 80004cc:	68f8      	ldr	r0, [r7, #12]
+ 80004ce:	f000 fa84 	bl	80009da <usart_cr1_configure_rxneie>
+	usart_cr1_configure_idleie(type, idleie);
+ 80004d2:	8ebb      	ldrh	r3, [r7, #52]	@ 0x34
+ 80004d4:	4619      	mov	r1, r3
+ 80004d6:	68f8      	ldr	r0, [r7, #12]
+ 80004d8:	f000 fa98 	bl	8000a0c <usart_cr1_configure_idleie>
+	usart_cr1_configure_te(type, te);
+ 80004dc:	8f3b      	ldrh	r3, [r7, #56]	@ 0x38
+ 80004de:	4619      	mov	r1, r3
+ 80004e0:	68f8      	ldr	r0, [r7, #12]
+ 80004e2:	f000 faac 	bl	8000a3e <usart_cr1_configure_te>
+	usart_cr1_configure_re(type, re);
+ 80004e6:	8fbb      	ldrh	r3, [r7, #60]	@ 0x3c
+ 80004e8:	4619      	mov	r1, r3
+ 80004ea:	68f8      	ldr	r0, [r7, #12]
+ 80004ec:	f000 fac0 	bl	8000a70 <usart_cr1_configure_re>
+	usart_cr1_configure_rwu(type, rwu);
+ 80004f0:	f8b7 3040 	ldrh.w	r3, [r7, #64]	@ 0x40
+ 80004f4:	4619      	mov	r1, r3
+ 80004f6:	68f8      	ldr	r0, [r7, #12]
+ 80004f8:	f000 fad3 	bl	8000aa2 <usart_cr1_configure_rwu>
+	usart_cr1_configure_sbk(type, sbk);
+ 80004fc:	f8b7 3044 	ldrh.w	r3, [r7, #68]	@ 0x44
+ 8000500:	4619      	mov	r1, r3
+ 8000502:	68f8      	ldr	r0, [r7, #12]
+ 8000504:	f000 fae6 	bl	8000ad4 <usart_cr1_configure_sbk>
+}
+ 8000508:	bf00      	nop
+ 800050a:	3710      	adds	r7, #16
+ 800050c:	46bd      	mov	sp, r7
+ 800050e:	bd80      	pop	{r7, pc}
+
+08000510 <usart_configure_cr2>:
+
+void usart_configure_cr2(USART_TypeDef* type, uint16_t linen, uint16_t stop, uint16_t clken, uint16_t cpol, uint16_t cpha, uint16_t lbcl, uint16_t lbdie, uint16_t lbdl, uint16_t add)
+{
+ 8000510:	b580      	push	{r7, lr}
+ 8000512:	b084      	sub	sp, #16
+ 8000514:	af00      	add	r7, sp, #0
+ 8000516:	60f8      	str	r0, [r7, #12]
+ 8000518:	4608      	mov	r0, r1
+ 800051a:	4611      	mov	r1, r2
+ 800051c:	461a      	mov	r2, r3
+ 800051e:	4603      	mov	r3, r0
+ 8000520:	817b      	strh	r3, [r7, #10]
+ 8000522:	460b      	mov	r3, r1
+ 8000524:	813b      	strh	r3, [r7, #8]
+ 8000526:	4613      	mov	r3, r2
+ 8000528:	80fb      	strh	r3, [r7, #6]
+	usart_cr2_configure_linen(type, linen);
+ 800052a:	897b      	ldrh	r3, [r7, #10]
+ 800052c:	4619      	mov	r1, r3
+ 800052e:	68f8      	ldr	r0, [r7, #12]
+ 8000530:	f000 fae8 	bl	8000b04 <usart_cr2_configure_linen>
+	usart_cr2_configure_stop(type, stop);
+ 8000534:	893b      	ldrh	r3, [r7, #8]
+ 8000536:	4619      	mov	r1, r3
+ 8000538:	68f8      	ldr	r0, [r7, #12]
+ 800053a:	f000 fafc 	bl	8000b36 <usart_cr2_configure_stop>
+	usart_cr2_configure_clken(type, clken);
+ 800053e:	88fb      	ldrh	r3, [r7, #6]
+ 8000540:	4619      	mov	r1, r3
+ 8000542:	68f8      	ldr	r0, [r7, #12]
+ 8000544:	f000 fb10 	bl	8000b68 <usart_cr2_configure_clken>
+	usart_cr2_configure_cpol(type, cpol);
+ 8000548:	8b3b      	ldrh	r3, [r7, #24]
+ 800054a:	4619      	mov	r1, r3
+ 800054c:	68f8      	ldr	r0, [r7, #12]
+ 800054e:	f000 fb24 	bl	8000b9a <usart_cr2_configure_cpol>
+	usart_cr2_configure_cpha(type, cpha);
+ 8000552:	8bbb      	ldrh	r3, [r7, #28]
+ 8000554:	4619      	mov	r1, r3
+ 8000556:	68f8      	ldr	r0, [r7, #12]
+ 8000558:	f000 fb38 	bl	8000bcc <usart_cr2_configure_cpha>
+	usart_cr2_configure_lbcl(type, lbcl);
+ 800055c:	8c3b      	ldrh	r3, [r7, #32]
+ 800055e:	4619      	mov	r1, r3
+ 8000560:	68f8      	ldr	r0, [r7, #12]
+ 8000562:	f000 fb4c 	bl	8000bfe <usart_cr2_configure_lbcl>
+	usart_cr2_configure_lbdie(type, lbdie);
+ 8000566:	8cbb      	ldrh	r3, [r7, #36]	@ 0x24
+ 8000568:	4619      	mov	r1, r3
+ 800056a:	68f8      	ldr	r0, [r7, #12]
+ 800056c:	f000 fb60 	bl	8000c30 <usart_cr2_configure_lbdie>
+	usart_cr2_configure_lbdl(type, lbdl);
+ 8000570:	8d3b      	ldrh	r3, [r7, #40]	@ 0x28
+ 8000572:	4619      	mov	r1, r3
+ 8000574:	68f8      	ldr	r0, [r7, #12]
+ 8000576:	f000 fb74 	bl	8000c62 <usart_cr2_configure_lbdl>
+	usart_cr2_configure_add(type, add);
+ 800057a:	8dbb      	ldrh	r3, [r7, #44]	@ 0x2c
+ 800057c:	4619      	mov	r1, r3
+ 800057e:	68f8      	ldr	r0, [r7, #12]
+ 8000580:	f000 fb88 	bl	8000c94 <usart_cr2_configure_add>
+}
+ 8000584:	bf00      	nop
+ 8000586:	3710      	adds	r7, #16
+ 8000588:	46bd      	mov	sp, r7
+ 800058a:	bd80      	pop	{r7, pc}
+
+0800058c <usart_configure_cr3>:
+
+void usart_configure_cr3(USART_TypeDef* type, uint16_t onebit, uint16_t ctsie, uint16_t ctse, uint16_t rtse, uint16_t dmat, uint16_t dmar, uint16_t scen, uint16_t nack, uint16_t hdsel, uint16_t irlp, uint16_t iren, uint16_t eie)
+{
+ 800058c:	b580      	push	{r7, lr}
+ 800058e:	b084      	sub	sp, #16
+ 8000590:	af00      	add	r7, sp, #0
+ 8000592:	60f8      	str	r0, [r7, #12]
+ 8000594:	4608      	mov	r0, r1
+ 8000596:	4611      	mov	r1, r2
+ 8000598:	461a      	mov	r2, r3
+ 800059a:	4603      	mov	r3, r0
+ 800059c:	817b      	strh	r3, [r7, #10]
+ 800059e:	460b      	mov	r3, r1
+ 80005a0:	813b      	strh	r3, [r7, #8]
+ 80005a2:	4613      	mov	r3, r2
+ 80005a4:	80fb      	strh	r3, [r7, #6]
+	usart_cr3_configure_onebit(type, onebit);
+ 80005a6:	897b      	ldrh	r3, [r7, #10]
+ 80005a8:	4619      	mov	r1, r3
+ 80005aa:	68f8      	ldr	r0, [r7, #12]
+ 80005ac:	f000 fb8a 	bl	8000cc4 <usart_cr3_configure_onebit>
+	usart_cr3_configure_ctsie(type, ctsie);
+ 80005b0:	893b      	ldrh	r3, [r7, #8]
+ 80005b2:	4619      	mov	r1, r3
+ 80005b4:	68f8      	ldr	r0, [r7, #12]
+ 80005b6:	f000 fb9e 	bl	8000cf6 <usart_cr3_configure_ctsie>
+	usart_cr3_configure_ctse(type, ctse);
+ 80005ba:	88fb      	ldrh	r3, [r7, #6]
+ 80005bc:	4619      	mov	r1, r3
+ 80005be:	68f8      	ldr	r0, [r7, #12]
+ 80005c0:	f000 fbb2 	bl	8000d28 <usart_cr3_configure_ctse>
+	usart_cr3_configure_rtse(type, rtse);
+ 80005c4:	8b3b      	ldrh	r3, [r7, #24]
+ 80005c6:	4619      	mov	r1, r3
+ 80005c8:	68f8      	ldr	r0, [r7, #12]
+ 80005ca:	f000 fbc6 	bl	8000d5a <usart_cr3_configure_rtse>
+	usart_cr3_configure_dmat(type, dmat);
+ 80005ce:	8bbb      	ldrh	r3, [r7, #28]
+ 80005d0:	4619      	mov	r1, r3
+ 80005d2:	68f8      	ldr	r0, [r7, #12]
+ 80005d4:	f000 fbda 	bl	8000d8c <usart_cr3_configure_dmat>
+	usart_cr3_configure_dmar(type, dmar);
+ 80005d8:	8c3b      	ldrh	r3, [r7, #32]
+ 80005da:	4619      	mov	r1, r3
+ 80005dc:	68f8      	ldr	r0, [r7, #12]
+ 80005de:	f000 fbee 	bl	8000dbe <usart_cr3_configure_dmar>
+	usart_cr3_configure_scen(type, scen);
+ 80005e2:	8cbb      	ldrh	r3, [r7, #36]	@ 0x24
+ 80005e4:	4619      	mov	r1, r3
+ 80005e6:	68f8      	ldr	r0, [r7, #12]
+ 80005e8:	f000 fc02 	bl	8000df0 <usart_cr3_configure_scen>
+	usart_cr3_configure_nack(type, nack);
+ 80005ec:	8d3b      	ldrh	r3, [r7, #40]	@ 0x28
+ 80005ee:	4619      	mov	r1, r3
+ 80005f0:	68f8      	ldr	r0, [r7, #12]
+ 80005f2:	f000 fc16 	bl	8000e22 <usart_cr3_configure_nack>
+	usart_cr3_configure_hdsel(type, hdsel);
+ 80005f6:	8dbb      	ldrh	r3, [r7, #44]	@ 0x2c
+ 80005f8:	4619      	mov	r1, r3
+ 80005fa:	68f8      	ldr	r0, [r7, #12]
+ 80005fc:	f000 fc2a 	bl	8000e54 <usart_cr3_configure_hdsel>
+	usart_cr3_configure_irlp(type, irlp);
+ 8000600:	8e3b      	ldrh	r3, [r7, #48]	@ 0x30
+ 8000602:	4619      	mov	r1, r3
+ 8000604:	68f8      	ldr	r0, [r7, #12]
+ 8000606:	f000 fc3e 	bl	8000e86 <usart_cr3_configure_irlp>
+	usart_cr3_configure_iren(type, iren);
+ 800060a:	8ebb      	ldrh	r3, [r7, #52]	@ 0x34
+ 800060c:	4619      	mov	r1, r3
+ 800060e:	68f8      	ldr	r0, [r7, #12]
+ 8000610:	f000 fc52 	bl	8000eb8 <usart_cr3_configure_iren>
+	usart_cr3_configure_eie(type, eie);
+ 8000614:	8f3b      	ldrh	r3, [r7, #56]	@ 0x38
+ 8000616:	4619      	mov	r1, r3
+ 8000618:	68f8      	ldr	r0, [r7, #12]
+ 800061a:	f000 fc66 	bl	8000eea <usart_cr3_configure_eie>
+}
+ 800061e:	bf00      	nop
+ 8000620:	3710      	adds	r7, #16
+ 8000622:	46bd      	mov	sp, r7
+ 8000624:	bd80      	pop	{r7, pc}
+
+08000626 <usart_configure_brr>:
+
+void usart_configure_brr(USART_TypeDef* type, uint16_t div_mantissa, uint16_t div_fraction)
+{
+ 8000626:	b580      	push	{r7, lr}
+ 8000628:	b082      	sub	sp, #8
+ 800062a:	af00      	add	r7, sp, #0
+ 800062c:	6078      	str	r0, [r7, #4]
+ 800062e:	460b      	mov	r3, r1
+ 8000630:	807b      	strh	r3, [r7, #2]
+ 8000632:	4613      	mov	r3, r2
+ 8000634:	803b      	strh	r3, [r7, #0]
+	usart_brr_configure_div_mantissa(type, div_mantissa);
+ 8000636:	887b      	ldrh	r3, [r7, #2]
+ 8000638:	4619      	mov	r1, r3
+ 800063a:	6878      	ldr	r0, [r7, #4]
+ 800063c:	f000 fc6d 	bl	8000f1a <usart_brr_configure_div_mantissa>
+	usart_brr_configure_div_fraction(type, div_fraction);
+ 8000640:	883b      	ldrh	r3, [r7, #0]
+ 8000642:	4619      	mov	r1, r3
+ 8000644:	6878      	ldr	r0, [r7, #4]
+ 8000646:	f000 fc83 	bl	8000f50 <usart_brr_configure_div_fraction>
+}
+ 800064a:	bf00      	nop
+ 800064c:	3708      	adds	r7, #8
+ 800064e:	46bd      	mov	sp, r7
+ 8000650:	bd80      	pop	{r7, pc}
+
+08000652 <usart_configure_gtpr>:
+
+void usart_configure_gtpr(USART_TypeDef* type, uint16_t gt, uint16_t psc)
+{
+ 8000652:	b580      	push	{r7, lr}
+ 8000654:	b082      	sub	sp, #8
+ 8000656:	af00      	add	r7, sp, #0
+ 8000658:	6078      	str	r0, [r7, #4]
+ 800065a:	460b      	mov	r3, r1
+ 800065c:	807b      	strh	r3, [r7, #2]
+ 800065e:	4613      	mov	r3, r2
+ 8000660:	803b      	strh	r3, [r7, #0]
+	usart_gtpr_configure_gt(type, gt);
+ 8000662:	887b      	ldrh	r3, [r7, #2]
+ 8000664:	4619      	mov	r1, r3
+ 8000666:	6878      	ldr	r0, [r7, #4]
+ 8000668:	f000 fc8a 	bl	8000f80 <usart_gtpr_configure_gt>
+	usart_gtpr_configure_psc(type, psc);
+ 800066c:	883b      	ldrh	r3, [r7, #0]
+ 800066e:	4619      	mov	r1, r3
+ 8000670:	6878      	ldr	r0, [r7, #4]
+ 8000672:	f000 fc9e 	bl	8000fb2 <usart_gtpr_configure_psc>
+}
+ 8000676:	bf00      	nop
+ 8000678:	3708      	adds	r7, #8
+ 800067a:	46bd      	mov	sp, r7
+ 800067c:	bd80      	pop	{r7, pc}
+
+0800067e <usart_configure>:
+
+void usart_configure(usart_type* usart)
+{
+ 800067e:	e92d 41f0 	stmdb	sp!, {r4, r5, r6, r7, r8, lr}
+ 8000682:	b094      	sub	sp, #80	@ 0x50
+ 8000684:	af0c      	add	r7, sp, #48	@ 0x30
+ 8000686:	61f8      	str	r0, [r7, #28]
+	usart_choose_type(usart->type);
+ 8000688:	69fb      	ldr	r3, [r7, #28]
+ 800068a:	685b      	ldr	r3, [r3, #4]
+ 800068c:	4618      	mov	r0, r3
+ 800068e:	f7ff feb3 	bl	80003f8 <usart_choose_type>
+	usart_cr1_configure_ue(usart->usart, 0x0);
+ 8000692:	69fb      	ldr	r3, [r7, #28]
+ 8000694:	681b      	ldr	r3, [r3, #0]
+ 8000696:	2100      	movs	r1, #0
+ 8000698:	4618      	mov	r0, r3
+ 800069a:	f000 f8d6 	bl	800084a <usart_cr1_configure_ue>
+	usart_configure_brr(usart->usart, usart->div_mantissa, usart->div_fraction);
+ 800069e:	69fb      	ldr	r3, [r7, #28]
+ 80006a0:	6818      	ldr	r0, [r3, #0]
+ 80006a2:	69fb      	ldr	r3, [r7, #28]
+ 80006a4:	f8b3 1050 	ldrh.w	r1, [r3, #80]	@ 0x50
+ 80006a8:	69fb      	ldr	r3, [r7, #28]
+ 80006aa:	f8b3 3052 	ldrh.w	r3, [r3, #82]	@ 0x52
+ 80006ae:	461a      	mov	r2, r3
+ 80006b0:	f7ff ffb9 	bl	8000626 <usart_configure_brr>
+	usart_configure_cr1(usart->usart, usart->over8, usart->ue, usart->m, usart->wake, usart->pce, usart->ps, usart->peie, usart->txeie, usart->tcie, usart->rxneie, usart->idleie, usart->te, usart->re, usart->rwu, usart->sbk);
+ 80006b4:	69fb      	ldr	r3, [r7, #28]
+ 80006b6:	681b      	ldr	r3, [r3, #0]
+ 80006b8:	61bb      	str	r3, [r7, #24]
+ 80006ba:	69fb      	ldr	r3, [r7, #28]
+ 80006bc:	f8b3 c008 	ldrh.w	ip, [r3, #8]
+ 80006c0:	69fb      	ldr	r3, [r7, #28]
+ 80006c2:	f8b3 e00a 	ldrh.w	lr, [r3, #10]
+ 80006c6:	69fb      	ldr	r3, [r7, #28]
+ 80006c8:	f8b3 800c 	ldrh.w	r8, [r3, #12]
+ 80006cc:	69fb      	ldr	r3, [r7, #28]
+ 80006ce:	89d8      	ldrh	r0, [r3, #14]
+ 80006d0:	69fb      	ldr	r3, [r7, #28]
+ 80006d2:	8a1c      	ldrh	r4, [r3, #16]
+ 80006d4:	69fb      	ldr	r3, [r7, #28]
+ 80006d6:	8a5d      	ldrh	r5, [r3, #18]
+ 80006d8:	69fb      	ldr	r3, [r7, #28]
+ 80006da:	8a9e      	ldrh	r6, [r3, #20]
+ 80006dc:	69fb      	ldr	r3, [r7, #28]
+ 80006de:	8ada      	ldrh	r2, [r3, #22]
+ 80006e0:	617a      	str	r2, [r7, #20]
+ 80006e2:	69fb      	ldr	r3, [r7, #28]
+ 80006e4:	8b19      	ldrh	r1, [r3, #24]
+ 80006e6:	6139      	str	r1, [r7, #16]
+ 80006e8:	69fb      	ldr	r3, [r7, #28]
+ 80006ea:	8b5b      	ldrh	r3, [r3, #26]
+ 80006ec:	60fb      	str	r3, [r7, #12]
+ 80006ee:	69fb      	ldr	r3, [r7, #28]
+ 80006f0:	8b9a      	ldrh	r2, [r3, #28]
+ 80006f2:	60ba      	str	r2, [r7, #8]
+ 80006f4:	69fb      	ldr	r3, [r7, #28]
+ 80006f6:	8bd9      	ldrh	r1, [r3, #30]
+ 80006f8:	6079      	str	r1, [r7, #4]
+ 80006fa:	69fb      	ldr	r3, [r7, #28]
+ 80006fc:	8c19      	ldrh	r1, [r3, #32]
+ 80006fe:	69fb      	ldr	r3, [r7, #28]
+ 8000700:	8c5a      	ldrh	r2, [r3, #34]	@ 0x22
+ 8000702:	69fb      	ldr	r3, [r7, #28]
+ 8000704:	8c9b      	ldrh	r3, [r3, #36]	@ 0x24
+ 8000706:	930b      	str	r3, [sp, #44]	@ 0x2c
+ 8000708:	920a      	str	r2, [sp, #40]	@ 0x28
+ 800070a:	9109      	str	r1, [sp, #36]	@ 0x24
+ 800070c:	6879      	ldr	r1, [r7, #4]
+ 800070e:	9108      	str	r1, [sp, #32]
+ 8000710:	68ba      	ldr	r2, [r7, #8]
+ 8000712:	9207      	str	r2, [sp, #28]
+ 8000714:	68fb      	ldr	r3, [r7, #12]
+ 8000716:	9306      	str	r3, [sp, #24]
+ 8000718:	6939      	ldr	r1, [r7, #16]
+ 800071a:	9105      	str	r1, [sp, #20]
+ 800071c:	697a      	ldr	r2, [r7, #20]
+ 800071e:	9204      	str	r2, [sp, #16]
+ 8000720:	9603      	str	r6, [sp, #12]
+ 8000722:	9502      	str	r5, [sp, #8]
+ 8000724:	9401      	str	r4, [sp, #4]
+ 8000726:	9000      	str	r0, [sp, #0]
+ 8000728:	4643      	mov	r3, r8
+ 800072a:	4672      	mov	r2, lr
+ 800072c:	4661      	mov	r1, ip
+ 800072e:	69b8      	ldr	r0, [r7, #24]
+ 8000730:	f7ff fe90 	bl	8000454 <usart_configure_cr1>
+	usart_configure_cr2(usart->usart, usart->linen, usart->stop, usart->clken, usart->cpol, usart->cpha, usart->lbcl, usart->lbdie, usart->lbdl, usart->add);
+ 8000734:	69fb      	ldr	r3, [r7, #28]
+ 8000736:	681e      	ldr	r6, [r3, #0]
+ 8000738:	69fb      	ldr	r3, [r7, #28]
+ 800073a:	f8b3 c026 	ldrh.w	ip, [r3, #38]	@ 0x26
+ 800073e:	69fb      	ldr	r3, [r7, #28]
+ 8000740:	f8b3 e028 	ldrh.w	lr, [r3, #40]	@ 0x28
+ 8000744:	69fb      	ldr	r3, [r7, #28]
+ 8000746:	f8b3 802a 	ldrh.w	r8, [r3, #42]	@ 0x2a
+ 800074a:	69fb      	ldr	r3, [r7, #28]
+ 800074c:	8d9b      	ldrh	r3, [r3, #44]	@ 0x2c
+ 800074e:	69fa      	ldr	r2, [r7, #28]
+ 8000750:	8dd2      	ldrh	r2, [r2, #46]	@ 0x2e
+ 8000752:	69f9      	ldr	r1, [r7, #28]
+ 8000754:	8e09      	ldrh	r1, [r1, #48]	@ 0x30
+ 8000756:	69f8      	ldr	r0, [r7, #28]
+ 8000758:	8e40      	ldrh	r0, [r0, #50]	@ 0x32
+ 800075a:	69fc      	ldr	r4, [r7, #28]
+ 800075c:	8ea4      	ldrh	r4, [r4, #52]	@ 0x34
+ 800075e:	69fd      	ldr	r5, [r7, #28]
+ 8000760:	8eed      	ldrh	r5, [r5, #54]	@ 0x36
+ 8000762:	9505      	str	r5, [sp, #20]
+ 8000764:	9404      	str	r4, [sp, #16]
+ 8000766:	9003      	str	r0, [sp, #12]
+ 8000768:	9102      	str	r1, [sp, #8]
+ 800076a:	9201      	str	r2, [sp, #4]
+ 800076c:	9300      	str	r3, [sp, #0]
+ 800076e:	4643      	mov	r3, r8
+ 8000770:	4672      	mov	r2, lr
+ 8000772:	4661      	mov	r1, ip
+ 8000774:	4630      	mov	r0, r6
+ 8000776:	f7ff fecb 	bl	8000510 <usart_configure_cr2>
+	usart_configure_cr3(usart->usart, usart->onebit, usart->ctsie, usart->ctse, usart->rtse, usart->dmat, usart->dmar, usart->scen, usart->nack, usart->hdsel, usart->irlp, usart->iren, usart->eie);
+ 800077a:	69fb      	ldr	r3, [r7, #28]
+ 800077c:	681b      	ldr	r3, [r3, #0]
+ 800077e:	61bb      	str	r3, [r7, #24]
+ 8000780:	69fb      	ldr	r3, [r7, #28]
+ 8000782:	f8b3 c038 	ldrh.w	ip, [r3, #56]	@ 0x38
+ 8000786:	69fb      	ldr	r3, [r7, #28]
+ 8000788:	f8b3 e03a 	ldrh.w	lr, [r3, #58]	@ 0x3a
+ 800078c:	69fb      	ldr	r3, [r7, #28]
+ 800078e:	f8b3 803c 	ldrh.w	r8, [r3, #60]	@ 0x3c
+ 8000792:	69fb      	ldr	r3, [r7, #28]
+ 8000794:	8fdb      	ldrh	r3, [r3, #62]	@ 0x3e
+ 8000796:	69fa      	ldr	r2, [r7, #28]
+ 8000798:	f8b2 2040 	ldrh.w	r2, [r2, #64]	@ 0x40
+ 800079c:	617a      	str	r2, [r7, #20]
+ 800079e:	69f9      	ldr	r1, [r7, #28]
+ 80007a0:	f8b1 1042 	ldrh.w	r1, [r1, #66]	@ 0x42
+ 80007a4:	69f8      	ldr	r0, [r7, #28]
+ 80007a6:	f8b0 0044 	ldrh.w	r0, [r0, #68]	@ 0x44
+ 80007aa:	69fc      	ldr	r4, [r7, #28]
+ 80007ac:	f8b4 4046 	ldrh.w	r4, [r4, #70]	@ 0x46
+ 80007b0:	69fd      	ldr	r5, [r7, #28]
+ 80007b2:	f8b5 5048 	ldrh.w	r5, [r5, #72]	@ 0x48
+ 80007b6:	69fe      	ldr	r6, [r7, #28]
+ 80007b8:	f8b6 604a 	ldrh.w	r6, [r6, #74]	@ 0x4a
+ 80007bc:	69fa      	ldr	r2, [r7, #28]
+ 80007be:	f8b2 204c 	ldrh.w	r2, [r2, #76]	@ 0x4c
+ 80007c2:	613a      	str	r2, [r7, #16]
+ 80007c4:	69fa      	ldr	r2, [r7, #28]
+ 80007c6:	f8b2 204e 	ldrh.w	r2, [r2, #78]	@ 0x4e
+ 80007ca:	9208      	str	r2, [sp, #32]
+ 80007cc:	693a      	ldr	r2, [r7, #16]
+ 80007ce:	9207      	str	r2, [sp, #28]
+ 80007d0:	9606      	str	r6, [sp, #24]
+ 80007d2:	9505      	str	r5, [sp, #20]
+ 80007d4:	9404      	str	r4, [sp, #16]
+ 80007d6:	9003      	str	r0, [sp, #12]
+ 80007d8:	9102      	str	r1, [sp, #8]
+ 80007da:	697a      	ldr	r2, [r7, #20]
+ 80007dc:	9201      	str	r2, [sp, #4]
+ 80007de:	9300      	str	r3, [sp, #0]
+ 80007e0:	4643      	mov	r3, r8
+ 80007e2:	4672      	mov	r2, lr
+ 80007e4:	4661      	mov	r1, ip
+ 80007e6:	69b8      	ldr	r0, [r7, #24]
+ 80007e8:	f7ff fed0 	bl	800058c <usart_configure_cr3>
+	usart_configure_gtpr(usart->usart, usart->gt, usart->psc);
+ 80007ec:	69fb      	ldr	r3, [r7, #28]
+ 80007ee:	6818      	ldr	r0, [r3, #0]
+ 80007f0:	69fb      	ldr	r3, [r7, #28]
+ 80007f2:	f8b3 1054 	ldrh.w	r1, [r3, #84]	@ 0x54
+ 80007f6:	69fb      	ldr	r3, [r7, #28]
+ 80007f8:	f8b3 3056 	ldrh.w	r3, [r3, #86]	@ 0x56
+ 80007fc:	461a      	mov	r2, r3
+ 80007fe:	f7ff ff28 	bl	8000652 <usart_configure_gtpr>
+	usart_cr1_configure_ue(usart->usart, 0x1);
+ 8000802:	69fb      	ldr	r3, [r7, #28]
+ 8000804:	681b      	ldr	r3, [r3, #0]
+ 8000806:	2101      	movs	r1, #1
+ 8000808:	4618      	mov	r0, r3
+ 800080a:	f000 f81e 	bl	800084a <usart_cr1_configure_ue>
+}
+ 800080e:	bf00      	nop
+ 8000810:	3720      	adds	r7, #32
+ 8000812:	46bd      	mov	sp, r7
+ 8000814:	e8bd 81f0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, pc}
+
+08000818 <usart_cr1_configure_over8>:
+
+void usart_cr1_configure_over8(USART_TypeDef* type, uint16_t over8)
+{
+ 8000818:	b480      	push	{r7}
+ 800081a:	b083      	sub	sp, #12
+ 800081c:	af00      	add	r7, sp, #0
+ 800081e:	6078      	str	r0, [r7, #4]
+ 8000820:	460b      	mov	r3, r1
+ 8000822:	807b      	strh	r3, [r7, #2]
+	type->CR1 = type->CR1 & ~(0x0001 << USART_OVER8);
+ 8000824:	687b      	ldr	r3, [r7, #4]
+ 8000826:	68db      	ldr	r3, [r3, #12]
+ 8000828:	f423 4200 	bic.w	r2, r3, #32768	@ 0x8000
+ 800082c:	687b      	ldr	r3, [r7, #4]
+ 800082e:	60da      	str	r2, [r3, #12]
+	type->CR1 = type->CR1 | (over8 << USART_OVER8);
+ 8000830:	687b      	ldr	r3, [r7, #4]
+ 8000832:	68da      	ldr	r2, [r3, #12]
+ 8000834:	887b      	ldrh	r3, [r7, #2]
+ 8000836:	03db      	lsls	r3, r3, #15
+ 8000838:	431a      	orrs	r2, r3
+ 800083a:	687b      	ldr	r3, [r7, #4]
+ 800083c:	60da      	str	r2, [r3, #12]
+}
+ 800083e:	bf00      	nop
+ 8000840:	370c      	adds	r7, #12
+ 8000842:	46bd      	mov	sp, r7
+ 8000844:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 8000848:	4770      	bx	lr
+
+0800084a <usart_cr1_configure_ue>:
+
+void usart_cr1_configure_ue(USART_TypeDef* type, uint16_t ue)
+{
+ 800084a:	b480      	push	{r7}
+ 800084c:	b083      	sub	sp, #12
+ 800084e:	af00      	add	r7, sp, #0
+ 8000850:	6078      	str	r0, [r7, #4]
+ 8000852:	460b      	mov	r3, r1
+ 8000854:	807b      	strh	r3, [r7, #2]
+	type->CR1 = type->CR1 & ~(0x0001 << USART_UE);
+ 8000856:	687b      	ldr	r3, [r7, #4]
+ 8000858:	68db      	ldr	r3, [r3, #12]
+ 800085a:	f423 5200 	bic.w	r2, r3, #8192	@ 0x2000
+ 800085e:	687b      	ldr	r3, [r7, #4]
+ 8000860:	60da      	str	r2, [r3, #12]
+	type->CR1 = type->CR1 | (ue << USART_UE);
+ 8000862:	687b      	ldr	r3, [r7, #4]
+ 8000864:	68da      	ldr	r2, [r3, #12]
+ 8000866:	887b      	ldrh	r3, [r7, #2]
+ 8000868:	035b      	lsls	r3, r3, #13
+ 800086a:	431a      	orrs	r2, r3
+ 800086c:	687b      	ldr	r3, [r7, #4]
+ 800086e:	60da      	str	r2, [r3, #12]
+}
+ 8000870:	bf00      	nop
+ 8000872:	370c      	adds	r7, #12
+ 8000874:	46bd      	mov	sp, r7
+ 8000876:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 800087a:	4770      	bx	lr
+
+0800087c <usart_cr1_configure_m>:
+
+void usart_cr1_configure_m(USART_TypeDef* type, uint16_t m)
+{
+ 800087c:	b480      	push	{r7}
+ 800087e:	b083      	sub	sp, #12
+ 8000880:	af00      	add	r7, sp, #0
+ 8000882:	6078      	str	r0, [r7, #4]
+ 8000884:	460b      	mov	r3, r1
+ 8000886:	807b      	strh	r3, [r7, #2]
+	type->CR1 = type->CR1 & ~(0x0001 << USART_M);
+ 8000888:	687b      	ldr	r3, [r7, #4]
+ 800088a:	68db      	ldr	r3, [r3, #12]
+ 800088c:	f423 5280 	bic.w	r2, r3, #4096	@ 0x1000
+ 8000890:	687b      	ldr	r3, [r7, #4]
+ 8000892:	60da      	str	r2, [r3, #12]
+	type->CR1 = type->CR1 | (m << USART_M);
+ 8000894:	687b      	ldr	r3, [r7, #4]
+ 8000896:	68da      	ldr	r2, [r3, #12]
+ 8000898:	887b      	ldrh	r3, [r7, #2]
+ 800089a:	031b      	lsls	r3, r3, #12
+ 800089c:	431a      	orrs	r2, r3
+ 800089e:	687b      	ldr	r3, [r7, #4]
+ 80008a0:	60da      	str	r2, [r3, #12]
+}
+ 80008a2:	bf00      	nop
+ 80008a4:	370c      	adds	r7, #12
+ 80008a6:	46bd      	mov	sp, r7
+ 80008a8:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 80008ac:	4770      	bx	lr
+
+080008ae <usart_cr1_configure_wake>:
+
+void usart_cr1_configure_wake(USART_TypeDef* type, uint16_t wake)
+{
+ 80008ae:	b480      	push	{r7}
+ 80008b0:	b083      	sub	sp, #12
+ 80008b2:	af00      	add	r7, sp, #0
+ 80008b4:	6078      	str	r0, [r7, #4]
+ 80008b6:	460b      	mov	r3, r1
+ 80008b8:	807b      	strh	r3, [r7, #2]
+	type->CR1 = type->CR1 & ~(0x0001 << USART_WAKE);
+ 80008ba:	687b      	ldr	r3, [r7, #4]
+ 80008bc:	68db      	ldr	r3, [r3, #12]
+ 80008be:	f423 6200 	bic.w	r2, r3, #2048	@ 0x800
+ 80008c2:	687b      	ldr	r3, [r7, #4]
+ 80008c4:	60da      	str	r2, [r3, #12]
+	type->CR1 = type->CR1 | (wake << USART_WAKE);
+ 80008c6:	687b      	ldr	r3, [r7, #4]
+ 80008c8:	68da      	ldr	r2, [r3, #12]
+ 80008ca:	887b      	ldrh	r3, [r7, #2]
+ 80008cc:	02db      	lsls	r3, r3, #11
+ 80008ce:	431a      	orrs	r2, r3
+ 80008d0:	687b      	ldr	r3, [r7, #4]
+ 80008d2:	60da      	str	r2, [r3, #12]
+}
+ 80008d4:	bf00      	nop
+ 80008d6:	370c      	adds	r7, #12
+ 80008d8:	46bd      	mov	sp, r7
+ 80008da:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 80008de:	4770      	bx	lr
+
+080008e0 <usart_cr1_configure_pce>:
+
+void usart_cr1_configure_pce(USART_TypeDef* type, uint16_t pce)
+{
+ 80008e0:	b480      	push	{r7}
+ 80008e2:	b083      	sub	sp, #12
+ 80008e4:	af00      	add	r7, sp, #0
+ 80008e6:	6078      	str	r0, [r7, #4]
+ 80008e8:	460b      	mov	r3, r1
+ 80008ea:	807b      	strh	r3, [r7, #2]
+	type->CR1 = type->CR1 & ~(0x0001 << USART_PCE);
+ 80008ec:	687b      	ldr	r3, [r7, #4]
+ 80008ee:	68db      	ldr	r3, [r3, #12]
+ 80008f0:	f423 6280 	bic.w	r2, r3, #1024	@ 0x400
+ 80008f4:	687b      	ldr	r3, [r7, #4]
+ 80008f6:	60da      	str	r2, [r3, #12]
+	type->CR1 = type->CR1 | (pce << USART_PCE);
+ 80008f8:	687b      	ldr	r3, [r7, #4]
+ 80008fa:	68da      	ldr	r2, [r3, #12]
+ 80008fc:	887b      	ldrh	r3, [r7, #2]
+ 80008fe:	029b      	lsls	r3, r3, #10
+ 8000900:	431a      	orrs	r2, r3
+ 8000902:	687b      	ldr	r3, [r7, #4]
+ 8000904:	60da      	str	r2, [r3, #12]
+}
+ 8000906:	bf00      	nop
+ 8000908:	370c      	adds	r7, #12
+ 800090a:	46bd      	mov	sp, r7
+ 800090c:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 8000910:	4770      	bx	lr
+
+08000912 <usart_cr1_configure_ps>:
+
+void usart_cr1_configure_ps(USART_TypeDef* type, uint16_t ps)
+{
+ 8000912:	b480      	push	{r7}
+ 8000914:	b083      	sub	sp, #12
+ 8000916:	af00      	add	r7, sp, #0
+ 8000918:	6078      	str	r0, [r7, #4]
+ 800091a:	460b      	mov	r3, r1
+ 800091c:	807b      	strh	r3, [r7, #2]
+	type->CR1 = type->CR1 & ~(0x0001 << USART_PS);
+ 800091e:	687b      	ldr	r3, [r7, #4]
+ 8000920:	68db      	ldr	r3, [r3, #12]
+ 8000922:	f423 7200 	bic.w	r2, r3, #512	@ 0x200
+ 8000926:	687b      	ldr	r3, [r7, #4]
+ 8000928:	60da      	str	r2, [r3, #12]
+	type->CR1 = type->CR1 | (ps << USART_PS);
+ 800092a:	687b      	ldr	r3, [r7, #4]
+ 800092c:	68da      	ldr	r2, [r3, #12]
+ 800092e:	887b      	ldrh	r3, [r7, #2]
+ 8000930:	025b      	lsls	r3, r3, #9
+ 8000932:	431a      	orrs	r2, r3
+ 8000934:	687b      	ldr	r3, [r7, #4]
+ 8000936:	60da      	str	r2, [r3, #12]
+}
+ 8000938:	bf00      	nop
+ 800093a:	370c      	adds	r7, #12
+ 800093c:	46bd      	mov	sp, r7
+ 800093e:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 8000942:	4770      	bx	lr
+
+08000944 <usart_cr1_configure_peie>:
+
+void usart_cr1_configure_peie(USART_TypeDef* type, uint16_t peie)
+{
+ 8000944:	b480      	push	{r7}
+ 8000946:	b083      	sub	sp, #12
+ 8000948:	af00      	add	r7, sp, #0
+ 800094a:	6078      	str	r0, [r7, #4]
+ 800094c:	460b      	mov	r3, r1
+ 800094e:	807b      	strh	r3, [r7, #2]
+	type->CR1 = type->CR1 & ~(0x0001 << USART_PEIE);
+ 8000950:	687b      	ldr	r3, [r7, #4]
+ 8000952:	68db      	ldr	r3, [r3, #12]
+ 8000954:	f423 7280 	bic.w	r2, r3, #256	@ 0x100
+ 8000958:	687b      	ldr	r3, [r7, #4]
+ 800095a:	60da      	str	r2, [r3, #12]
+	type->CR1 = type->CR1 | (peie << USART_PEIE);
+ 800095c:	687b      	ldr	r3, [r7, #4]
+ 800095e:	68da      	ldr	r2, [r3, #12]
+ 8000960:	887b      	ldrh	r3, [r7, #2]
+ 8000962:	021b      	lsls	r3, r3, #8
+ 8000964:	431a      	orrs	r2, r3
+ 8000966:	687b      	ldr	r3, [r7, #4]
+ 8000968:	60da      	str	r2, [r3, #12]
+}
+ 800096a:	bf00      	nop
+ 800096c:	370c      	adds	r7, #12
+ 800096e:	46bd      	mov	sp, r7
+ 8000970:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 8000974:	4770      	bx	lr
+
+08000976 <usart_cr1_configure_txeie>:
+
+void usart_cr1_configure_txeie(USART_TypeDef* type, uint16_t txeie)
+{
+ 8000976:	b480      	push	{r7}
+ 8000978:	b083      	sub	sp, #12
+ 800097a:	af00      	add	r7, sp, #0
+ 800097c:	6078      	str	r0, [r7, #4]
+ 800097e:	460b      	mov	r3, r1
+ 8000980:	807b      	strh	r3, [r7, #2]
+	type->CR1 = type->CR1 & ~(0x0001 << USART_TXEIE);
+ 8000982:	687b      	ldr	r3, [r7, #4]
+ 8000984:	68db      	ldr	r3, [r3, #12]
+ 8000986:	f023 0280 	bic.w	r2, r3, #128	@ 0x80
+ 800098a:	687b      	ldr	r3, [r7, #4]
+ 800098c:	60da      	str	r2, [r3, #12]
+	type->CR1 = type->CR1 | (txeie << USART_TXEIE);
+ 800098e:	687b      	ldr	r3, [r7, #4]
+ 8000990:	68da      	ldr	r2, [r3, #12]
+ 8000992:	887b      	ldrh	r3, [r7, #2]
+ 8000994:	01db      	lsls	r3, r3, #7
+ 8000996:	431a      	orrs	r2, r3
+ 8000998:	687b      	ldr	r3, [r7, #4]
+ 800099a:	60da      	str	r2, [r3, #12]
+}
+ 800099c:	bf00      	nop
+ 800099e:	370c      	adds	r7, #12
+ 80009a0:	46bd      	mov	sp, r7
+ 80009a2:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 80009a6:	4770      	bx	lr
+
+080009a8 <usart_cr1_configure_tcie>:
+
+void usart_cr1_configure_tcie(USART_TypeDef* type, uint16_t tcie)
+{
+ 80009a8:	b480      	push	{r7}
+ 80009aa:	b083      	sub	sp, #12
+ 80009ac:	af00      	add	r7, sp, #0
+ 80009ae:	6078      	str	r0, [r7, #4]
+ 80009b0:	460b      	mov	r3, r1
+ 80009b2:	807b      	strh	r3, [r7, #2]
+	type->CR1 = type->CR1 & ~(0x0001 << USART_TCIE);
+ 80009b4:	687b      	ldr	r3, [r7, #4]
+ 80009b6:	68db      	ldr	r3, [r3, #12]
+ 80009b8:	f023 0240 	bic.w	r2, r3, #64	@ 0x40
+ 80009bc:	687b      	ldr	r3, [r7, #4]
+ 80009be:	60da      	str	r2, [r3, #12]
+	type->CR1 = type->CR1 | (tcie << USART_TCIE);
+ 80009c0:	687b      	ldr	r3, [r7, #4]
+ 80009c2:	68da      	ldr	r2, [r3, #12]
+ 80009c4:	887b      	ldrh	r3, [r7, #2]
+ 80009c6:	019b      	lsls	r3, r3, #6
+ 80009c8:	431a      	orrs	r2, r3
+ 80009ca:	687b      	ldr	r3, [r7, #4]
+ 80009cc:	60da      	str	r2, [r3, #12]
+}
+ 80009ce:	bf00      	nop
+ 80009d0:	370c      	adds	r7, #12
+ 80009d2:	46bd      	mov	sp, r7
+ 80009d4:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 80009d8:	4770      	bx	lr
+
+080009da <usart_cr1_configure_rxneie>:
+
+void usart_cr1_configure_rxneie(USART_TypeDef* type, uint16_t rxneie)
+{
+ 80009da:	b480      	push	{r7}
+ 80009dc:	b083      	sub	sp, #12
+ 80009de:	af00      	add	r7, sp, #0
+ 80009e0:	6078      	str	r0, [r7, #4]
+ 80009e2:	460b      	mov	r3, r1
+ 80009e4:	807b      	strh	r3, [r7, #2]
+	type->CR1 = type->CR1 & ~(0x0001 << USART_RXNEIE);
+ 80009e6:	687b      	ldr	r3, [r7, #4]
+ 80009e8:	68db      	ldr	r3, [r3, #12]
+ 80009ea:	f023 0220 	bic.w	r2, r3, #32
+ 80009ee:	687b      	ldr	r3, [r7, #4]
+ 80009f0:	60da      	str	r2, [r3, #12]
+	type->CR1 = type->CR1 | (rxneie << USART_RXNEIE);
+ 80009f2:	687b      	ldr	r3, [r7, #4]
+ 80009f4:	68da      	ldr	r2, [r3, #12]
+ 80009f6:	887b      	ldrh	r3, [r7, #2]
+ 80009f8:	015b      	lsls	r3, r3, #5
+ 80009fa:	431a      	orrs	r2, r3
+ 80009fc:	687b      	ldr	r3, [r7, #4]
+ 80009fe:	60da      	str	r2, [r3, #12]
+}
+ 8000a00:	bf00      	nop
+ 8000a02:	370c      	adds	r7, #12
+ 8000a04:	46bd      	mov	sp, r7
+ 8000a06:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 8000a0a:	4770      	bx	lr
+
+08000a0c <usart_cr1_configure_idleie>:
+
+void usart_cr1_configure_idleie(USART_TypeDef* type, uint16_t idleie)
+{
+ 8000a0c:	b480      	push	{r7}
+ 8000a0e:	b083      	sub	sp, #12
+ 8000a10:	af00      	add	r7, sp, #0
+ 8000a12:	6078      	str	r0, [r7, #4]
+ 8000a14:	460b      	mov	r3, r1
+ 8000a16:	807b      	strh	r3, [r7, #2]
+	type->CR1 = type->CR1 & ~(0x0001 << USART_IDLEIE);
+ 8000a18:	687b      	ldr	r3, [r7, #4]
+ 8000a1a:	68db      	ldr	r3, [r3, #12]
+ 8000a1c:	f023 0210 	bic.w	r2, r3, #16
+ 8000a20:	687b      	ldr	r3, [r7, #4]
+ 8000a22:	60da      	str	r2, [r3, #12]
+	type->CR1 = type->CR1 | (idleie << USART_IDLEIE);
+ 8000a24:	687b      	ldr	r3, [r7, #4]
+ 8000a26:	68da      	ldr	r2, [r3, #12]
+ 8000a28:	887b      	ldrh	r3, [r7, #2]
+ 8000a2a:	011b      	lsls	r3, r3, #4
+ 8000a2c:	431a      	orrs	r2, r3
+ 8000a2e:	687b      	ldr	r3, [r7, #4]
+ 8000a30:	60da      	str	r2, [r3, #12]
+}
+ 8000a32:	bf00      	nop
+ 8000a34:	370c      	adds	r7, #12
+ 8000a36:	46bd      	mov	sp, r7
+ 8000a38:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 8000a3c:	4770      	bx	lr
+
+08000a3e <usart_cr1_configure_te>:
+
+void usart_cr1_configure_te(USART_TypeDef* type, uint16_t te)
+{
+ 8000a3e:	b480      	push	{r7}
+ 8000a40:	b083      	sub	sp, #12
+ 8000a42:	af00      	add	r7, sp, #0
+ 8000a44:	6078      	str	r0, [r7, #4]
+ 8000a46:	460b      	mov	r3, r1
+ 8000a48:	807b      	strh	r3, [r7, #2]
+	type->CR1 = type->CR1 & ~(0x0001 << USART_TE);
+ 8000a4a:	687b      	ldr	r3, [r7, #4]
+ 8000a4c:	68db      	ldr	r3, [r3, #12]
+ 8000a4e:	f023 0208 	bic.w	r2, r3, #8
+ 8000a52:	687b      	ldr	r3, [r7, #4]
+ 8000a54:	60da      	str	r2, [r3, #12]
+	type->CR1 = type->CR1 | (te << USART_TE);
+ 8000a56:	687b      	ldr	r3, [r7, #4]
+ 8000a58:	68da      	ldr	r2, [r3, #12]
+ 8000a5a:	887b      	ldrh	r3, [r7, #2]
+ 8000a5c:	00db      	lsls	r3, r3, #3
+ 8000a5e:	431a      	orrs	r2, r3
+ 8000a60:	687b      	ldr	r3, [r7, #4]
+ 8000a62:	60da      	str	r2, [r3, #12]
+}
+ 8000a64:	bf00      	nop
+ 8000a66:	370c      	adds	r7, #12
+ 8000a68:	46bd      	mov	sp, r7
+ 8000a6a:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 8000a6e:	4770      	bx	lr
+
+08000a70 <usart_cr1_configure_re>:
+
+void usart_cr1_configure_re(USART_TypeDef* type, uint16_t re)
+{
+ 8000a70:	b480      	push	{r7}
+ 8000a72:	b083      	sub	sp, #12
+ 8000a74:	af00      	add	r7, sp, #0
+ 8000a76:	6078      	str	r0, [r7, #4]
+ 8000a78:	460b      	mov	r3, r1
+ 8000a7a:	807b      	strh	r3, [r7, #2]
+	type->CR1 = type->CR1 & ~(0x0001 << USART_RE);
+ 8000a7c:	687b      	ldr	r3, [r7, #4]
+ 8000a7e:	68db      	ldr	r3, [r3, #12]
+ 8000a80:	f023 0204 	bic.w	r2, r3, #4
+ 8000a84:	687b      	ldr	r3, [r7, #4]
+ 8000a86:	60da      	str	r2, [r3, #12]
+	type->CR1 = type->CR1 | (re << USART_RE);
+ 8000a88:	687b      	ldr	r3, [r7, #4]
+ 8000a8a:	68da      	ldr	r2, [r3, #12]
+ 8000a8c:	887b      	ldrh	r3, [r7, #2]
+ 8000a8e:	009b      	lsls	r3, r3, #2
+ 8000a90:	431a      	orrs	r2, r3
+ 8000a92:	687b      	ldr	r3, [r7, #4]
+ 8000a94:	60da      	str	r2, [r3, #12]
+}
+ 8000a96:	bf00      	nop
+ 8000a98:	370c      	adds	r7, #12
+ 8000a9a:	46bd      	mov	sp, r7
+ 8000a9c:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 8000aa0:	4770      	bx	lr
+
+08000aa2 <usart_cr1_configure_rwu>:
+
+void usart_cr1_configure_rwu(USART_TypeDef* type, uint16_t rwu)
+{
+ 8000aa2:	b480      	push	{r7}
+ 8000aa4:	b083      	sub	sp, #12
+ 8000aa6:	af00      	add	r7, sp, #0
+ 8000aa8:	6078      	str	r0, [r7, #4]
+ 8000aaa:	460b      	mov	r3, r1
+ 8000aac:	807b      	strh	r3, [r7, #2]
+	type->CR1 = type->CR1 & ~(0x0001 << USART_RWU);
+ 8000aae:	687b      	ldr	r3, [r7, #4]
+ 8000ab0:	68db      	ldr	r3, [r3, #12]
+ 8000ab2:	f023 0202 	bic.w	r2, r3, #2
+ 8000ab6:	687b      	ldr	r3, [r7, #4]
+ 8000ab8:	60da      	str	r2, [r3, #12]
+	type->CR1 = type->CR1 | (rwu << USART_RWU);
+ 8000aba:	687b      	ldr	r3, [r7, #4]
+ 8000abc:	68da      	ldr	r2, [r3, #12]
+ 8000abe:	887b      	ldrh	r3, [r7, #2]
+ 8000ac0:	005b      	lsls	r3, r3, #1
+ 8000ac2:	431a      	orrs	r2, r3
+ 8000ac4:	687b      	ldr	r3, [r7, #4]
+ 8000ac6:	60da      	str	r2, [r3, #12]
+}
+ 8000ac8:	bf00      	nop
+ 8000aca:	370c      	adds	r7, #12
+ 8000acc:	46bd      	mov	sp, r7
+ 8000ace:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 8000ad2:	4770      	bx	lr
+
+08000ad4 <usart_cr1_configure_sbk>:
+
+void usart_cr1_configure_sbk(USART_TypeDef* type, uint16_t sbk)
+{
+ 8000ad4:	b480      	push	{r7}
+ 8000ad6:	b083      	sub	sp, #12
+ 8000ad8:	af00      	add	r7, sp, #0
+ 8000ada:	6078      	str	r0, [r7, #4]
+ 8000adc:	460b      	mov	r3, r1
+ 8000ade:	807b      	strh	r3, [r7, #2]
+	type->CR1 = type->CR1 & ~(0x0001 << USART_SBK);
+ 8000ae0:	687b      	ldr	r3, [r7, #4]
+ 8000ae2:	68db      	ldr	r3, [r3, #12]
+ 8000ae4:	f023 0201 	bic.w	r2, r3, #1
+ 8000ae8:	687b      	ldr	r3, [r7, #4]
+ 8000aea:	60da      	str	r2, [r3, #12]
+	type->CR1 = type->CR1 | (sbk << USART_SBK);
+ 8000aec:	687b      	ldr	r3, [r7, #4]
+ 8000aee:	68da      	ldr	r2, [r3, #12]
+ 8000af0:	887b      	ldrh	r3, [r7, #2]
+ 8000af2:	431a      	orrs	r2, r3
+ 8000af4:	687b      	ldr	r3, [r7, #4]
+ 8000af6:	60da      	str	r2, [r3, #12]
+}
+ 8000af8:	bf00      	nop
+ 8000afa:	370c      	adds	r7, #12
+ 8000afc:	46bd      	mov	sp, r7
+ 8000afe:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 8000b02:	4770      	bx	lr
+
+08000b04 <usart_cr2_configure_linen>:
+
+void usart_cr2_configure_linen(USART_TypeDef* type, uint16_t linen)
+{
+ 8000b04:	b480      	push	{r7}
+ 8000b06:	b083      	sub	sp, #12
+ 8000b08:	af00      	add	r7, sp, #0
+ 8000b0a:	6078      	str	r0, [r7, #4]
+ 8000b0c:	460b      	mov	r3, r1
+ 8000b0e:	807b      	strh	r3, [r7, #2]
+	type->CR2 = type->CR2 & ~(0x0001 << USART_LINEN);
+ 8000b10:	687b      	ldr	r3, [r7, #4]
+ 8000b12:	691b      	ldr	r3, [r3, #16]
+ 8000b14:	f423 4280 	bic.w	r2, r3, #16384	@ 0x4000
+ 8000b18:	687b      	ldr	r3, [r7, #4]
+ 8000b1a:	611a      	str	r2, [r3, #16]
+	type->CR2 = type->CR2 | (linen << USART_LINEN);
+ 8000b1c:	687b      	ldr	r3, [r7, #4]
+ 8000b1e:	691a      	ldr	r2, [r3, #16]
+ 8000b20:	887b      	ldrh	r3, [r7, #2]
+ 8000b22:	039b      	lsls	r3, r3, #14
+ 8000b24:	431a      	orrs	r2, r3
+ 8000b26:	687b      	ldr	r3, [r7, #4]
+ 8000b28:	611a      	str	r2, [r3, #16]
+}
+ 8000b2a:	bf00      	nop
+ 8000b2c:	370c      	adds	r7, #12
+ 8000b2e:	46bd      	mov	sp, r7
+ 8000b30:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 8000b34:	4770      	bx	lr
+
+08000b36 <usart_cr2_configure_stop>:
+
+void usart_cr2_configure_stop(USART_TypeDef* type, uint16_t stop)
+{
+ 8000b36:	b480      	push	{r7}
+ 8000b38:	b083      	sub	sp, #12
+ 8000b3a:	af00      	add	r7, sp, #0
+ 8000b3c:	6078      	str	r0, [r7, #4]
+ 8000b3e:	460b      	mov	r3, r1
+ 8000b40:	807b      	strh	r3, [r7, #2]
+	type->CR2 = type->CR2 & ~(0x0003 << USART_STOP);
+ 8000b42:	687b      	ldr	r3, [r7, #4]
+ 8000b44:	691b      	ldr	r3, [r3, #16]
+ 8000b46:	f423 5240 	bic.w	r2, r3, #12288	@ 0x3000
+ 8000b4a:	687b      	ldr	r3, [r7, #4]
+ 8000b4c:	611a      	str	r2, [r3, #16]
+	type->CR2 = type->CR2 | (stop << USART_STOP);
+ 8000b4e:	687b      	ldr	r3, [r7, #4]
+ 8000b50:	691a      	ldr	r2, [r3, #16]
+ 8000b52:	887b      	ldrh	r3, [r7, #2]
+ 8000b54:	031b      	lsls	r3, r3, #12
+ 8000b56:	431a      	orrs	r2, r3
+ 8000b58:	687b      	ldr	r3, [r7, #4]
+ 8000b5a:	611a      	str	r2, [r3, #16]
+}
+ 8000b5c:	bf00      	nop
+ 8000b5e:	370c      	adds	r7, #12
+ 8000b60:	46bd      	mov	sp, r7
+ 8000b62:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 8000b66:	4770      	bx	lr
+
+08000b68 <usart_cr2_configure_clken>:
+
+void usart_cr2_configure_clken(USART_TypeDef* type, uint16_t clken)
+{
+ 8000b68:	b480      	push	{r7}
+ 8000b6a:	b083      	sub	sp, #12
+ 8000b6c:	af00      	add	r7, sp, #0
+ 8000b6e:	6078      	str	r0, [r7, #4]
+ 8000b70:	460b      	mov	r3, r1
+ 8000b72:	807b      	strh	r3, [r7, #2]
+	type->CR2 = type->CR2 & ~(0x0001 << USART_CLKEN);
+ 8000b74:	687b      	ldr	r3, [r7, #4]
+ 8000b76:	691b      	ldr	r3, [r3, #16]
+ 8000b78:	f423 6200 	bic.w	r2, r3, #2048	@ 0x800
+ 8000b7c:	687b      	ldr	r3, [r7, #4]
+ 8000b7e:	611a      	str	r2, [r3, #16]
+	type->CR2 = type->CR2 | (clken << USART_CLKEN);
+ 8000b80:	687b      	ldr	r3, [r7, #4]
+ 8000b82:	691a      	ldr	r2, [r3, #16]
+ 8000b84:	887b      	ldrh	r3, [r7, #2]
+ 8000b86:	02db      	lsls	r3, r3, #11
+ 8000b88:	431a      	orrs	r2, r3
+ 8000b8a:	687b      	ldr	r3, [r7, #4]
+ 8000b8c:	611a      	str	r2, [r3, #16]
+}
+ 8000b8e:	bf00      	nop
+ 8000b90:	370c      	adds	r7, #12
+ 8000b92:	46bd      	mov	sp, r7
+ 8000b94:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 8000b98:	4770      	bx	lr
+
+08000b9a <usart_cr2_configure_cpol>:
+
+void usart_cr2_configure_cpol(USART_TypeDef* type, uint16_t cpol)
+{
+ 8000b9a:	b480      	push	{r7}
+ 8000b9c:	b083      	sub	sp, #12
+ 8000b9e:	af00      	add	r7, sp, #0
+ 8000ba0:	6078      	str	r0, [r7, #4]
+ 8000ba2:	460b      	mov	r3, r1
+ 8000ba4:	807b      	strh	r3, [r7, #2]
+	type->CR2 = type->CR2 & ~(0x0001 << USART_CPOL);
+ 8000ba6:	687b      	ldr	r3, [r7, #4]
+ 8000ba8:	691b      	ldr	r3, [r3, #16]
+ 8000baa:	f423 6280 	bic.w	r2, r3, #1024	@ 0x400
+ 8000bae:	687b      	ldr	r3, [r7, #4]
+ 8000bb0:	611a      	str	r2, [r3, #16]
+	type->CR2 = type->CR2 | (cpol << USART_CPOL);
+ 8000bb2:	687b      	ldr	r3, [r7, #4]
+ 8000bb4:	691a      	ldr	r2, [r3, #16]
+ 8000bb6:	887b      	ldrh	r3, [r7, #2]
+ 8000bb8:	029b      	lsls	r3, r3, #10
+ 8000bba:	431a      	orrs	r2, r3
+ 8000bbc:	687b      	ldr	r3, [r7, #4]
+ 8000bbe:	611a      	str	r2, [r3, #16]
+}
+ 8000bc0:	bf00      	nop
+ 8000bc2:	370c      	adds	r7, #12
+ 8000bc4:	46bd      	mov	sp, r7
+ 8000bc6:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 8000bca:	4770      	bx	lr
+
+08000bcc <usart_cr2_configure_cpha>:
+
+void usart_cr2_configure_cpha(USART_TypeDef* type, uint16_t cpha)
+{
+ 8000bcc:	b480      	push	{r7}
+ 8000bce:	b083      	sub	sp, #12
+ 8000bd0:	af00      	add	r7, sp, #0
+ 8000bd2:	6078      	str	r0, [r7, #4]
+ 8000bd4:	460b      	mov	r3, r1
+ 8000bd6:	807b      	strh	r3, [r7, #2]
+	type->CR2 = type->CR2 & ~(0x0001 << USART_CPHA);
+ 8000bd8:	687b      	ldr	r3, [r7, #4]
+ 8000bda:	691b      	ldr	r3, [r3, #16]
+ 8000bdc:	f423 7200 	bic.w	r2, r3, #512	@ 0x200
+ 8000be0:	687b      	ldr	r3, [r7, #4]
+ 8000be2:	611a      	str	r2, [r3, #16]
+	type->CR2 = type->CR2 | (cpha << USART_CPHA);
+ 8000be4:	687b      	ldr	r3, [r7, #4]
+ 8000be6:	691a      	ldr	r2, [r3, #16]
+ 8000be8:	887b      	ldrh	r3, [r7, #2]
+ 8000bea:	025b      	lsls	r3, r3, #9
+ 8000bec:	431a      	orrs	r2, r3
+ 8000bee:	687b      	ldr	r3, [r7, #4]
+ 8000bf0:	611a      	str	r2, [r3, #16]
+}
+ 8000bf2:	bf00      	nop
+ 8000bf4:	370c      	adds	r7, #12
+ 8000bf6:	46bd      	mov	sp, r7
+ 8000bf8:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 8000bfc:	4770      	bx	lr
+
+08000bfe <usart_cr2_configure_lbcl>:
+
+void usart_cr2_configure_lbcl(USART_TypeDef* type, uint16_t lbcl)
+{
+ 8000bfe:	b480      	push	{r7}
+ 8000c00:	b083      	sub	sp, #12
+ 8000c02:	af00      	add	r7, sp, #0
+ 8000c04:	6078      	str	r0, [r7, #4]
+ 8000c06:	460b      	mov	r3, r1
+ 8000c08:	807b      	strh	r3, [r7, #2]
+	type->CR2 = type->CR2 & ~(0x0001 << USART_LBCL);
+ 8000c0a:	687b      	ldr	r3, [r7, #4]
+ 8000c0c:	691b      	ldr	r3, [r3, #16]
+ 8000c0e:	f423 7280 	bic.w	r2, r3, #256	@ 0x100
+ 8000c12:	687b      	ldr	r3, [r7, #4]
+ 8000c14:	611a      	str	r2, [r3, #16]
+	type->CR2 = type->CR2 | (lbcl << USART_LBCL);
+ 8000c16:	687b      	ldr	r3, [r7, #4]
+ 8000c18:	691a      	ldr	r2, [r3, #16]
+ 8000c1a:	887b      	ldrh	r3, [r7, #2]
+ 8000c1c:	021b      	lsls	r3, r3, #8
+ 8000c1e:	431a      	orrs	r2, r3
+ 8000c20:	687b      	ldr	r3, [r7, #4]
+ 8000c22:	611a      	str	r2, [r3, #16]
+}
+ 8000c24:	bf00      	nop
+ 8000c26:	370c      	adds	r7, #12
+ 8000c28:	46bd      	mov	sp, r7
+ 8000c2a:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 8000c2e:	4770      	bx	lr
+
+08000c30 <usart_cr2_configure_lbdie>:
+
+void usart_cr2_configure_lbdie(USART_TypeDef* type, uint16_t lbdie)
+{
+ 8000c30:	b480      	push	{r7}
+ 8000c32:	b083      	sub	sp, #12
+ 8000c34:	af00      	add	r7, sp, #0
+ 8000c36:	6078      	str	r0, [r7, #4]
+ 8000c38:	460b      	mov	r3, r1
+ 8000c3a:	807b      	strh	r3, [r7, #2]
+	type->CR2 = type->CR2 & ~(0x0001 << USART_LBDIE);
+ 8000c3c:	687b      	ldr	r3, [r7, #4]
+ 8000c3e:	691b      	ldr	r3, [r3, #16]
+ 8000c40:	f023 0240 	bic.w	r2, r3, #64	@ 0x40
+ 8000c44:	687b      	ldr	r3, [r7, #4]
+ 8000c46:	611a      	str	r2, [r3, #16]
+	type->CR2 = type->CR2 | (lbdie << USART_LBDIE);
+ 8000c48:	687b      	ldr	r3, [r7, #4]
+ 8000c4a:	691a      	ldr	r2, [r3, #16]
+ 8000c4c:	887b      	ldrh	r3, [r7, #2]
+ 8000c4e:	019b      	lsls	r3, r3, #6
+ 8000c50:	431a      	orrs	r2, r3
+ 8000c52:	687b      	ldr	r3, [r7, #4]
+ 8000c54:	611a      	str	r2, [r3, #16]
+}
+ 8000c56:	bf00      	nop
+ 8000c58:	370c      	adds	r7, #12
+ 8000c5a:	46bd      	mov	sp, r7
+ 8000c5c:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 8000c60:	4770      	bx	lr
+
+08000c62 <usart_cr2_configure_lbdl>:
+
+void usart_cr2_configure_lbdl(USART_TypeDef* type, uint16_t lbdl)
+{
+ 8000c62:	b480      	push	{r7}
+ 8000c64:	b083      	sub	sp, #12
+ 8000c66:	af00      	add	r7, sp, #0
+ 8000c68:	6078      	str	r0, [r7, #4]
+ 8000c6a:	460b      	mov	r3, r1
+ 8000c6c:	807b      	strh	r3, [r7, #2]
+	type->CR2 = type->CR2 & ~(0x0001 << USART_LBDL);
+ 8000c6e:	687b      	ldr	r3, [r7, #4]
+ 8000c70:	691b      	ldr	r3, [r3, #16]
+ 8000c72:	f023 0220 	bic.w	r2, r3, #32
+ 8000c76:	687b      	ldr	r3, [r7, #4]
+ 8000c78:	611a      	str	r2, [r3, #16]
+	type->CR2 = type->CR2 | (lbdl << USART_LBDL);
+ 8000c7a:	687b      	ldr	r3, [r7, #4]
+ 8000c7c:	691a      	ldr	r2, [r3, #16]
+ 8000c7e:	887b      	ldrh	r3, [r7, #2]
+ 8000c80:	015b      	lsls	r3, r3, #5
+ 8000c82:	431a      	orrs	r2, r3
+ 8000c84:	687b      	ldr	r3, [r7, #4]
+ 8000c86:	611a      	str	r2, [r3, #16]
+}
+ 8000c88:	bf00      	nop
+ 8000c8a:	370c      	adds	r7, #12
+ 8000c8c:	46bd      	mov	sp, r7
+ 8000c8e:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 8000c92:	4770      	bx	lr
+
+08000c94 <usart_cr2_configure_add>:
+
+void usart_cr2_configure_add(USART_TypeDef* type, uint16_t add)
+{
+ 8000c94:	b480      	push	{r7}
+ 8000c96:	b083      	sub	sp, #12
+ 8000c98:	af00      	add	r7, sp, #0
+ 8000c9a:	6078      	str	r0, [r7, #4]
+ 8000c9c:	460b      	mov	r3, r1
+ 8000c9e:	807b      	strh	r3, [r7, #2]
+	type->CR2 = type->CR2 & ~(0x000F << USART_ADD);
+ 8000ca0:	687b      	ldr	r3, [r7, #4]
+ 8000ca2:	691b      	ldr	r3, [r3, #16]
+ 8000ca4:	f023 020f 	bic.w	r2, r3, #15
+ 8000ca8:	687b      	ldr	r3, [r7, #4]
+ 8000caa:	611a      	str	r2, [r3, #16]
+	type->CR2 = type->CR2 | (add << USART_ADD);
+ 8000cac:	687b      	ldr	r3, [r7, #4]
+ 8000cae:	691a      	ldr	r2, [r3, #16]
+ 8000cb0:	887b      	ldrh	r3, [r7, #2]
+ 8000cb2:	431a      	orrs	r2, r3
+ 8000cb4:	687b      	ldr	r3, [r7, #4]
+ 8000cb6:	611a      	str	r2, [r3, #16]
+}
+ 8000cb8:	bf00      	nop
+ 8000cba:	370c      	adds	r7, #12
+ 8000cbc:	46bd      	mov	sp, r7
+ 8000cbe:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 8000cc2:	4770      	bx	lr
+
+08000cc4 <usart_cr3_configure_onebit>:
+
+void usart_cr3_configure_onebit(USART_TypeDef* type, uint16_t onebit)
+{
+ 8000cc4:	b480      	push	{r7}
+ 8000cc6:	b083      	sub	sp, #12
+ 8000cc8:	af00      	add	r7, sp, #0
+ 8000cca:	6078      	str	r0, [r7, #4]
+ 8000ccc:	460b      	mov	r3, r1
+ 8000cce:	807b      	strh	r3, [r7, #2]
+	type->CR3 = type->CR3 & ~(0x0001 << USART_ONEBIT);
+ 8000cd0:	687b      	ldr	r3, [r7, #4]
+ 8000cd2:	695b      	ldr	r3, [r3, #20]
+ 8000cd4:	f423 6200 	bic.w	r2, r3, #2048	@ 0x800
+ 8000cd8:	687b      	ldr	r3, [r7, #4]
+ 8000cda:	615a      	str	r2, [r3, #20]
+	type->CR3 = type->CR3 | (onebit << USART_ONEBIT);
+ 8000cdc:	687b      	ldr	r3, [r7, #4]
+ 8000cde:	695a      	ldr	r2, [r3, #20]
+ 8000ce0:	887b      	ldrh	r3, [r7, #2]
+ 8000ce2:	02db      	lsls	r3, r3, #11
+ 8000ce4:	431a      	orrs	r2, r3
+ 8000ce6:	687b      	ldr	r3, [r7, #4]
+ 8000ce8:	615a      	str	r2, [r3, #20]
+}
+ 8000cea:	bf00      	nop
+ 8000cec:	370c      	adds	r7, #12
+ 8000cee:	46bd      	mov	sp, r7
+ 8000cf0:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 8000cf4:	4770      	bx	lr
+
+08000cf6 <usart_cr3_configure_ctsie>:
+
+void usart_cr3_configure_ctsie(USART_TypeDef* type, uint16_t ctsie)
+{
+ 8000cf6:	b480      	push	{r7}
+ 8000cf8:	b083      	sub	sp, #12
+ 8000cfa:	af00      	add	r7, sp, #0
+ 8000cfc:	6078      	str	r0, [r7, #4]
+ 8000cfe:	460b      	mov	r3, r1
+ 8000d00:	807b      	strh	r3, [r7, #2]
+	type->CR3 = type->CR3 & ~(0x0001 << USART_CTSIE);
+ 8000d02:	687b      	ldr	r3, [r7, #4]
+ 8000d04:	695b      	ldr	r3, [r3, #20]
+ 8000d06:	f423 6280 	bic.w	r2, r3, #1024	@ 0x400
+ 8000d0a:	687b      	ldr	r3, [r7, #4]
+ 8000d0c:	615a      	str	r2, [r3, #20]
+	type->CR3 = type->CR3 | (ctsie << USART_CTSIE);
+ 8000d0e:	687b      	ldr	r3, [r7, #4]
+ 8000d10:	695a      	ldr	r2, [r3, #20]
+ 8000d12:	887b      	ldrh	r3, [r7, #2]
+ 8000d14:	029b      	lsls	r3, r3, #10
+ 8000d16:	431a      	orrs	r2, r3
+ 8000d18:	687b      	ldr	r3, [r7, #4]
+ 8000d1a:	615a      	str	r2, [r3, #20]
+}
+ 8000d1c:	bf00      	nop
+ 8000d1e:	370c      	adds	r7, #12
+ 8000d20:	46bd      	mov	sp, r7
+ 8000d22:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 8000d26:	4770      	bx	lr
+
+08000d28 <usart_cr3_configure_ctse>:
+
+void usart_cr3_configure_ctse(USART_TypeDef* type, uint16_t ctse)
+{
+ 8000d28:	b480      	push	{r7}
+ 8000d2a:	b083      	sub	sp, #12
+ 8000d2c:	af00      	add	r7, sp, #0
+ 8000d2e:	6078      	str	r0, [r7, #4]
+ 8000d30:	460b      	mov	r3, r1
+ 8000d32:	807b      	strh	r3, [r7, #2]
+	type->CR3 = type->CR3 & ~(0x0001 << USART_CTSE);
+ 8000d34:	687b      	ldr	r3, [r7, #4]
+ 8000d36:	695b      	ldr	r3, [r3, #20]
+ 8000d38:	f423 7200 	bic.w	r2, r3, #512	@ 0x200
+ 8000d3c:	687b      	ldr	r3, [r7, #4]
+ 8000d3e:	615a      	str	r2, [r3, #20]
+	type->CR3 = type->CR3 | (ctse << USART_CTSE);
+ 8000d40:	687b      	ldr	r3, [r7, #4]
+ 8000d42:	695a      	ldr	r2, [r3, #20]
+ 8000d44:	887b      	ldrh	r3, [r7, #2]
+ 8000d46:	025b      	lsls	r3, r3, #9
+ 8000d48:	431a      	orrs	r2, r3
+ 8000d4a:	687b      	ldr	r3, [r7, #4]
+ 8000d4c:	615a      	str	r2, [r3, #20]
+}
+ 8000d4e:	bf00      	nop
+ 8000d50:	370c      	adds	r7, #12
+ 8000d52:	46bd      	mov	sp, r7
+ 8000d54:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 8000d58:	4770      	bx	lr
+
+08000d5a <usart_cr3_configure_rtse>:
+
+void usart_cr3_configure_rtse(USART_TypeDef* type, uint16_t rtse)
+{
+ 8000d5a:	b480      	push	{r7}
+ 8000d5c:	b083      	sub	sp, #12
+ 8000d5e:	af00      	add	r7, sp, #0
+ 8000d60:	6078      	str	r0, [r7, #4]
+ 8000d62:	460b      	mov	r3, r1
+ 8000d64:	807b      	strh	r3, [r7, #2]
+	type->CR3 = type->CR3 & ~(0x0001 << USART_RTSE);
+ 8000d66:	687b      	ldr	r3, [r7, #4]
+ 8000d68:	695b      	ldr	r3, [r3, #20]
+ 8000d6a:	f423 7280 	bic.w	r2, r3, #256	@ 0x100
+ 8000d6e:	687b      	ldr	r3, [r7, #4]
+ 8000d70:	615a      	str	r2, [r3, #20]
+	type->CR3 = type->CR3 | (rtse << USART_RTSE);
+ 8000d72:	687b      	ldr	r3, [r7, #4]
+ 8000d74:	695a      	ldr	r2, [r3, #20]
+ 8000d76:	887b      	ldrh	r3, [r7, #2]
+ 8000d78:	021b      	lsls	r3, r3, #8
+ 8000d7a:	431a      	orrs	r2, r3
+ 8000d7c:	687b      	ldr	r3, [r7, #4]
+ 8000d7e:	615a      	str	r2, [r3, #20]
+}
+ 8000d80:	bf00      	nop
+ 8000d82:	370c      	adds	r7, #12
+ 8000d84:	46bd      	mov	sp, r7
+ 8000d86:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 8000d8a:	4770      	bx	lr
+
+08000d8c <usart_cr3_configure_dmat>:
+
+void usart_cr3_configure_dmat(USART_TypeDef* type, uint16_t dmat)
+{
+ 8000d8c:	b480      	push	{r7}
+ 8000d8e:	b083      	sub	sp, #12
+ 8000d90:	af00      	add	r7, sp, #0
+ 8000d92:	6078      	str	r0, [r7, #4]
+ 8000d94:	460b      	mov	r3, r1
+ 8000d96:	807b      	strh	r3, [r7, #2]
+	type->CR3 = type->CR3 & ~(0x0001 << USART_DMAT);
+ 8000d98:	687b      	ldr	r3, [r7, #4]
+ 8000d9a:	695b      	ldr	r3, [r3, #20]
+ 8000d9c:	f023 0280 	bic.w	r2, r3, #128	@ 0x80
+ 8000da0:	687b      	ldr	r3, [r7, #4]
+ 8000da2:	615a      	str	r2, [r3, #20]
+	type->CR3 = type->CR3 | (dmat << USART_DMAT);
+ 8000da4:	687b      	ldr	r3, [r7, #4]
+ 8000da6:	695a      	ldr	r2, [r3, #20]
+ 8000da8:	887b      	ldrh	r3, [r7, #2]
+ 8000daa:	01db      	lsls	r3, r3, #7
+ 8000dac:	431a      	orrs	r2, r3
+ 8000dae:	687b      	ldr	r3, [r7, #4]
+ 8000db0:	615a      	str	r2, [r3, #20]
+}
+ 8000db2:	bf00      	nop
+ 8000db4:	370c      	adds	r7, #12
+ 8000db6:	46bd      	mov	sp, r7
+ 8000db8:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 8000dbc:	4770      	bx	lr
+
+08000dbe <usart_cr3_configure_dmar>:
+
+void usart_cr3_configure_dmar(USART_TypeDef* type, uint16_t dmar)
+{
+ 8000dbe:	b480      	push	{r7}
+ 8000dc0:	b083      	sub	sp, #12
+ 8000dc2:	af00      	add	r7, sp, #0
+ 8000dc4:	6078      	str	r0, [r7, #4]
+ 8000dc6:	460b      	mov	r3, r1
+ 8000dc8:	807b      	strh	r3, [r7, #2]
+	type->CR3 = type->CR3 & ~(0x0001 << USART_DMAR);
+ 8000dca:	687b      	ldr	r3, [r7, #4]
+ 8000dcc:	695b      	ldr	r3, [r3, #20]
+ 8000dce:	f023 0240 	bic.w	r2, r3, #64	@ 0x40
+ 8000dd2:	687b      	ldr	r3, [r7, #4]
+ 8000dd4:	615a      	str	r2, [r3, #20]
+	type->CR3 = type->CR3 | (dmar << USART_DMAR);
+ 8000dd6:	687b      	ldr	r3, [r7, #4]
+ 8000dd8:	695a      	ldr	r2, [r3, #20]
+ 8000dda:	887b      	ldrh	r3, [r7, #2]
+ 8000ddc:	019b      	lsls	r3, r3, #6
+ 8000dde:	431a      	orrs	r2, r3
+ 8000de0:	687b      	ldr	r3, [r7, #4]
+ 8000de2:	615a      	str	r2, [r3, #20]
+}
+ 8000de4:	bf00      	nop
+ 8000de6:	370c      	adds	r7, #12
+ 8000de8:	46bd      	mov	sp, r7
+ 8000dea:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 8000dee:	4770      	bx	lr
+
+08000df0 <usart_cr3_configure_scen>:
+
+void usart_cr3_configure_scen(USART_TypeDef* type, uint16_t scen)
+{
+ 8000df0:	b480      	push	{r7}
+ 8000df2:	b083      	sub	sp, #12
+ 8000df4:	af00      	add	r7, sp, #0
+ 8000df6:	6078      	str	r0, [r7, #4]
+ 8000df8:	460b      	mov	r3, r1
+ 8000dfa:	807b      	strh	r3, [r7, #2]
+	type->CR3 = type->CR3 & ~(0x0001 << USART_SCEN);
+ 8000dfc:	687b      	ldr	r3, [r7, #4]
+ 8000dfe:	695b      	ldr	r3, [r3, #20]
+ 8000e00:	f023 0220 	bic.w	r2, r3, #32
+ 8000e04:	687b      	ldr	r3, [r7, #4]
+ 8000e06:	615a      	str	r2, [r3, #20]
+	type->CR3 = type->CR3 | (scen << USART_SCEN);
+ 8000e08:	687b      	ldr	r3, [r7, #4]
+ 8000e0a:	695a      	ldr	r2, [r3, #20]
+ 8000e0c:	887b      	ldrh	r3, [r7, #2]
+ 8000e0e:	015b      	lsls	r3, r3, #5
+ 8000e10:	431a      	orrs	r2, r3
+ 8000e12:	687b      	ldr	r3, [r7, #4]
+ 8000e14:	615a      	str	r2, [r3, #20]
+}
+ 8000e16:	bf00      	nop
+ 8000e18:	370c      	adds	r7, #12
+ 8000e1a:	46bd      	mov	sp, r7
+ 8000e1c:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 8000e20:	4770      	bx	lr
+
+08000e22 <usart_cr3_configure_nack>:
+
+void usart_cr3_configure_nack(USART_TypeDef* type, uint16_t nack)
+{
+ 8000e22:	b480      	push	{r7}
+ 8000e24:	b083      	sub	sp, #12
+ 8000e26:	af00      	add	r7, sp, #0
+ 8000e28:	6078      	str	r0, [r7, #4]
+ 8000e2a:	460b      	mov	r3, r1
+ 8000e2c:	807b      	strh	r3, [r7, #2]
+	type->CR3 = type->CR3 & ~(0x0001 << USART_NACK);
+ 8000e2e:	687b      	ldr	r3, [r7, #4]
+ 8000e30:	695b      	ldr	r3, [r3, #20]
+ 8000e32:	f023 0210 	bic.w	r2, r3, #16
+ 8000e36:	687b      	ldr	r3, [r7, #4]
+ 8000e38:	615a      	str	r2, [r3, #20]
+	type->CR3 = type->CR3 | (nack << USART_NACK);
+ 8000e3a:	687b      	ldr	r3, [r7, #4]
+ 8000e3c:	695a      	ldr	r2, [r3, #20]
+ 8000e3e:	887b      	ldrh	r3, [r7, #2]
+ 8000e40:	011b      	lsls	r3, r3, #4
+ 8000e42:	431a      	orrs	r2, r3
+ 8000e44:	687b      	ldr	r3, [r7, #4]
+ 8000e46:	615a      	str	r2, [r3, #20]
+}
+ 8000e48:	bf00      	nop
+ 8000e4a:	370c      	adds	r7, #12
+ 8000e4c:	46bd      	mov	sp, r7
+ 8000e4e:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 8000e52:	4770      	bx	lr
+
+08000e54 <usart_cr3_configure_hdsel>:
+
+void usart_cr3_configure_hdsel(USART_TypeDef* type, uint16_t hdsel)
+{
+ 8000e54:	b480      	push	{r7}
+ 8000e56:	b083      	sub	sp, #12
+ 8000e58:	af00      	add	r7, sp, #0
+ 8000e5a:	6078      	str	r0, [r7, #4]
+ 8000e5c:	460b      	mov	r3, r1
+ 8000e5e:	807b      	strh	r3, [r7, #2]
+	type->CR3 = type->CR3 & ~(0x0001 << USART_HDSEL);
+ 8000e60:	687b      	ldr	r3, [r7, #4]
+ 8000e62:	695b      	ldr	r3, [r3, #20]
+ 8000e64:	f023 0208 	bic.w	r2, r3, #8
+ 8000e68:	687b      	ldr	r3, [r7, #4]
+ 8000e6a:	615a      	str	r2, [r3, #20]
+	type->CR3 = type->CR3 | (hdsel << USART_HDSEL);
+ 8000e6c:	687b      	ldr	r3, [r7, #4]
+ 8000e6e:	695a      	ldr	r2, [r3, #20]
+ 8000e70:	887b      	ldrh	r3, [r7, #2]
+ 8000e72:	00db      	lsls	r3, r3, #3
+ 8000e74:	431a      	orrs	r2, r3
+ 8000e76:	687b      	ldr	r3, [r7, #4]
+ 8000e78:	615a      	str	r2, [r3, #20]
+}
+ 8000e7a:	bf00      	nop
+ 8000e7c:	370c      	adds	r7, #12
+ 8000e7e:	46bd      	mov	sp, r7
+ 8000e80:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 8000e84:	4770      	bx	lr
+
+08000e86 <usart_cr3_configure_irlp>:
+
+void usart_cr3_configure_irlp(USART_TypeDef* type, uint16_t irlp)
+{
+ 8000e86:	b480      	push	{r7}
+ 8000e88:	b083      	sub	sp, #12
+ 8000e8a:	af00      	add	r7, sp, #0
+ 8000e8c:	6078      	str	r0, [r7, #4]
+ 8000e8e:	460b      	mov	r3, r1
+ 8000e90:	807b      	strh	r3, [r7, #2]
+	type->CR3 = type->CR3 & ~(0x0001 << USART_IRLP);
+ 8000e92:	687b      	ldr	r3, [r7, #4]
+ 8000e94:	695b      	ldr	r3, [r3, #20]
+ 8000e96:	f023 0204 	bic.w	r2, r3, #4
+ 8000e9a:	687b      	ldr	r3, [r7, #4]
+ 8000e9c:	615a      	str	r2, [r3, #20]
+	type->CR3 = type->CR3 | (irlp << USART_IRLP);
+ 8000e9e:	687b      	ldr	r3, [r7, #4]
+ 8000ea0:	695a      	ldr	r2, [r3, #20]
+ 8000ea2:	887b      	ldrh	r3, [r7, #2]
+ 8000ea4:	009b      	lsls	r3, r3, #2
+ 8000ea6:	431a      	orrs	r2, r3
+ 8000ea8:	687b      	ldr	r3, [r7, #4]
+ 8000eaa:	615a      	str	r2, [r3, #20]
+}
+ 8000eac:	bf00      	nop
+ 8000eae:	370c      	adds	r7, #12
+ 8000eb0:	46bd      	mov	sp, r7
+ 8000eb2:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 8000eb6:	4770      	bx	lr
+
+08000eb8 <usart_cr3_configure_iren>:
+
+void usart_cr3_configure_iren(USART_TypeDef* type, uint16_t iren)
+{
+ 8000eb8:	b480      	push	{r7}
+ 8000eba:	b083      	sub	sp, #12
+ 8000ebc:	af00      	add	r7, sp, #0
+ 8000ebe:	6078      	str	r0, [r7, #4]
+ 8000ec0:	460b      	mov	r3, r1
+ 8000ec2:	807b      	strh	r3, [r7, #2]
+	type->CR3 = type->CR3 & ~(0x0001 << USART_IREN);
+ 8000ec4:	687b      	ldr	r3, [r7, #4]
+ 8000ec6:	695b      	ldr	r3, [r3, #20]
+ 8000ec8:	f023 0202 	bic.w	r2, r3, #2
+ 8000ecc:	687b      	ldr	r3, [r7, #4]
+ 8000ece:	615a      	str	r2, [r3, #20]
+	type->CR3 = type->CR3 | (iren << USART_IREN);
+ 8000ed0:	687b      	ldr	r3, [r7, #4]
+ 8000ed2:	695a      	ldr	r2, [r3, #20]
+ 8000ed4:	887b      	ldrh	r3, [r7, #2]
+ 8000ed6:	005b      	lsls	r3, r3, #1
+ 8000ed8:	431a      	orrs	r2, r3
+ 8000eda:	687b      	ldr	r3, [r7, #4]
+ 8000edc:	615a      	str	r2, [r3, #20]
+}
+ 8000ede:	bf00      	nop
+ 8000ee0:	370c      	adds	r7, #12
+ 8000ee2:	46bd      	mov	sp, r7
+ 8000ee4:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 8000ee8:	4770      	bx	lr
+
+08000eea <usart_cr3_configure_eie>:
+
+void usart_cr3_configure_eie(USART_TypeDef* type, uint16_t eie)
+{
+ 8000eea:	b480      	push	{r7}
+ 8000eec:	b083      	sub	sp, #12
+ 8000eee:	af00      	add	r7, sp, #0
+ 8000ef0:	6078      	str	r0, [r7, #4]
+ 8000ef2:	460b      	mov	r3, r1
+ 8000ef4:	807b      	strh	r3, [r7, #2]
+	type->CR3 = type->CR3 & ~(0x0001 << USART_EIE);
+ 8000ef6:	687b      	ldr	r3, [r7, #4]
+ 8000ef8:	695b      	ldr	r3, [r3, #20]
+ 8000efa:	f023 0201 	bic.w	r2, r3, #1
+ 8000efe:	687b      	ldr	r3, [r7, #4]
+ 8000f00:	615a      	str	r2, [r3, #20]
+	type->CR3 = type->CR3 | (eie << USART_EIE);
+ 8000f02:	687b      	ldr	r3, [r7, #4]
+ 8000f04:	695a      	ldr	r2, [r3, #20]
+ 8000f06:	887b      	ldrh	r3, [r7, #2]
+ 8000f08:	431a      	orrs	r2, r3
+ 8000f0a:	687b      	ldr	r3, [r7, #4]
+ 8000f0c:	615a      	str	r2, [r3, #20]
+}
+ 8000f0e:	bf00      	nop
+ 8000f10:	370c      	adds	r7, #12
+ 8000f12:	46bd      	mov	sp, r7
+ 8000f14:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 8000f18:	4770      	bx	lr
+
+08000f1a <usart_brr_configure_div_mantissa>:
+
+void usart_brr_configure_div_mantissa(USART_TypeDef* type, uint16_t div_mantissa)
+{
+ 8000f1a:	b480      	push	{r7}
+ 8000f1c:	b083      	sub	sp, #12
+ 8000f1e:	af00      	add	r7, sp, #0
+ 8000f20:	6078      	str	r0, [r7, #4]
+ 8000f22:	460b      	mov	r3, r1
+ 8000f24:	807b      	strh	r3, [r7, #2]
+	type->BRR = type->BRR & ~(0x0FFF << USART_DIV_Mantissa);
+ 8000f26:	687b      	ldr	r3, [r7, #4]
+ 8000f28:	689b      	ldr	r3, [r3, #8]
+ 8000f2a:	f423 437f 	bic.w	r3, r3, #65280	@ 0xff00
+ 8000f2e:	f023 03f0 	bic.w	r3, r3, #240	@ 0xf0
+ 8000f32:	687a      	ldr	r2, [r7, #4]
+ 8000f34:	6093      	str	r3, [r2, #8]
+	type->BRR = type->BRR | (div_mantissa << USART_DIV_Mantissa);
+ 8000f36:	687b      	ldr	r3, [r7, #4]
+ 8000f38:	689a      	ldr	r2, [r3, #8]
+ 8000f3a:	887b      	ldrh	r3, [r7, #2]
+ 8000f3c:	011b      	lsls	r3, r3, #4
+ 8000f3e:	431a      	orrs	r2, r3
+ 8000f40:	687b      	ldr	r3, [r7, #4]
+ 8000f42:	609a      	str	r2, [r3, #8]
+}
+ 8000f44:	bf00      	nop
+ 8000f46:	370c      	adds	r7, #12
+ 8000f48:	46bd      	mov	sp, r7
+ 8000f4a:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 8000f4e:	4770      	bx	lr
+
+08000f50 <usart_brr_configure_div_fraction>:
+
+void usart_brr_configure_div_fraction(USART_TypeDef* type, uint16_t div_fraction)
+{
+ 8000f50:	b480      	push	{r7}
+ 8000f52:	b083      	sub	sp, #12
+ 8000f54:	af00      	add	r7, sp, #0
+ 8000f56:	6078      	str	r0, [r7, #4]
+ 8000f58:	460b      	mov	r3, r1
+ 8000f5a:	807b      	strh	r3, [r7, #2]
+	type->BRR = type->BRR & ~(0x000F << USART_DIV_Fraction);
+ 8000f5c:	687b      	ldr	r3, [r7, #4]
+ 8000f5e:	689b      	ldr	r3, [r3, #8]
+ 8000f60:	f023 020f 	bic.w	r2, r3, #15
+ 8000f64:	687b      	ldr	r3, [r7, #4]
+ 8000f66:	609a      	str	r2, [r3, #8]
+	type->BRR = type->BRR | (div_fraction << USART_DIV_Fraction);
+ 8000f68:	687b      	ldr	r3, [r7, #4]
+ 8000f6a:	689a      	ldr	r2, [r3, #8]
+ 8000f6c:	887b      	ldrh	r3, [r7, #2]
+ 8000f6e:	431a      	orrs	r2, r3
+ 8000f70:	687b      	ldr	r3, [r7, #4]
+ 8000f72:	609a      	str	r2, [r3, #8]
+}
+ 8000f74:	bf00      	nop
+ 8000f76:	370c      	adds	r7, #12
+ 8000f78:	46bd      	mov	sp, r7
+ 8000f7a:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 8000f7e:	4770      	bx	lr
+
+08000f80 <usart_gtpr_configure_gt>:
+
+void usart_gtpr_configure_gt(USART_TypeDef* type, uint16_t gt)
+{
+ 8000f80:	b480      	push	{r7}
+ 8000f82:	b083      	sub	sp, #12
+ 8000f84:	af00      	add	r7, sp, #0
+ 8000f86:	6078      	str	r0, [r7, #4]
+ 8000f88:	460b      	mov	r3, r1
+ 8000f8a:	807b      	strh	r3, [r7, #2]
+	type->GTPR = type->GTPR & ~(0x00FF << USART_GT);
+ 8000f8c:	687b      	ldr	r3, [r7, #4]
+ 8000f8e:	699b      	ldr	r3, [r3, #24]
+ 8000f90:	f423 427f 	bic.w	r2, r3, #65280	@ 0xff00
+ 8000f94:	687b      	ldr	r3, [r7, #4]
+ 8000f96:	619a      	str	r2, [r3, #24]
+	type->GTPR = type->GTPR | (gt << USART_GT);
+ 8000f98:	687b      	ldr	r3, [r7, #4]
+ 8000f9a:	699a      	ldr	r2, [r3, #24]
+ 8000f9c:	887b      	ldrh	r3, [r7, #2]
+ 8000f9e:	021b      	lsls	r3, r3, #8
+ 8000fa0:	431a      	orrs	r2, r3
+ 8000fa2:	687b      	ldr	r3, [r7, #4]
+ 8000fa4:	619a      	str	r2, [r3, #24]
+}
+ 8000fa6:	bf00      	nop
+ 8000fa8:	370c      	adds	r7, #12
+ 8000faa:	46bd      	mov	sp, r7
+ 8000fac:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 8000fb0:	4770      	bx	lr
+
+08000fb2 <usart_gtpr_configure_psc>:
+
+void usart_gtpr_configure_psc(USART_TypeDef* type, uint16_t psc)
+{
+ 8000fb2:	b480      	push	{r7}
+ 8000fb4:	b083      	sub	sp, #12
+ 8000fb6:	af00      	add	r7, sp, #0
+ 8000fb8:	6078      	str	r0, [r7, #4]
+ 8000fba:	460b      	mov	r3, r1
+ 8000fbc:	807b      	strh	r3, [r7, #2]
+	type->GTPR = type->GTPR & ~(0x00FF << USART_PSC);
+ 8000fbe:	687b      	ldr	r3, [r7, #4]
+ 8000fc0:	699b      	ldr	r3, [r3, #24]
+ 8000fc2:	f023 02ff 	bic.w	r2, r3, #255	@ 0xff
+ 8000fc6:	687b      	ldr	r3, [r7, #4]
+ 8000fc8:	619a      	str	r2, [r3, #24]
+	type->GTPR = type->GTPR | (psc << USART_PSC);
+ 8000fca:	687b      	ldr	r3, [r7, #4]
+ 8000fcc:	699a      	ldr	r2, [r3, #24]
+ 8000fce:	887b      	ldrh	r3, [r7, #2]
+ 8000fd0:	431a      	orrs	r2, r3
+ 8000fd2:	687b      	ldr	r3, [r7, #4]
+ 8000fd4:	619a      	str	r2, [r3, #24]
+}
+ 8000fd6:	bf00      	nop
+ 8000fd8:	370c      	adds	r7, #12
+ 8000fda:	46bd      	mov	sp, r7
+ 8000fdc:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 8000fe0:	4770      	bx	lr
+
+08000fe2 <usart_sr_check_rxne>:
+{
+	return ((type->SR & (0x0001 << USART_TC)) >> USART_TC);
+}
+
+uint16_t usart_sr_check_rxne(USART_TypeDef* type)
+{
+ 8000fe2:	b480      	push	{r7}
+ 8000fe4:	b083      	sub	sp, #12
+ 8000fe6:	af00      	add	r7, sp, #0
+ 8000fe8:	6078      	str	r0, [r7, #4]
+	return ((type->SR & (0x0001 << USART_RXNE)) >> USART_RXNE);
+ 8000fea:	687b      	ldr	r3, [r7, #4]
+ 8000fec:	681b      	ldr	r3, [r3, #0]
+ 8000fee:	095b      	lsrs	r3, r3, #5
+ 8000ff0:	b29b      	uxth	r3, r3
+ 8000ff2:	f003 0301 	and.w	r3, r3, #1
+ 8000ff6:	b29b      	uxth	r3, r3
+}
+ 8000ff8:	4618      	mov	r0, r3
+ 8000ffa:	370c      	adds	r7, #12
+ 8000ffc:	46bd      	mov	sp, r7
+ 8000ffe:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 8001002:	4770      	bx	lr
+
+08001004 <usart_dr_read>:
+{
+	type->DR = data;
+}
+
+uint16_t usart_dr_read(USART_TypeDef* type)
+{
+ 8001004:	b480      	push	{r7}
+ 8001006:	b083      	sub	sp, #12
+ 8001008:	af00      	add	r7, sp, #0
+ 800100a:	6078      	str	r0, [r7, #4]
+	return type->DR;
+ 800100c:	687b      	ldr	r3, [r7, #4]
+ 800100e:	685b      	ldr	r3, [r3, #4]
+ 8001010:	b29b      	uxth	r3, r3
+}
+ 8001012:	4618      	mov	r0, r3
+ 8001014:	370c      	adds	r7, #12
+ 8001016:	46bd      	mov	sp, r7
+ 8001018:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 800101c:	4770      	bx	lr
+
+0800101e <usart_receive>:
+	while(usart_sr_check_txe(type) == USART_TXE_NO_TRANSFER);
+	usart_dr_write(type, data);
+}
+
+uint16_t usart_receive(USART_TypeDef* type)
+{
+ 800101e:	b580      	push	{r7, lr}
+ 8001020:	b082      	sub	sp, #8
+ 8001022:	af00      	add	r7, sp, #0
+ 8001024:	6078      	str	r0, [r7, #4]
+	while(usart_sr_check_rxne(type) == USART_RXNE_NO_RECEIVED);
+ 8001026:	bf00      	nop
+ 8001028:	6878      	ldr	r0, [r7, #4]
+ 800102a:	f7ff ffda 	bl	8000fe2 <usart_sr_check_rxne>
+ 800102e:	4603      	mov	r3, r0
+ 8001030:	2b00      	cmp	r3, #0
+ 8001032:	d0f9      	beq.n	8001028 <usart_receive+0xa>
+	return usart_dr_read(type);
+ 8001034:	6878      	ldr	r0, [r7, #4]
+ 8001036:	f7ff ffe5 	bl	8001004 <usart_dr_read>
+ 800103a:	4603      	mov	r3, r0
+}
+ 800103c:	4618      	mov	r0, r3
+ 800103e:	3708      	adds	r7, #8
+ 8001040:	46bd      	mov	sp, r7
+ 8001042:	bd80      	pop	{r7, pc}
+
+08001044 <__libc_init_array>:
+ 8001044:	b570      	push	{r4, r5, r6, lr}
+ 8001046:	4d0d      	ldr	r5, [pc, #52]	@ (800107c <__libc_init_array+0x38>)
+ 8001048:	4c0d      	ldr	r4, [pc, #52]	@ (8001080 <__libc_init_array+0x3c>)
+ 800104a:	1b64      	subs	r4, r4, r5
+ 800104c:	10a4      	asrs	r4, r4, #2
+ 800104e:	2600      	movs	r6, #0
+ 8001050:	42a6      	cmp	r6, r4
+ 8001052:	d109      	bne.n	8001068 <__libc_init_array+0x24>
+ 8001054:	4d0b      	ldr	r5, [pc, #44]	@ (8001084 <__libc_init_array+0x40>)
+ 8001056:	4c0c      	ldr	r4, [pc, #48]	@ (8001088 <__libc_init_array+0x44>)
+ 8001058:	f000 f818 	bl	800108c <_init>
+ 800105c:	1b64      	subs	r4, r4, r5
+ 800105e:	10a4      	asrs	r4, r4, #2
+ 8001060:	2600      	movs	r6, #0
+ 8001062:	42a6      	cmp	r6, r4
+ 8001064:	d105      	bne.n	8001072 <__libc_init_array+0x2e>
+ 8001066:	bd70      	pop	{r4, r5, r6, pc}
+ 8001068:	f855 3b04 	ldr.w	r3, [r5], #4
+ 800106c:	4798      	blx	r3
+ 800106e:	3601      	adds	r6, #1
+ 8001070:	e7ee      	b.n	8001050 <__libc_init_array+0xc>
+ 8001072:	f855 3b04 	ldr.w	r3, [r5], #4
+ 8001076:	4798      	blx	r3
+ 8001078:	3601      	adds	r6, #1
+ 800107a:	e7f2      	b.n	8001062 <__libc_init_array+0x1e>
+ 800107c:	080010a4 	.word	0x080010a4
+ 8001080:	080010a4 	.word	0x080010a4
+ 8001084:	080010a4 	.word	0x080010a4
+ 8001088:	080010a8 	.word	0x080010a8
+
+0800108c <_init>:
+ 800108c:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+ 800108e:	bf00      	nop
+ 8001090:	bcf8      	pop	{r3, r4, r5, r6, r7}
+ 8001092:	bc08      	pop	{r3}
+ 8001094:	469e      	mov	lr, r3
+ 8001096:	4770      	bx	lr
+
+08001098 <_fini>:
+ 8001098:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+ 800109a:	bf00      	nop
+ 800109c:	bcf8      	pop	{r3, r4, r5, r6, r7}
+ 800109e:	bc08      	pop	{r3}
+ 80010a0:	469e      	mov	lr, r3
+ 80010a2:	4770      	bx	lr
