@@ -24,11 +24,14 @@
 //Smoke alarm connected to GPIOC pin PC0
 
 //*********************************MACROS***********************************************
-#define SMARTHOME_LIGHTS 		GPIOD_BASE
-#define SMARTHOME_THERMOSTAT 	GPIOA_BASE
-#define SMARTHOME_DOORLOCKS 	GPIOB_BASE
-#define SMARTHOME_SWITCHES 		GPIOE_BASE
-#define SMARTHOME_ALARMS 		GPIOC_BASE
+#define SMARTHOME_LIGHTS 		GPIOD
+#define SMARTHOME_THERMOSTAT 	GPIOA
+#define SMARTHOME_DOORLOCKS 	GPIOB
+#define SMARTHOME_SWITCHES 		GPIOE
+#define SMARTHOME_ALARMS 		GPIOC
+
+#define SMARTHOME_USART_TX	((uint16_t)0x9)
+#define SMARTHOME_USART_RX 	((uint16_t)0xA)
 
 #define SMARTHOME_LIGHT_BEDROOM 	((uint16_t)0x0)
 #define SMARTHOME_LIGHT_OFFICE 		((uint16_t)0x1)
@@ -60,5 +63,65 @@
 #define SMARTHOME_SWITCH_TOASTER 		((uint16_t)0x9)
 
 #define SMARTHOME_ALARM_SMOKE ((uint16_t)0x0)
+
+#define SMARTHOME_LIGHT_OFF ((uint16_t)0x0)
+#define SMARTHOME_LIGHT_ON 	((uint16_t)0x1)
+
+#define SMARTHOME_THERMOSTAT_FAN_TEMP 		((uint16_t)30)
+#define SMARTHOME_THERMOSTAT_HEATER_TEMP 	((uint16_t)10)
+
+#define SMARTHOME_DOORLOCK_UNLOCKED ((uint16_t)0x0)
+#define SMARTHOME_DOORLOCK_LOCKED 	((uint16_t)0x1)
+
+#define SMARTHOME_SWITCH_OFF 	((uint16_t)0x0)
+#define SMARTHOME_SWITCH_ON 	((uint16_t)0x1)
+//CODE MEAINING
+//bit 8 code type - 0 - change value of pin
+//bit 7 thermostat flag - 0 - other device
+//						- 1 - thermostat
+//For thermostat:
+//	bits 6-0 temperature
+//For other devices:
+//	bits 6-5 device type - 00 - lights
+//					   	 - 01 - door locks
+//					 	 - 10 - switches
+//	bits 4-1 device no.
+//	bit 0  on/off - 0 - off
+//				  - 1 - on
+#define SMARTHOME_CODE_LIGHT_BEDROOM 			((uint16_t)0x0)
+#define SMARTHOME_CODE_LIGHT_OFFICE 			((uint16_t)0x2)
+#define SMARTHOME_CODE_LIGHT_HALL				((uint16_t)0x4)
+#define SMARTHOME_CODE_LIGHT_BATHROOM 			((uint16_t)0x6)
+#define SMARTHOME_CODE_LIGHT_LIVINGROOM 		((uint16_t)0x8)
+#define SMARTHOME_CODE_LIGHT_KITCHEN 			((uint16_t)0xA)
+#define SMARTHOME_CODE_LIGHT_DININGROOM 		((uint16_t)0xC)
+#define SMARTHOME_CODE_LIGHT_BALCONY 			((uint16_t)0xE)
+#define SMARTHOME_CODE_THERMOSTAT_TEMPERATURE 	((uint16_t)0x80)
+#define SMARTHOME_CODE_DOORLOCK_FRONT 			((uint16_t)0x20)
+#define SMARTHOME_CODE_DOORLOCK_BACK 			((uint16_t)0x22)
+#define SMARTHOME_CODE_SWITCH_IRON 				((uint16_t)0x40)
+#define SMARTHOME_CODE_SWITCH_PC 				((uint16_t)0x42)
+#define SMARTHOME_CODE_SWITCH_BOILER 			((uint16_t)0x44)
+#define SMARTHOME_CODE_SWITCH_WASHINGMACHINE 	((uint16_t)0x46)
+#define SMARTHOME_CODE_SWITCH_HEATER 			((uint16_t)0x48)
+#define SMARTHOME_CODE_SWITCH_ROUTER			((uint16_t)0x4A)
+#define SMARTHOME_CODE_SWITCH_DISHWASHER 		((uint16_t)0x4C)
+#define SMARTHOME_CODE_SWITCH_TV 				((uint16_t)0x4E)
+#define SMARTHOME_CODE_SWITCH_OVEN				((uint16_t)0x50)
+#define SMARTHOME_CODE_SWITCH_TOASTER			((uint16_t)0x52)
+
+//***************************************************FUNCTIONS**************************************************
+
+void smarthome_initialize();
+
+void smarthome_configure_interrupts();
+
+
+
+
+
+
+
+
 
 
