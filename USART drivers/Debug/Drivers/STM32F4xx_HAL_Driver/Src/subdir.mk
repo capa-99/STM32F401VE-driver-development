@@ -5,12 +5,15 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
+../Drivers/STM32F4xx_HAL_Driver/Src/STM32F401VE_GPIO_driver.c \
 ../Drivers/STM32F4xx_HAL_Driver/Src/STM32F401VE_USART_driver.c 
 
 OBJS += \
+./Drivers/STM32F4xx_HAL_Driver/Src/STM32F401VE_GPIO_driver.o \
 ./Drivers/STM32F4xx_HAL_Driver/Src/STM32F401VE_USART_driver.o 
 
 C_DEPS += \
+./Drivers/STM32F4xx_HAL_Driver/Src/STM32F401VE_GPIO_driver.d \
 ./Drivers/STM32F4xx_HAL_Driver/Src/STM32F401VE_USART_driver.d 
 
 
@@ -21,7 +24,7 @@ Drivers/STM32F4xx_HAL_Driver/Src/%.o Drivers/STM32F4xx_HAL_Driver/Src/%.su Drive
 clean: clean-Drivers-2f-STM32F4xx_HAL_Driver-2f-Src
 
 clean-Drivers-2f-STM32F4xx_HAL_Driver-2f-Src:
-	-$(RM) ./Drivers/STM32F4xx_HAL_Driver/Src/STM32F401VE_USART_driver.cyclo ./Drivers/STM32F4xx_HAL_Driver/Src/STM32F401VE_USART_driver.d ./Drivers/STM32F4xx_HAL_Driver/Src/STM32F401VE_USART_driver.o ./Drivers/STM32F4xx_HAL_Driver/Src/STM32F401VE_USART_driver.su
+	-$(RM) ./Drivers/STM32F4xx_HAL_Driver/Src/STM32F401VE_GPIO_driver.cyclo ./Drivers/STM32F4xx_HAL_Driver/Src/STM32F401VE_GPIO_driver.d ./Drivers/STM32F4xx_HAL_Driver/Src/STM32F401VE_GPIO_driver.o ./Drivers/STM32F4xx_HAL_Driver/Src/STM32F401VE_GPIO_driver.su ./Drivers/STM32F4xx_HAL_Driver/Src/STM32F401VE_USART_driver.cyclo ./Drivers/STM32F4xx_HAL_Driver/Src/STM32F401VE_USART_driver.d ./Drivers/STM32F4xx_HAL_Driver/Src/STM32F401VE_USART_driver.o ./Drivers/STM32F4xx_HAL_Driver/Src/STM32F401VE_USART_driver.su
 
 .PHONY: clean-Drivers-2f-STM32F4xx_HAL_Driver-2f-Src
 

@@ -1,4 +1,4 @@
-Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
+Core/Src/USART_smart_home.o: ../Core/Src/USART_smart_home.c \
  ../Core/Inc/USART_smart_home.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/STM32F401VE_USART_driver.h \
  ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f401xe.h \
@@ -9,7 +9,6 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  ../Drivers/CMSIS/Include/mpu_armv7.h \
  ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/STM32F401VE_GPIO_driver.h
-../Core/Inc/main.h:
 ../Core/Inc/USART_smart_home.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/STM32F401VE_USART_driver.h:
 ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f401xe.h:

@@ -1,0 +1,15 @@
+../Drivers/CMSIS/Include/core_cm4.h:1684:22:__NVIC_EnableIRQ	2
+../Drivers/STM32F4xx_HAL_Driver/Src/STM32F401VE_GPIO_driver.c:12:5:gpio_clock_enable	1
+../Drivers/STM32F4xx_HAL_Driver/Src/STM32F401VE_GPIO_driver.c:20:5:gpio_init	6
+../Drivers/STM32F4xx_HAL_Driver/Src/STM32F401VE_GPIO_driver.c:45:5:gpio_configure_pin_mode	1
+../Drivers/STM32F4xx_HAL_Driver/Src/STM32F401VE_GPIO_driver.c:53:5:gpio_configure_pin_output_type	1
+../Drivers/STM32F4xx_HAL_Driver/Src/STM32F401VE_GPIO_driver.c:61:5:gpio_configure_pin_output_speed	1
+../Drivers/STM32F4xx_HAL_Driver/Src/STM32F401VE_GPIO_driver.c:69:5:gpio_configure_pin_pull	1
+../Drivers/STM32F4xx_HAL_Driver/Src/STM32F401VE_GPIO_driver.c:77:5:gpio_configure_pin_alternate_function	2
+../Drivers/STM32F4xx_HAL_Driver/Src/STM32F401VE_GPIO_driver.c:95:9:gpio_read_from_pin	1
+../Drivers/STM32F4xx_HAL_Driver/Src/STM32F401VE_GPIO_driver.c:100:5:gpio_write_to_pin	1
+../Drivers/STM32F4xx_HAL_Driver/Src/STM32F401VE_GPIO_driver.c:108:10:gpio_read_from_port	2
+../Drivers/STM32F4xx_HAL_Driver/Src/STM32F401VE_GPIO_driver.c:119:5:gpio_write_to_port	2
+../Drivers/STM32F4xx_HAL_Driver/Src/STM32F401VE_GPIO_driver.c:134:5:gpio_configure_interrupt	4
+../Drivers/STM32F4xx_HAL_Driver/Src/STM32F401VE_GPIO_driver.c:165:5:gpio_enable_interrupt	1
+../Drivers/STM32F4xx_HAL_Driver/Src/STM32F401VE_GPIO_driver.c:174:5:gpio_clear_interrupt	2

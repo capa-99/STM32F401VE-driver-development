@@ -55,11 +55,6 @@ void SystemClock_Config(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 
-void USART1_IRQHandler(void)
-{
-
-}
-
 /* USER CODE END 0 */
 
 /**
@@ -97,54 +92,7 @@ int main(void)
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
 
-  /*int mstr = 1;
-
-  if(mstr)
-  {
-	  RCC->AHB1ENR = RCC->AHB1ENR | 0x1;
-	  RCC->AHB1ENR = RCC->AHB1ENR | 0x8;
-	  GPIOA->MODER = GPIOA->MODER | 0x2AA0000;
-	  GPIOA->AFR[1] = GPIOA->AFR[1] | 0x77777;
-	  GPIOD->MODER = GPIOD->MODER | 0x0055;
-	  RCC->APB2ENR = RCC->APB2ENR | 0x10;
-	  USART1->BRR = 9600;
-	  USART1->CR1 = USART1->CR1 | 0xC;
-	  USART1->CR2 = USART1->CR2 | 0x0;
-	  USART1->CR3 = USART1->CR3 | 0x0;
-	  USART1->CR1 = USART1->CR1 | 0x2000;
-	  uint16_t i = 0;
-	  while(i < 100)
-	  {
-		  for(int j = 0; j < 1000; j++);
-
-		  while(!(USART1->SR & 0x80));
-		  USART1->DR = 0x4;
-		  i++;
-	  }
-	  while(1)
-	  {
-	  		while(!(USART1->SR & 0x20));
-	  		GPIOD->ODR = USART1->DR;
-	  }
-  }
-  else
-  {
-	  RCC->AHB1ENR = RCC->AHB1ENR | 0x1;
-	  RCC->AHB1ENR = RCC->AHB1ENR | 0x8;
-	  GPIOA->MODER = GPIOA->MODER | 0x2AA0000;
-	  GPIOA->AFR[1] = GPIOA->AFR[1] | 0x77777;
-	  GPIOD->MODER = GPIOD->MODER | 0x0055;
-	  GPIOD->ODR = 0x1;
-	  RCC->APB2ENR = RCC->APB2ENR | 0x10;
-	  USART1->BRR = 1667;
-	  USART1->CR1 = USART1->CR1 | 0xC;
-	  USART1->CR2 = USART1->CR2 | 0x0;
-	  USART1->CR3 = USART1->CR3 | 0x0;
-	  USART1->CR1 = USART1->CR1 | 0x2000;
-	  while(!(USART1->SR & 0x20));
-	  GPIOD->ODR = USART1->DR;
-  }*/
-
+  /*
   RCC->AHB1ENR = RCC->AHB1ENR | 0x1;
   RCC->AHB1ENR = RCC->AHB1ENR | 0x8;
   GPIOA->MODER = GPIOA->MODER | 0x2AA0000;
@@ -195,37 +143,20 @@ int main(void)
   usart1.gt = 0x00;
   usart1.psc = 0x00;
   usart_configure(&usart1);
+  uint16_t data;*/
 
-  uint16_t data;
+  smarthome_initialize();
+  smarthome_configure_interrupts();
+
+
+
+
   while (1)
   {
 
 
     /* USER CODE END WHILE */
-	 data = usart_receive(usart1.usart);
-	 switch(data)
-	 {
-	 case 60:
-	 {
-		 GPIOD->ODR = 0x0;
-	 }break;
-	 case 61:
-	 {
-	 	GPIOD->ODR = 0x1;
-	 }break;
-	 case 62:
-	 {
-	 	GPIOD->ODR = 0x2;
-	 }break;
-	 case 64:
-	 {
-	    GPIOD->ODR = 0x4;
-	 }break;
-	 default:
-	 {
-	 	GPIOD->ODR = 0x7;
-	 }break;
-	 }
+
     /* USER CODE BEGIN 3 */
   }
 

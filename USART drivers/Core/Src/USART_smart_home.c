@@ -32,7 +32,7 @@ void smarthome_initialize()
 	RCC->AHB1ENR = RCC->AHB1ENR | 0x2;
 	uart.mode = GPIO_PIN_MODE_OUTPUT;
 	uart.alternate_function = GPIO_PIN_ALTERNATE_FUNCTION_AF0_SYSTEM;
-	uart.pull = GPIO_PIN_PULL_DOWN;
+	uart.pull = GPIO_PIN_PULL_UP;
 	uart.output_type = GPIO_PIN_OUTPUT_TYPE_PUSH_PULL;
 	uart.output_speed = GPIO_PIN_OUTPUT_SPEED_MEDIUM;
 	for(int i = 0; i < 2; i++)
@@ -129,22 +129,96 @@ void smarthome_configure_interrupts()
 	gpio_enable_interrupt(SMARTHOME_ALARM_SMOKE, EXTI0_IRQn);
 }
 
+void smarthome_change_state(uint16_t data)
+{
+	if(data & 0x80)
+	{
+		smarthome_change_device_state(data);
+	}
+	else
+	{
+		smarthome_change_temperature(data);
+	}
+}
+
+
+void smarthome_change_device_state(uint16_t data)
+{
+	if(data & 0x60 == SMARTHOME_CODE_LIGHT_BEDROOM)
+	{
+		gpio_write_to_pin(SMARTHOME_LIGHTS, (data & 0x1E) >> 0x1, data & 0x1);
+	}
+	else
+	{
+		if(data & 0x60 == SMARTHOME_CODE_DOORLOCK_FRONT)
+		{
+			gpio_write_to_pin(SMARTHOME_DOORLOCKS, (data & 0x1E) >> 0x1, data & 0x1);
+		}
+		else
+		{
+			if(data & 0x60 == SMARTHOME_CODE_SWITCH_IRON)
+			{
+				gpio_write_to_pin(SMARTHOME_SWITCHES, (data & 0x1E) >> 0x1, data & 0x1);
+			}
+			else
+			{
+				//invalid code word, ERROR
+			}
+		}
+	}
+}
+
+void smarthome_change_temperature(uint16_t data)
+{
+	uint16_t temp = data & 0x7F;
+	//send to DQ this temperature
+}
+
 void USART1_IRQHandler(void)
 {
 	uint16_t data = usart_receive(USART1);
+	if(data & 0x100)
+	{
+		//something else
+	}
+	else
+	{
+		smarthome_change_state(data);
+	}
 }
 
 void EXTI0_IRQHandler(void)
 {
-
+	if(gpio_read_from_pin(SMARTHOME_THERMOSTAT, SMARTHOME_THERMOSTAT_THIGH) == 0x1)
+	{
+		//send alarm
+	}
+	else
+	{
+		//send end of alarm
+	}
 }
 
 void EXTI3_IRQHandler(void)
 {
-
+	if(gpio_read_from_pin(SMARTHOME_THERMOSTAT, SMARTHOME_THERMOSTAT_THIGH) == 0x1)
+	{
+		//send alarm
+	}
+	else
+	{
+		//send end of alarm
+	}
 }
 
 void EXTI4_IRQHandler(void)
 {
-
+	if(gpio_read_from_pin(SMARTHOME_THERMOSTAT, SMARTHOME_THERMOSTAT_TLOW) == 0x1)
+	{
+		//send alarm
+	}
+	else
+	{
+		//send end of alarm
+	}
 }

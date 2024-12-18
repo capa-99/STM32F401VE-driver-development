@@ -77,17 +77,21 @@
 #define SMARTHOME_SWITCH_ON 	((uint16_t)0x1)
 //CODE MEAINING
 //bit 8 code type - 0 - change value of pin
-//bit 7 thermostat flag - 0 - other device
-//						- 1 - thermostat
-//For thermostat:
-//	bits 6-0 temperature
-//For other devices:
-//	bits 6-5 device type - 00 - lights
-//					   	 - 01 - door locks
-//					 	 - 10 - switches
-//	bits 4-1 device no.
-//	bit 0  on/off - 0 - off
-//				  - 1 - on
+//				  - 1 - error or warning
+//For changing values:
+//	bit 7 thermostat flag - 0 - other device
+//						  - 1 - thermostat
+//	For thermostat:
+//		bits 6-0 temperature
+//	For other devices:
+//		bits 6-5 device type - 00 - lights
+//					   	 	 - 01 - door locks
+//					 	 	 - 10 - switches
+//		bits 4-1 device no.
+//		bit 0  on/off - 0 - off
+//				  	  - 1 - on
+//For errors and warnings:
+
 #define SMARTHOME_CODE_LIGHT_BEDROOM 			((uint16_t)0x0)
 #define SMARTHOME_CODE_LIGHT_OFFICE 			((uint16_t)0x2)
 #define SMARTHOME_CODE_LIGHT_HALL				((uint16_t)0x4)
@@ -109,6 +113,9 @@
 #define SMARTHOME_CODE_SWITCH_TV 				((uint16_t)0x4E)
 #define SMARTHOME_CODE_SWITCH_OVEN				((uint16_t)0x50)
 #define SMARTHOME_CODE_SWITCH_TOASTER			((uint16_t)0x52)
+#define SMARTHOME_CODE_SMOKE 					((uint16_t)0x100)
+#define SMARTHOME_CODE_HIGH_TEMP 				((uint16_t)0x102)
+#define SMARTHOME_CODE_LOW_TEMP 				((uint16_t)0x104)
 
 //***************************************************FUNCTIONS**************************************************
 
@@ -116,10 +123,11 @@ void smarthome_initialize();
 
 void smarthome_configure_interrupts();
 
+void smarthome_change_state(uint16_t data);
 
+void smarthome_change_device_state(uint16_t data);
 
-
-
+void smarthome_change_temperature(uint16_t data);
 
 
 
