@@ -1,6 +1,9 @@
 ../Core/Src/USART_smart_home.c:10:6:smarthome_initialize	136	static
 ../Core/Src/USART_smart_home.c:121:6:smarthome_configure_interrupts	8	static
-../Core/Src/USART_smart_home.c:132:6:USART1_IRQHandler	16	static
-../Core/Src/USART_smart_home.c:137:6:EXTI0_IRQHandler	4	static
-../Core/Src/USART_smart_home.c:142:6:EXTI3_IRQHandler	4	static
-../Core/Src/USART_smart_home.c:147:6:EXTI4_IRQHandler	4	static
+../Core/Src/USART_smart_home.c:132:6:smarthome_change_state	16	static
+../Core/Src/USART_smart_home.c:145:6:smarthome_change_device_state	16	static
+../Core/Src/USART_smart_home.c:171:6:smarthome_change_temperature	24	static
+../Core/Src/USART_smart_home.c:177:6:USART1_IRQHandler	16	static
+../Core/Src/USART_smart_home.c:192:6:EXTI0_IRQHandler	16	static
+../Core/Src/USART_smart_home.c:198:6:EXTI3_IRQHandler	16	static
+../Core/Src/USART_smart_home.c:204:6:EXTI4_IRQHandler	16	static

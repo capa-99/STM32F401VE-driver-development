@@ -145,10 +145,9 @@ int main(void)
   usart_configure(&usart1);
   uint16_t data;*/
 
+
   smarthome_initialize();
   smarthome_configure_interrupts();
-
-
 
 
   while (1)

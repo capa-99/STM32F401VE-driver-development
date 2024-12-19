@@ -133,30 +133,30 @@ void smarthome_change_state(uint16_t data)
 {
 	if(data & 0x80)
 	{
-		smarthome_change_device_state(data);
+		smarthome_change_temperature(data);
 	}
 	else
 	{
-		smarthome_change_temperature(data);
+		smarthome_change_device_state(data);
 	}
 }
 
 
 void smarthome_change_device_state(uint16_t data)
 {
-	if(data & 0x60 == SMARTHOME_CODE_LIGHT_BEDROOM)
+	if((data & 0x60) == SMARTHOME_CODE_LIGHT_BEDROOM)
 	{
 		gpio_write_to_pin(SMARTHOME_LIGHTS, (data & 0x1E) >> 0x1, data & 0x1);
 	}
 	else
 	{
-		if(data & 0x60 == SMARTHOME_CODE_DOORLOCK_FRONT)
+		if((data & 0x60) == SMARTHOME_CODE_DOORLOCK_FRONT)
 		{
 			gpio_write_to_pin(SMARTHOME_DOORLOCKS, (data & 0x1E) >> 0x1, data & 0x1);
 		}
 		else
 		{
-			if(data & 0x60 == SMARTHOME_CODE_SWITCH_IRON)
+			if((data & 0x60) == SMARTHOME_CODE_SWITCH_IRON)
 			{
 				gpio_write_to_pin(SMARTHOME_SWITCHES, (data & 0x1E) >> 0x1, data & 0x1);
 			}
@@ -177,6 +177,8 @@ void smarthome_change_temperature(uint16_t data)
 void USART1_IRQHandler(void)
 {
 	uint16_t data = usart_receive(USART1);
+	data = data | ((uint16_t)usart_receive(USART1) << 8);
+
 	if(data & 0x100)
 	{
 		//something else
@@ -189,36 +191,18 @@ void USART1_IRQHandler(void)
 
 void EXTI0_IRQHandler(void)
 {
-	if(gpio_read_from_pin(SMARTHOME_THERMOSTAT, SMARTHOME_THERMOSTAT_THIGH) == 0x1)
-	{
-		//send alarm
-	}
-	else
-	{
-		//send end of alarm
-	}
+	uint16_t warning = gpio_read_from_pin(SMARTHOME_ALARMS, SMARTHOME_ALARM_SMOKE);
+	usart_transmit(USART1, SMARTHOME_CODE_SMOKE & warning);
 }
 
 void EXTI3_IRQHandler(void)
 {
-	if(gpio_read_from_pin(SMARTHOME_THERMOSTAT, SMARTHOME_THERMOSTAT_THIGH) == 0x1)
-	{
-		//send alarm
-	}
-	else
-	{
-		//send end of alarm
-	}
+	uint16_t warning = gpio_read_from_pin(SMARTHOME_THERMOSTAT, SMARTHOME_THERMOSTAT_THIGH);
+	usart_transmit(USART1, SMARTHOME_CODE_HIGH_TEMP & warning);
 }
 
 void EXTI4_IRQHandler(void)
 {
-	if(gpio_read_from_pin(SMARTHOME_THERMOSTAT, SMARTHOME_THERMOSTAT_TLOW) == 0x1)
-	{
-		//send alarm
-	}
-	else
-	{
-		//send end of alarm
-	}
+	uint16_t warning = gpio_read_from_pin(SMARTHOME_THERMOSTAT, SMARTHOME_THERMOSTAT_TLOW);
+	usart_transmit(USART1, SMARTHOME_CODE_LOW_TEMP & warning);
 }
