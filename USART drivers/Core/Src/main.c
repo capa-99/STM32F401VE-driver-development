@@ -18,7 +18,7 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-#include <stm32f401xe.h>
+//#include <stm32f401xe.h>
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -92,7 +92,7 @@ int main(void)
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
 
-  /*
+/*
   RCC->AHB1ENR = RCC->AHB1ENR | 0x1;
   RCC->AHB1ENR = RCC->AHB1ENR | 0x8;
   GPIOA->MODER = GPIOA->MODER | 0x2AA0000;
@@ -111,7 +111,7 @@ int main(void)
   usart1.peie = USART_PEIE_INHIBITED;
   usart1.txeie = USART_TXEIE_INHIBITED;
   usart1.tcie = USART_TCIE_INHIBITED;
-  usart1.rxneie = USART_RXNEIE_ENABLED;
+  usart1.rxneie = USART_RXNEIE_INHIBITED;
   usart1.idleie = USART_IDLEIE_INHIBITED;
   usart1.te = USART_TE_ENABLED;
   usart1.re = USART_RE_ENABLED;
@@ -148,7 +148,6 @@ int main(void)
 
   smarthome_initialize();
   smarthome_configure_interrupts();
-
 
   while (1)
   {

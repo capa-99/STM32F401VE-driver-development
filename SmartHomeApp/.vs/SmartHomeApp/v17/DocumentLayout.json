@@ -3,6 +3,14 @@
   "WorkspaceRootPath": "C:\\Users\\Novak\\Desktop\\STM32F401VE driver development new version\\SmartHomeApp\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{666C8099-0515-43FF-A03A-50ADE08C0DA2}|SmartHomeApp\\SmartHomeApp.vcxproj|C:\\Users\\Novak\\Desktop\\STM32F401VE driver development new version\\SmartHomeApp\\SmartHomeApp\\SmartHomeApp.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{666C8099-0515-43FF-A03A-50ADE08C0DA2}|SmartHomeApp\\SmartHomeApp.vcxproj|solutionrelative:SmartHomeApp\\SmartHomeApp.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{666C8099-0515-43FF-A03A-50ADE08C0DA2}|SmartHomeApp\\SmartHomeApp.vcxproj|C:\\Users\\Novak\\Desktop\\STM32F401VE driver development new version\\SmartHomeApp\\SmartHomeApp\\SmartHomeApp.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{666C8099-0515-43FF-A03A-50ADE08C0DA2}|SmartHomeApp\\SmartHomeApp.vcxproj|solutionrelative:SmartHomeApp\\SmartHomeApp.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{666C8099-0515-43FF-A03A-50ADE08C0DA2}|SmartHomeApp\\SmartHomeApp.vcxproj|C:\\Users\\Novak\\Desktop\\STM32F401VE driver development new version\\SmartHomeApp\\SmartHomeApp\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{666C8099-0515-43FF-A03A-50ADE08C0DA2}|SmartHomeApp\\SmartHomeApp.vcxproj|solutionrelative:SmartHomeApp\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
@@ -14,17 +22,43 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "SmartHomeApp.cpp",
+              "DocumentMoniker": "C:\\Users\\Novak\\Desktop\\STM32F401VE driver development new version\\SmartHomeApp\\SmartHomeApp\\SmartHomeApp.cpp",
+              "RelativeDocumentMoniker": "SmartHomeApp\\SmartHomeApp.cpp",
+              "ToolTip": "C:\\Users\\Novak\\Desktop\\STM32F401VE driver development new version\\SmartHomeApp\\SmartHomeApp\\SmartHomeApp.cpp",
+              "RelativeToolTip": "SmartHomeApp\\SmartHomeApp.cpp",
+              "ViewState": "AQIAABUAAAAAAAAAAAAAACoAAAAhAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-12-22T16:01:11.357Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "SmartHomeApp.h",
+              "DocumentMoniker": "C:\\Users\\Novak\\Desktop\\STM32F401VE driver development new version\\SmartHomeApp\\SmartHomeApp\\SmartHomeApp.h",
+              "RelativeDocumentMoniker": "SmartHomeApp\\SmartHomeApp.h",
+              "ToolTip": "C:\\Users\\Novak\\Desktop\\STM32F401VE driver development new version\\SmartHomeApp\\SmartHomeApp\\SmartHomeApp.h",
+              "RelativeToolTip": "SmartHomeApp\\SmartHomeApp.h",
+              "ViewState": "AQIAABgAAAAAAAAAAAAAADEAAAAMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-12-22T16:00:47.747Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "main.cpp",
               "DocumentMoniker": "C:\\Users\\Novak\\Desktop\\STM32F401VE driver development new version\\SmartHomeApp\\SmartHomeApp\\main.cpp",
               "RelativeDocumentMoniker": "SmartHomeApp\\main.cpp",
               "ToolTip": "C:\\Users\\Novak\\Desktop\\STM32F401VE driver development new version\\SmartHomeApp\\SmartHomeApp\\main.cpp",
               "RelativeToolTip": "SmartHomeApp\\main.cpp",
-              "ViewState": "AQIAABgAAAAAAAAAAAAAAC4AAAAKAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-12-19T15:16:56.442Z",
               "EditorCaption": ""

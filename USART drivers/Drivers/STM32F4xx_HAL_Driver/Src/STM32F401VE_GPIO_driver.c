@@ -83,8 +83,8 @@ int gpio_configure_pin_alternate_function(GPIO_TypeDef* port, uint16_t pin, uint
 	}
 	else
 	{
-		//port->AFR[1] = port-AFR[1] & ~(0x0000000F << (pin*4));
-		//port->AFR[1] = port->AFR[1] | (alt_function << (pin*4));
+		port->AFR[1] = port->AFR[1] & ~(0x0000000F << ((pin-8)*4));
+		port->AFR[1] = port->AFR[1] | (alt_function << ((pin-8)*4));
 	}
 
 	return 0;

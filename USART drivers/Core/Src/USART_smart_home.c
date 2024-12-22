@@ -111,8 +111,8 @@ void smarthome_initialize()
 	usart1.irlp = USART_IRLP_NORMAL_MODE;
 	usart1.iren = USART_IREN_DISABLED;
 	usart1.eie = USART_EIE_INHIBITED;
-	usart1.div_mantissa = 0x258;
-	usart1.div_fraction = 0x0;
+	usart1.div_mantissa = 0x68;
+	usart1.div_fraction = 0x3;
 	usart1.gt = 0x00;
 	usart1.psc = 0x00;
 	usart_configure(&usart1);
@@ -177,7 +177,7 @@ void smarthome_change_temperature(uint16_t data)
 void USART1_IRQHandler(void)
 {
 	uint16_t data = usart_receive(USART1);
-	data = data | ((uint16_t)usart_receive(USART1) << 8);
+	data = data | (usart_receive(USART1) << 8);
 
 	if(data & 0x100)
 	{

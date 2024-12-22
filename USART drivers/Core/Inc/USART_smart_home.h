@@ -30,8 +30,8 @@
 #define SMARTHOME_SWITCHES 		GPIOE
 #define SMARTHOME_ALARMS 		GPIOC
 
-#define SMARTHOME_USART_TX	((uint16_t)0x9)
-#define SMARTHOME_USART_RX 	((uint16_t)0xA)
+#define SMARTHOME_USART_TX	((uint16_t)9)
+#define SMARTHOME_USART_RX 	((uint16_t)10)
 
 #define SMARTHOME_LIGHT_BEDROOM 	((uint16_t)0x0)
 #define SMARTHOME_LIGHT_OFFICE 		((uint16_t)0x1)
