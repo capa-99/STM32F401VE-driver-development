@@ -76,8 +76,9 @@
 #define SMARTHOME_SWITCH_OFF 	((uint16_t)0x0)
 #define SMARTHOME_SWITCH_ON 	((uint16_t)0x1)
 //CODE MEAINING
-//bit 8 code type - 0 - change value of pin
-//				  - 1 - error or warning
+//bit 9-8 code type - 00 - change value of pin
+//				  	- 01 - get data
+//					- 10 - warnings and errors
 //For changing values:
 //	bit 7 thermostat flag - 0 - other device
 //						  - 1 - thermostat
@@ -90,7 +91,7 @@
 //		bits 4-1 device no.
 //		bit 0  on/off - 0 - off
 //				  	  - 1 - on
-//For errors and warnings:
+//For getting data:
 
 #define SMARTHOME_CODE_LIGHT_BEDROOM 			((uint16_t)0x0)
 #define SMARTHOME_CODE_LIGHT_OFFICE 			((uint16_t)0x2)
@@ -113,9 +114,31 @@
 #define SMARTHOME_CODE_SWITCH_TV 				((uint16_t)0x4E)
 #define SMARTHOME_CODE_SWITCH_OVEN				((uint16_t)0x50)
 #define SMARTHOME_CODE_SWITCH_TOASTER			((uint16_t)0x52)
-#define SMARTHOME_CODE_SMOKE 					((uint16_t)0x100)
-#define SMARTHOME_CODE_HIGH_TEMP 				((uint16_t)0x102)
-#define SMARTHOME_CODE_LOW_TEMP 				((uint16_t)0x104)
+#define SMARTHOME_CODE_REQUEST_BEDROOM 			((uint16_t)0x100)
+#define SMARTHOME_CODE_REQUEST_OFFICE 			((uint16_t)0x102)
+#define SMARTHOME_CODE_REQUEST_HALL				((uint16_t)0x104)
+#define SMARTHOME_CODE_REQUEST_BATHROOM 		((uint16_t)0x106)
+#define SMARTHOME_CODE_REQUEST_LIVINGROOM 		((uint16_t)0x108)
+#define SMARTHOME_CODE_REQUEST_KITCHEN 			((uint16_t)0x10A)
+#define SMARTHOME_CODE_REQUEST_DININGROOM 		((uint16_t)0x10C)
+#define SMARTHOME_CODE_REQUEST_BALCONY 			((uint16_t)0x10E)
+#define SMARTHOME_CODE_REQUEST_TEMPERATURE 		((uint16_t)0x180)
+#define SMARTHOME_CODE_REQUEST_FRONT 			((uint16_t)0x120)
+#define SMARTHOME_CODE_REQUEST_BACK 			((uint16_t)0x122)
+#define SMARTHOME_CODE_REQUEST_IRON 			((uint16_t)0x140)
+#define SMARTHOME_CODE_REQUEST_PC 				((uint16_t)0x142)
+#define SMARTHOME_CODE_REQUEST_BOILER 			((uint16_t)0x144)
+#define SMARTHOME_CODE_REQUEST_WASHINGMACHINE 	((uint16_t)0x146)
+#define SMARTHOME_CODE_REQUEST_HEATER 			((uint16_t)0x148)
+#define SMARTHOME_CODE_REQUEST_ROUTER			((uint16_t)0x14A)
+#define SMARTHOME_CODE_REQUEST_DISHWASHER 		((uint16_t)0x14C)
+#define SMARTHOME_CODE_REQUEST_TV 				((uint16_t)0x14E)
+#define SMARTHOME_CODE_REQUEST_OVEN				((uint16_t)0x150)
+#define SMARTHOME_CODE_REQUEST_TOASTER			((uint16_t)0x152)
+#define SMARTHOME_CODE_REQUEST_ALL 				((uint16_t)0x1FF)
+#define SMARTHOME_CODE_SMOKE 					((uint16_t)0x200)
+#define SMARTHOME_CODE_HIGH_TEMP 				((uint16_t)0x202)
+#define SMARTHOME_CODE_LOW_TEMP 				((uint16_t)0x204)
 
 //***************************************************FUNCTIONS**************************************************
 
@@ -129,7 +152,7 @@ void smarthome_change_device_state(uint16_t data);
 
 void smarthome_change_temperature(uint16_t data);
 
-
+void smarthome_send_requested(uint16_t data);
 
 
 

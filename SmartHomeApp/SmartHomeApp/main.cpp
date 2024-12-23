@@ -2,14 +2,11 @@
 
 int main()
 {
-	COMPort* port = new COMPort();
+	SmartHome* myHome = new SmartHome();
 	
-	/*uint16_t code = 0x21;
-	DWORD bytesWritten;
-	if (!WriteFile(hSerial, &code, sizeof(code), &bytesWritten, NULL)) {
-		cerr << "Error writing to COM4" << endl;
-	}
-	cout << "Sent: " << code << endl;*/
+	myHome->sendCode(CODE_LIGHT_BALCONY | ON);
+
+
 
 	string a;
 	cin >> a;

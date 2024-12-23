@@ -26,9 +26,31 @@ using namespace std;
 #define CODE_SWITCH_TV 				((uint16_t)0x4E)
 #define CODE_SWITCH_OVEN			((uint16_t)0x50)
 #define CODE_SWITCH_TOASTER			((uint16_t)0x52)
-#define CODE_SMOKE 					((uint16_t)0x100)
-#define CODE_HIGH_TEMP 				((uint16_t)0x102)
-#define CODE_LOW_TEMP 				((uint16_t)0x104)
+#define CODE_REQUEST_BEDROOM 		((uint16_t)0x100)
+#define CODE_REQUEST_OFFICE 		((uint16_t)0x102)
+#define CODE_REQUEST_HALL			((uint16_t)0x104)
+#define CODE_REQUEST_BATHROOM 		((uint16_t)0x106)
+#define CODE_REQUEST_LIVINGROOM 	((uint16_t)0x108)
+#define CODE_REQUEST_KITCHEN 		((uint16_t)0x10A)
+#define CODE_REQUEST_DININGROOM 	((uint16_t)0x10C)
+#define CODE_REQUEST_BALCONY 		((uint16_t)0x10E)
+#define CODE_REQUEST_TEMPERATURE 	((uint16_t)0x180)
+#define CODE_REQUEST_FRONT 			((uint16_t)0x120)
+#define CODE_REQUEST_BACK 			((uint16_t)0x122)
+#define CODE_REQUEST_IRON 			((uint16_t)0x140)
+#define CODE_REQUEST_PC 			((uint16_t)0x142)
+#define CODE_REQUEST_BOILER 		((uint16_t)0x144)
+#define CODE_REQUEST_WASHINGMACHINE	((uint16_t)0x146)
+#define CODE_REQUEST_HEATER 		((uint16_t)0x148)
+#define CODE_REQUEST_ROUTER			((uint16_t)0x14A)
+#define CODE_REQUEST_DISHWASHER 	((uint16_t)0x14C)
+#define CODE_REQUEST_TV 			((uint16_t)0x14E)
+#define CODE_REQUEST_OVEN			((uint16_t)0x150)
+#define CODE_REQUEST_TOASTER		((uint16_t)0x152)
+#define CODE_REQUEST_ALL 			((uint16_t)0x1FF)
+#define CODE_SMOKE 					((uint16_t)0x200)
+#define CODE_HIGH_TEMP 				((uint16_t)0x202)
+#define CODE_LOW_TEMP 				((uint16_t)0x204)
 
 //*************************+*********************OTHER MACROS*************************************************
 #define OFF	((uint16_t)0x0)
@@ -37,15 +59,33 @@ using namespace std;
 #define MESSAGE_SIZE 2
 
 //*********************************************CLASS******************************************************
-class COMPort
+struct COMPort
 {
-private:
 	HANDLE serialHandle;
 	DCB serialParameters;
 	COMMTIMEOUTS timeouts;
 	uint16_t buffer;
 	DWORD written;
+	DWORD read;
+};
+
+
+class SmartHome
+{
+private:
+	COMPort port;
+	bool lights[8];
+	int temperature;
+	bool highTempWarning;
+	bool lowTempWarning;
+	bool doorlocks[2];
+	bool switches[10];
+	bool smokeAlarm;
 public:
-	COMPort();
-	~COMPort();
+	SmartHome();
+	~SmartHome();
+	void configureCOMPort();
+	void turnOnGetData();
+	void sendCode(uint16_t code);
+	void receiveCode();
 };

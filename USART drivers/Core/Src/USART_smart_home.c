@@ -174,6 +174,62 @@ void smarthome_change_temperature(uint16_t data)
 	//send to DQ this temperature
 }
 
+void smarthome_send_requested(uint16_t data)
+{
+	if(data == SMARTHOME_CODE_REQUEST_ALL)
+	{
+		uint16_t code;
+		for (uint16_t i = 0; i < 8; i++)
+		{
+			code = gpio_read_from_pin(SMARTHOME_LIGHTS, i);
+			code = code | SMARTHOME_CODE_LIGHT_BEDROOM | (i*2);
+			usart_transmit(USART1, code);
+			code = code >> 8;
+			usart_transmit(USART1, code);
+		}
+		code = gpio_read_from_pin(SMARTHOME_THERMOSTAT, 0);
+		code = code | SMARTHOME_CODE_THERMOSTAT_TEMPERATURE;
+		usart_transmit(USART1, code);
+		code = code >> 8;
+		usart_transmit(USART1, code);
+		code = gpio_read_from_pin(SMARTHOME_THERMOSTAT, 3);
+		code = code | SMARTHOME_CODE_HIGH_TEMP;
+		usart_transmit(USART1, code);
+		code = code >> 8;
+		usart_transmit(USART1, code);
+		code = gpio_read_from_pin(SMARTHOME_THERMOSTAT, 4);
+		code = code | SMARTHOME_CODE_LOW_TEMP;
+		usart_transmit(USART1, code);
+		code = code >> 8;
+		usart_transmit(USART1, code);
+		for (uint16_t i = 0; i < 2; i++)
+		{
+			code = gpio_read_from_pin(SMARTHOME_DOORLOCKS, i);
+			code = code | SMARTHOME_CODE_DOORLOCK_FRONT | (i*2);
+			usart_transmit(USART1, code);
+			code = code >> 8;
+			usart_transmit(USART1, code);
+		}
+		for (uint16_t i = 0; i < 10; i++)
+		{
+			code = gpio_read_from_pin(SMARTHOME_SWITCHES, i);
+			code = code | SMARTHOME_CODE_SWITCH_IRON | (i*2);
+			usart_transmit(USART1, code);
+			code = code >> 8;
+			usart_transmit(USART1, code);
+		}
+		code = gpio_read_from_pin(SMARTHOME_ALARMS, 0);
+		code = code | SMARTHOME_CODE_SMOKE;
+		usart_transmit(USART1, code);
+		code = code >> 8;
+		usart_transmit(USART1, code);
+	}
+	else
+	{
+
+	}
+}
+
 void USART1_IRQHandler(void)
 {
 	uint16_t data = usart_receive(USART1);
@@ -181,7 +237,7 @@ void USART1_IRQHandler(void)
 
 	if(data & 0x100)
 	{
-		//something else
+		smarthome_send_requested(data);
 	}
 	else
 	{
