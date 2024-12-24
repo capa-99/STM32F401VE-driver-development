@@ -1,9 +1,10 @@
-#include "SmartHomeApp.h"
+﻿#include "SmartHomeApp.h"
 
 SmartHome::SmartHome()
 {
 	this->configureCOMPort();
 	this->turnOnGetData();
+	this->selctedLine = 0;
 }
 
 SmartHome::~SmartHome()
@@ -95,5 +96,137 @@ void SmartHome::receiveCode()
 	else
 	{
 		cerr << "Error reading from COM4" << std::endl;
+	}
+}
+
+void SmartHome::showData()
+{
+	system("cls");
+	cout << "°    *   ..° ..*    °    .*+.~, .°   * *   ..* °    ° .°    *   ..° .+˳·˖*" << endl;
+	cout << "° *  ..°　..*  °  .*+.~," << "SMART HOME APP" << ".°  * *  ..* °  ° .°  *  ..° .+˳·˖*" << endl;
+	cout << "°    *   ..° ..*    °    .*+.~, .°   * *   ..* °    ° .°    *   ..° .+˳·˖*" << endl << endl;
+	cout << "LIGHTS:" << endl;
+	string lig[8] = { " Bedroom:     ", " Office:      ", " Hall:        ", " Bathroom:    ", " Living room: ", " Kitchen:     ", " Dining room: ", " Balcony:     " };
+	for (int i = 0; i < 8; i++)
+	{
+		if(this->selctedLine == i)
+		{
+			cout << "[ ";
+		}
+		cout << lig[i];
+		if (this->lights[i] == ON)
+		{
+			cout << DISP_LIGHT_ON;
+		}
+		else
+		{
+			cout << DISP_LIGHT_OFF;
+		}
+		if (this->selctedLine == i)
+		{
+			cout << " ]";
+		}
+		cout << endl;
+	}
+	cout << endl;
+	cout << "TEMPERATURE: ";
+	for (int i = -50; i < 100; i = i + 30)
+	{
+		if (this->temperature >= i)
+		{
+			cout << DISP_TEMP_ON;
+		}
+		else
+		{
+			cout << DISP_TEMP_OFF;
+		}
+	}
+	if (this->selctedLine == SELECTED_TEMP_LESS)
+	{
+		cout << "[ ";
+	}
+	cout << "| < |";
+	if (this->selctedLine == SELECTED_TEMP_LESS)
+	{
+		cout << " ]";
+	}
+	if (this->selctedLine == SELECTED_TEMP_MORE)
+	{
+		cout << "[ ";
+	}
+	cout << "| > |";
+	if (this->selctedLine == SELECTED_TEMP_MORE)
+	{
+		cout << " ]";
+	}
+	cout << endl;
+	cout << "DOORLOCKS:" << endl;
+	string door[8] = { " Front: ", " Back:  "};
+	for (int i = 0; i < 2; i++)
+	{
+		if (this->selctedLine == SELECTED_DOOR + i)
+		{
+			cout << "[ ";
+
+		}
+		cout << door[i];
+		if (this->doorlocks[i] == ON)
+		{
+			cout << DISP_LIGHT_ON;
+		}
+		else
+		{
+			cout << DISP_LIGHT_OFF;
+		}
+		if (this->selctedLine == SELECTED_DOOR + i)
+		{
+			cout << " ]";
+		}
+		cout << endl;
+	}
+	cout << endl;
+	cout << "SWITCHES:" << endl;
+	string swit[10] = { " Iron:            ", " PC:              ", " Boiler:          ", " Washing machine: ", " Heater:          ", " Router:          ", " Dishwasher:      ", " TV:              ", " Oven:            ", " Toaster:         "};
+	for (int i = 0; i < 10; i++)
+	{
+		if (this->selctedLine == SELECTED_SWITCH + i)
+		{
+			cout << "[ ";
+		}
+		cout << swit[i];
+		if (this->switches[i] == ON)
+		{
+			cout << DISP_LIGHT_ON;
+		}
+		else
+		{
+			cout << DISP_LIGHT_OFF;
+		}
+		if (this->selctedLine == SELECTED_SWITCH + i)
+		{
+			cout << " ]";
+		}
+		cout << endl;
+	}
+	cout << endl;
+}
+
+void SmartHome::work()
+{
+	while (true) {
+		if (_kbhit()) {
+			char key = _getch();
+			if (key == ARROW_UP)
+			{
+				this->selctedLine--;
+				showData();
+			}
+			if (key == ARROW_DOWN)
+			{
+				this->selctedLine++;
+				showData();
+			}
+			
+		}
 	}
 }

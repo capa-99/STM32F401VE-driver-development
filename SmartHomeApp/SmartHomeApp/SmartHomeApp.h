@@ -1,7 +1,8 @@
-#pragma once
+﻿#pragma once
 #include <windows.h>
 #include <iostream>
 #include <string>
+#include <conio.h>
 using namespace std;
 
 //*************************************************CODES****************************************************
@@ -58,6 +59,20 @@ using namespace std;
 
 #define MESSAGE_SIZE 2
 
+#define DISP_LIGHT_OFF  "-"
+#define DISP_LIGHT_ON	"*"
+#define DISP_TEMP_OFF	" "
+#define DISP_TEMP_ON	"■"
+
+#define SELECTED_LIGHT		0
+#define SELECTED_TEMP_LESS	8
+#define SELECTED_TEMP_MORE	9
+#define SELECTED_DOOR		10
+#define SELECTED_SWITCH		12
+
+#define ARROW_UP	72
+#define ARROW_DOWN	80
+
 //*********************************************CLASS******************************************************
 struct COMPort
 {
@@ -81,6 +96,7 @@ private:
 	bool doorlocks[2];
 	bool switches[10];
 	bool smokeAlarm;
+	int selctedLine;
 public:
 	SmartHome();
 	~SmartHome();
@@ -88,4 +104,6 @@ public:
 	void turnOnGetData();
 	void sendCode(uint16_t code);
 	void receiveCode();
+	void showData();
+	void work();
 };

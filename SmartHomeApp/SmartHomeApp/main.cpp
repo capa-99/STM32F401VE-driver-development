@@ -3,13 +3,9 @@
 int main()
 {
 	SmartHome* myHome = new SmartHome();
-	
-	myHome->sendCode(CODE_LIGHT_BALCONY | ON);
-
-
-
-	string a;
-	cin >> a;
+	myHome->showData();
+	myHome->work();
+   
 
 	return 0;
 }
