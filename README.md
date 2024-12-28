@@ -47,3 +47,36 @@ To demonstrate the SPI drivers, a project has been developed featuring two STM32
 ## How to Run  
 1. **Open in STM32CubeIDE** to explore the code.
 2. **Simulate in Proteus** by opening .pdsprj file and running the simulation.
+
+# UART Drivers  
+
+Still in progress
+
+Includes custom UART/USART drivers providing the following functionalities:  
+- Configuring the clock for a chosen USART peripheral.  
+- Setting up CR1, CR2, CR3, BRR, and GTPR registers.  
+- Reading flag states from the SR register.  
+- Transmitting and receiving data.  
+- Enabling USART interrupts.  
+
+## Demonstration Project  
+To demonstrate the UART drivers, a project has been developed featuring:  
+- **MCU Side:**  
+  - Connected to a PC via a COM port (COM3 in the simulation).
+  - Simulates a smart house with **lights**, **switches**, **door locks**, **thermostat**, **alarms**
+  - Receives coded data from the PC to:  
+    - Send the current status of devices (e.g., light states, thermostat temperature).  
+    - Update device states based on received commands.  
+- **PC Side:**  
+  - Connected to another COM port (COM4 in the simulation) paired with the MCU's COM3 port.  
+  - Includes a **C++ application** to visualize the data from the MCU.  
+  - Allows the user to:  
+    - Monitor device statuses.  
+    - Send commands to change device states.
+
+## How to Run  
+1. **Open in STM32CubeIDE** to explore the code.
+2. **Simulate in Proteus** by opening .pdsprj file and running the simulation.
+3. **Run the C++ Application** on the PC.
+   - Ensure that the COM ports are properly paired (e.g., COM3 for MCU and COM4 for PC).
+
