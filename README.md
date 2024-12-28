@@ -21,3 +21,29 @@ To demonstrate the GPIO drivers, a small project has been developed featuring:
 ## How to Run  
 1. **Open in STM32CubeIDE** to explore the code.
 2. **Simulate in Proteus** by opening .pdsprj file and running the simulation.
+
+# SPI Drivers  
+
+Includes custom SPI drivers providing the following functionalities:  
+- Enabling the clock for a chosen SPI peripheral.  
+- Configuring the CR1 and CR2 registers.  
+- Reading flag states from the SR register.  
+- Transmitting and receiving data.  
+- Enabling SPI interrupts.  
+
+## Demonstration Project
+To demonstrate the SPI drivers, a project has been developed featuring two STM32 MCUs communicating via SPI to simulate a stoplight:
+- **Master MCU:**
+  - Controls the data sent to the slave using a timer to regulate the timing of light changes.
+  - Includes four buttons for additional functionality:
+    1. **Night Mode Button:** Red light duration is shortened.
+    2. **Pedestrian Button:** Turns the light red to allow pedestrian crossing.
+    3. **Emergency/Train Button:** Turns the light red and activates a special emergency/train passing light.
+    4. **Out of Order Button:** Makes the stoplight flash yellow.
+- **Slave MCU:**
+  - Controls a stoplight based on the data received from the master.
+  - Lights up the appropriate light (red, yellow, green, or special light) according to the master’s commands.
+
+## How to Run  
+1. **Open in STM32CubeIDE** to explore the code.
+2. **Simulate in Proteus** by opening .pdsprj file and running the simulation.
