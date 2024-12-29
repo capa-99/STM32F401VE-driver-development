@@ -226,7 +226,39 @@ void SmartHome::work()
 				this->selctedLine++;
 				showData();
 			}
-			
+			if (key == '\r')
+			{
+				this->changeState();
+			}
 		}
+	}
+}
+
+void SmartHome::changeState()
+{
+	if (this->selctedLine < SELECTED_TEMP_LESS)
+	{
+		this->lights[selctedLine] = this->lights[selctedLine] ^ 0x1;
+		this->sendCode(CODE_LIGHT_BEDROOM | (uint16_t)(selctedLine*2) | this->lights[selctedLine]);
+	}
+	if (this->selctedLine == SELECTED_TEMP_LESS)
+	{
+		this->temperature--;
+		this->sendCode(CODE_THERMOSTAT_TEMPERATURE | this->temperature);
+	}
+	if (this->selctedLine == SELECTED_TEMP_MORE)
+	{
+		this->temperature--;
+		this->sendCode(CODE_THERMOSTAT_TEMPERATURE | this->temperature);
+	}
+	if (this->selctedLine > SELECTED_TEMP_MORE && SELECTED_SWITCH)
+	{
+		this->doorlocks[selctedLine - SELECTED_DOOR] = this->doorlocks[selctedLine - SELECTED_DOOR] ^ 0x1;
+		this->sendCode(CODE_DOORLOCK_FRONT | (uint16_t)((selctedLine - SELECTED_DOOR) * 2) | this->doorlocks[selctedLine - SELECTED_DOOR]);
+	}
+	if (this->selctedLine >= SELECTED_SWITCH)
+	{
+		this->switches[selctedLine - SELECTED_SWITCH] = this->switches[selctedLine - SELECTED_SWITCH] ^ 0x1;
+		this->sendCode(CODE_SWITCH_IRON | (uint16_t)((selctedLine - SELECTED_SWITCH) * 2) | this->switches[selctedLine - SELECTED_SWITCH]);
 	}
 }

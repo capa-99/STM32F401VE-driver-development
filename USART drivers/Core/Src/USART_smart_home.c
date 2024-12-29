@@ -174,6 +174,42 @@ void smarthome_change_temperature(uint16_t data)
 	//send to DQ this temperature
 }
 
+void smarthome_send_temperature()
+{
+
+}
+
+void smarthome_send_device_state(uint16_t data)
+{
+	uint16_t info;
+	if((data & 0x60) == SMARTHOME_CODE_REQUEST_BEDROOM)
+	{
+		info = gpio_read_from_pin(SMARTHOME_LIGHTS, (data & 0x1E) >> 0x1);
+	}
+	else
+	{
+		if((data & 0x60) == SMARTHOME_CODE_REQUEST_FRONT)
+		{
+			info = gpio_read_from_pin(SMARTHOME_DOORLOCKS, (data & 0x1E) >> 0x1);
+		}
+		else
+		{
+			if((data & 0x60) == SMARTHOME_CODE_SWITCH_IRON)
+			{
+				info = gpio_read_from_pin(SMARTHOME_SWITCHES, (data & 0x1E) >> 0x1);
+			}
+			else
+			{
+					//invalid code word, ERROR
+			}
+		}
+	}
+	info = info | (data & 0xFF);
+	usart_transmit(USART1, info);
+	info = info >> 8;
+	usart_transmit(USART1, info);
+}
+
 void smarthome_send_requested(uint16_t data)
 {
 	if(data == SMARTHOME_CODE_REQUEST_ALL)

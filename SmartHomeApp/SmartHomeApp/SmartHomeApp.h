@@ -106,4 +106,5 @@ public:
 	void receiveCode();
 	void showData();
 	void work();
+	void changeState();
 };
