@@ -154,5 +154,6 @@ void smarthome_change_temperature(uint16_t data);
 
 void smarthome_send_requested(uint16_t data);
 
+int16_t smarthome_temperature_read();
 
-
+void smarthome_delay(uint32_t microseconds);

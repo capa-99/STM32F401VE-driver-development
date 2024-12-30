@@ -7,10 +7,8 @@ C:\Users\Novak\Desktop\STM32F401VE driver development new version\SmartHomeApp\S
 C:\Users\Novak\Desktop\STM32F401VE driver development new version\SmartHomeApp\SmartHomeApp\SmartHomeApp.cpp(107,10): warning C4566: character represented by universal-character-name '\u2008' cannot be represented in the current code page (1252)
 C:\Users\Novak\Desktop\STM32F401VE driver development new version\SmartHomeApp\SmartHomeApp\SmartHomeApp.cpp(107,10): warning C4566: character represented by universal-character-name '\u02F3' cannot be represented in the current code page (1252)
 C:\Users\Novak\Desktop\STM32F401VE driver development new version\SmartHomeApp\SmartHomeApp\SmartHomeApp.cpp(107,10): warning C4566: character represented by universal-character-name '\u02D6' cannot be represented in the current code page (1252)
-C:\Users\Novak\Desktop\STM32F401VE driver development new version\SmartHomeApp\SmartHomeApp\SmartHomeApp.cpp(137,12): warning C4566: character represented by universal-character-name '\u25A0' cannot be represented in the current code page (1252)
-C:\Users\Novak\Desktop\STM32F401VE driver development new version\SmartHomeApp\SmartHomeApp\SmartHomeApp.cpp(242,91): warning C4805: '|': unsafe mix of type 'int' and type 'bool' in operation
-C:\Users\Novak\Desktop\STM32F401VE driver development new version\SmartHomeApp\SmartHomeApp\SmartHomeApp.cpp(257,131): warning C4805: '|': unsafe mix of type 'int' and type 'bool' in operation
-C:\Users\Novak\Desktop\STM32F401VE driver development new version\SmartHomeApp\SmartHomeApp\SmartHomeApp.cpp(262,131): warning C4805: '|': unsafe mix of type 'int' and type 'bool' in operation
-  main.cpp
-  Generating Code...
+C:\Users\Novak\Desktop\STM32F401VE driver development new version\SmartHomeApp\SmartHomeApp\SmartHomeApp.cpp(138,12): warning C4566: character represented by universal-character-name '\u25A0' cannot be represented in the current code page (1252)
+C:\Users\Novak\Desktop\STM32F401VE driver development new version\SmartHomeApp\SmartHomeApp\SmartHomeApp.cpp(243,91): warning C4805: '|': unsafe mix of type 'int' and type 'bool' in operation
+C:\Users\Novak\Desktop\STM32F401VE driver development new version\SmartHomeApp\SmartHomeApp\SmartHomeApp.cpp(258,131): warning C4805: '|': unsafe mix of type 'int' and type 'bool' in operation
+C:\Users\Novak\Desktop\STM32F401VE driver development new version\SmartHomeApp\SmartHomeApp\SmartHomeApp.cpp(263,131): warning C4805: '|': unsafe mix of type 'int' and type 'bool' in operation
   SmartHomeApp.vcxproj -> C:\Users\Novak\Desktop\STM32F401VE driver development new version\SmartHomeApp\x64\Debug\SmartHomeApp.exe

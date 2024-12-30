@@ -18,15 +18,34 @@ void smarthome_initialize()
 	uart.pin = SMARTHOME_USART_RX;
 	gpio_init(GPIOA, &uart);
 
-	uart.mode = GPIO_PIN_MODE_OUTPUT;//THIS IS A THERMOSTAT, CONFIGURE IT RIGHT LATER WHEN YOU TEST IT
-	uart.alternate_function = GPIO_PIN_ALTERNATE_FUNCTION_AF0_SYSTEM;
-	uart.pull = GPIO_PIN_PULL_DOWN;
-	uart.output_type = GPIO_PIN_OUTPUT_TYPE_PUSH_PULL;
-	uart.output_speed = GPIO_PIN_OUTPUT_SPEED_MEDIUM;
+	uart.mode = GPIO_PIN_MODE_OUTPUT;
+	uart.pull = GPIO_PIN_PULL_UP;
 	for(int i = 0; i < 5; i++)
 	{
 		uart.pin = i;
 		gpio_init(SMARTHOME_THERMOSTAT, &uart);
+	}
+	gpio_write_to_pin(SMARTHOME_THERMOSTAT, SMARTHOME_THERMOSTAT_RST, 0x1);
+	for (int i = 0; i < 8; i++)
+	{
+		gpio_write_to_pin(SMARTHOME_THERMOSTAT, SMARTHOME_THERMOSTAT_DQ, (0x0C >> i) & 0x01);
+		gpio_write_to_pin(SMARTHOME_THERMOSTAT, SMARTHOME_THERMOSTAT_CLK, 0x1);
+		smarthome_delay(10);
+		gpio_write_to_pin(SMARTHOME_THERMOSTAT, SMARTHOME_THERMOSTAT_CLK, 0x0);
+	}
+	for (int i = 0; i < 8; i++)
+	{
+		gpio_write_to_pin(SMARTHOME_THERMOSTAT, SMARTHOME_THERMOSTAT_DQ, (0x02 >> i) & 0x01);
+		gpio_write_to_pin(SMARTHOME_THERMOSTAT, SMARTHOME_THERMOSTAT_CLK, 0x1);
+		smarthome_delay(10);
+		gpio_write_to_pin(SMARTHOME_THERMOSTAT, SMARTHOME_THERMOSTAT_CLK, 0x0);
+	}
+	for (int i = 0; i < 8; i++)
+	{
+		gpio_write_to_pin(SMARTHOME_THERMOSTAT, SMARTHOME_THERMOSTAT_DQ, (0xEE >> i) & 0x01);
+		gpio_write_to_pin(SMARTHOME_THERMOSTAT, SMARTHOME_THERMOSTAT_CLK, 0x1);
+		smarthome_delay(10);
+		gpio_write_to_pin(SMARTHOME_THERMOSTAT, SMARTHOME_THERMOSTAT_CLK, 0x0);
 	}
 
 	RCC->AHB1ENR = RCC->AHB1ENR | 0x2;
@@ -129,6 +148,47 @@ void smarthome_configure_interrupts()
 	gpio_enable_interrupt(SMARTHOME_ALARM_SMOKE, EXTI0_IRQn);
 }
 
+void smarthome_delay(uint32_t microseconds) {
+    uint32_t cycles = microseconds * 16;
+    while (cycles--) {
+        __NOP();
+    }
+}
+
+int16_t smarthome_temperature_read()
+{
+	int16_t temp;
+	gpio_configure_pin_mode(GPIOA, 0, GPIO_PIN_MODE_OUTPUT);
+	for (int i = 0; i < 8; i++)
+	{
+	    gpio_write_to_pin(SMARTHOME_THERMOSTAT, SMARTHOME_THERMOSTAT_DQ, (0xAA >> i) & 0x01);
+	    gpio_write_to_pin(SMARTHOME_THERMOSTAT, SMARTHOME_THERMOSTAT_CLK, 0x1);
+	    smarthome_delay(10);
+	    gpio_write_to_pin(SMARTHOME_THERMOSTAT, SMARTHOME_THERMOSTAT_CLK, 0x0);
+	}
+	gpio_configure_pin_mode(GPIOA, 0, GPIO_PIN_MODE_INPUT);
+	uint8_t lsb = 0;
+	for (int i = 0; i < 8; i++)
+	{
+		gpio_write_to_pin(SMARTHOME_THERMOSTAT, SMARTHOME_THERMOSTAT_CLK, 0x1);
+	    smarthome_delay(10);
+	    lsb = lsb | (gpio_read_from_pin(SMARTHOME_THERMOSTAT, SMARTHOME_THERMOSTAT_DQ) << i);
+	    gpio_write_to_pin(SMARTHOME_THERMOSTAT, SMARTHOME_THERMOSTAT_CLK, 0x0);
+	}
+	uint8_t msb = 0;
+	for (int i = 0; i < 8; i++)
+	{
+		gpio_write_to_pin(SMARTHOME_THERMOSTAT, SMARTHOME_THERMOSTAT_CLK, 0x1);
+		smarthome_delay(10);
+		msb = msb | (gpio_read_from_pin(SMARTHOME_THERMOSTAT, SMARTHOME_THERMOSTAT_DQ) << i);
+		gpio_write_to_pin(SMARTHOME_THERMOSTAT, SMARTHOME_THERMOSTAT_CLK, 0x0);
+	}
+
+	temp = ((int16_t)msb << 8) | lsb;
+
+	return temp / 2;
+}
+
 void smarthome_change_state(uint16_t data)
 {
 	if(data & 0x80)
@@ -223,7 +283,7 @@ void smarthome_send_requested(uint16_t data)
 			code = code >> 8;
 			usart_transmit(USART1, code);
 		}
-		code = gpio_read_from_pin(SMARTHOME_THERMOSTAT, 0);
+		code = smarthome_temperature_read();
 		code = code | SMARTHOME_CODE_THERMOSTAT_TEMPERATURE;
 		usart_transmit(USART1, code);
 		code = code >> 8;

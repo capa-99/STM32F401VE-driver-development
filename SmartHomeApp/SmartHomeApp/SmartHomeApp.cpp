@@ -59,7 +59,7 @@ void SmartHome::turnOnGetData()
 		lights[i] = port.buffer & 0x1;
 	}
 	receiveCode();
-	temperature = port.buffer;
+	temperature = port.buffer & 0x7F;
 	receiveCode();
 	highTempWarning = port.buffer & 0x1;
 	receiveCode();
@@ -130,6 +130,7 @@ void SmartHome::showData()
 	}
 	cout << endl;
 	cout << "TEMPERATURE: ";
+	cout << this->temperature << " ";
 	for (int i = -50; i < 100; i = i + 30)
 	{
 		if (this->temperature >= i)
@@ -251,7 +252,7 @@ void SmartHome::changeState()
 		this->temperature--;
 		this->sendCode(CODE_THERMOSTAT_TEMPERATURE | this->temperature);
 	}
-	if (this->selctedLine > SELECTED_TEMP_MORE && SELECTED_SWITCH)
+	if (this->selctedLine > SELECTED_TEMP_MORE && this->selctedLine < SELECTED_SWITCH)
 	{
 		this->doorlocks[selctedLine - SELECTED_DOOR] = this->doorlocks[selctedLine - SELECTED_DOOR] ^ 0x1;
 		this->sendCode(CODE_DOORLOCK_FRONT | (uint16_t)((selctedLine - SELECTED_DOOR) * 2) | this->doorlocks[selctedLine - SELECTED_DOOR]);
