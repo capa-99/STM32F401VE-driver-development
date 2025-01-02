@@ -102,9 +102,9 @@ void SmartHome::receiveCode()
 void SmartHome::showData()
 {
 	system("cls");
-	cout << "°    *   ..° ..*    °    .*+.~, .°   * *   ..* °    ° .°    *   ..° .+˳·˖*" << endl;
-	cout << "° *  ..°　..*  °  .*+.~," << "SMART HOME APP" << ".°  * *  ..* °  ° .°  *  ..° .+˳·˖*" << endl;
-	cout << "°    *   ..° ..*    °    .*+.~, .°   * *   ..* °    ° .°    *   ..° .+˳·˖*" << endl << endl;
+	cout << "o    *   ..o ..*    o    .*+.~, .o   * *   ..* o    o .o    *   ..o .+.*" << endl;
+	cout << "o *  ..o　..*  o  .*+.~," << "SMART HOME APP" << ".o  * *  ..* o  o .o  *  ..o .+.*" << endl;
+	cout << "o    *   ..o ..*    o    .*+.~, .o   * *   ..* o    o .o    *   ..o .+.*" << endl << endl;
 	cout << "LIGHTS:" << endl;
 	string lig[8] = { " Bedroom:     ", " Office:      ", " Hall:        ", " Bathroom:    ", " Living room: ", " Kitchen:     ", " Dining room: ", " Balcony:     " };
 	for (int i = 0; i < 8; i++)

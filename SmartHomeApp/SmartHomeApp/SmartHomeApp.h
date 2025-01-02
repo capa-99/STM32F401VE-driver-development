@@ -62,7 +62,7 @@ using namespace std;
 #define DISP_LIGHT_OFF  "-"
 #define DISP_LIGHT_ON	"*"
 #define DISP_TEMP_OFF	" "
-#define DISP_TEMP_ON	"■"
+#define DISP_TEMP_ON	"*"
 
 #define SELECTED_LIGHT		0
 #define SELECTED_TEMP_LESS	8
