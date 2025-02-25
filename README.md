@@ -22,6 +22,9 @@ To demonstrate the GPIO drivers, a small project has been developed featuring:
 1. **Open in STM32CubeIDE** to explore the code.
 2. **Simulate in Proteus** by opening .pdsprj file and running the simulation.
 
+![GPIO Drivers Demo](https://github.com/user-attachments/assets/86dc9047-b3db-47b9-9319-02941b1a7ed2)
+
+
 # SPI Drivers  
 
 Includes custom SPI drivers providing the following functionalities:  
@@ -48,9 +51,10 @@ To demonstrate the SPI drivers, a project has been developed featuring two STM32
 1. **Open in STM32CubeIDE** to explore the code.
 2. **Simulate in Proteus** by opening .pdsprj file and running the simulation.
 
-# UART Drivers  
+![SPI Drivers Demo](https://github.com/user-attachments/assets/86acdc97-bc00-491a-9e31-5a394464c13f)
 
-Still in progress
+
+# UART Drivers  
 
 Includes custom UART/USART drivers providing the following functionalities:  
 - Configuring the clock for a chosen USART peripheral.  
@@ -79,4 +83,7 @@ To demonstrate the UART drivers, a project has been developed featuring:
 2. **Simulate in Proteus** by opening .pdsprj file and running the simulation.
 3. **Run the C++ Application** on the PC.
    - Ensure that the COM ports are properly paired (e.g., COM3 for MCU and COM4 for PC).
-
+     
+![UART Drivers Demo](https://github.com/user-attachments/assets/41dfc638-f287-418d-b32d-50d398a4fea8)
+  
+![UART Drivers Demo C++](https://github.com/user-attachments/assets/33a9adb1-c7f0-45d4-bfc9-c5dba4afd12b)
